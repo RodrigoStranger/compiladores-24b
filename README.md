@@ -20,3 +20,10 @@ Salida: True si lo llego a insertar y False si el dato ya existe
   
 ### Entregables
 - `compiladores-24b/binarytrees/binarytree.cpp`
+
+## Práctica 2
+- Implemente una cola y una pila respectivamente con los metodos pop y push.
+
+- Implemente una funcion que ordene una coleccion de datos. La solucion debe tener como maximo un costo de nlog(n).
+
+- Dada una coleccion de numeros y un valor x, encuentre un par de numeros en la coleccion que sea igual a x. Considere que la coleccion de datos puede estar desordenada y puede tener elementos repetidos. Implemente una solucion a ese problema al menor costo computacional.

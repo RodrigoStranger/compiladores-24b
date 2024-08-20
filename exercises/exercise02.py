@@ -1,10 +1,10 @@
-#Implemente una funcion que ordene una coleccion de datos.
-#La solucion debe tener como maximo un costo de nlog(n).
+# Implemente una funcion que ordene una coleccion de datos.
+# La solucion debe tener como maximo un costo de nlog(n).
 
 vector = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
-#la implementacion de una funcion de ordenamiento (ascendentemente) que posee un costo maximo costo de 
-#nlog(n) es el algoritmo de ordemaniento quicksort, aqui su implementacion:
+# la implementacion de una funcion de ordenamiento (ascendentemente) que posee un costo maximo costo de 
+# nlog(n) es el algoritmo de ordemaniento quicksort, aqui su implementacion:
 
 def particion(arreglo, bajo, alto):
     pivote = arreglo[alto]
@@ -25,5 +25,5 @@ def QuickSort(arreglo, bajo, alto):
         QuickSort(arreglo, pi + 1, alto)
 
 print(vector)
-QuickSort(vector,0,len(vector)-1)
+QuickSort(vector, 0, len(vector)-1)
 print(vector)
