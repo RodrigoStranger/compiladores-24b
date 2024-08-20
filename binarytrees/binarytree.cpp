@@ -6,32 +6,40 @@ using namespace std;
 class Nodo {
 public:
     int key;
-    string data;
+    int data;
     Nodo* left;
     Nodo* right;
     
-    Nodo(int key, string data) {
+    Nodo(int key, int data) {
         this->key=key;
         this->data=data;
         this->left=nullptr;
         this->right=nullptr;
     }
 
-    string EncontrarDato(int key);
-    bool InsertarDato(int key, string data);
-    void EliminarDato(string data);
+    int EncontrarDato(int key);
+    bool InsertarDato(int key, int data);
+    void EliminarDato(int data);
 
  };
 
-string Nodo::EncontrarDato(int key) {
-
+int Nodo::EncontrarDato(int key) {
+    if(this->key==key) {
+        return this->data;
+    } else if (key<this->key && this->left!=nullptr) {
+        return this->left->EncontrarDato(key);
+    } else if (key>this->key && this->right!=nullptr) {
+        return this->right->EncontrarDato(key);
+    } else {
+        return -1;
+    }
 }
 
-bool Nodo::InsertarDato(int key, string data) {
-
+bool Nodo::InsertarDato(int key, int data) {
+    
 }
 
-void Nodo::EliminarDato(string data) {
+void Nodo::EliminarDato(int data) {
 
 }
 
