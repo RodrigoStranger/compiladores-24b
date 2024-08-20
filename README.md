@@ -27,3 +27,8 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Implemente una funcion que ordene una coleccion de datos. La solucion debe tener como maximo un costo de nlog(n).
 
 - Dada una coleccion de numeros y un valor x, encuentre un par de numeros en la coleccion que sea igual a x. Considere que la coleccion de datos puede estar desordenada y puede tener elementos repetidos. Implemente una solucion a ese problema al menor costo computacional.
+
+### Entregables
+- `compiladores-24b/exercises/exercise01.py`
+- `compiladores-24b/exercises/exercise02.py`
+- `compiladores-24b/exercises/exercise03.py`
