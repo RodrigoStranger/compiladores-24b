@@ -19,10 +19,21 @@ public:
 
     string EncontrarDato(int key);
     bool InsertarDato(int key, string data);
-    void EliminarDato(string dato);
+    void EliminarDato(string data);
 
  };
 
+string Nodo::EncontrarDato(int key) {
+
+}
+
+bool Nodo::InsertarDato(int key, string data) {
+
+}
+
+void Nodo::EliminarDato(string data) {
+
+}
 
  int main () {
     cout<<"holi";
