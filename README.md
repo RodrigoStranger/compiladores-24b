@@ -1,11 +1,6 @@
 # Compiladores
 
 ## Rodrigo Emerson Infanzón Acosta
-
-## Acerca del Autor
-- Facebook: [Rodrigo Infanzon Acosta](https://www.facebook.com/rodrigo.stranger.pe/)
-- Instagram: [rodrigo.stranger](https://www.instagram.com/rodrigo.stranger/)
-- WhatsApp: [+51948899033](https://wa.me/+51948899033)
   
 ## Práctica 1
 - Crear una clase para en C++ o Python para representar un nodo de un
