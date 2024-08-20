@@ -36,7 +36,23 @@ int Nodo::EncontrarDato(int key) {
 }
 
 bool Nodo::InsertarDato(int key, int data) {
-    
+    if(this->key==key) {
+        return false; 
+    } else if (key<this->key) {
+         if (this->left==nullptr) {
+            this->left=new Nodo(key, data);
+            return true; 
+        }else {
+            return this->left->InsertarDato(key, data);
+        }
+    } else {
+        if (this->right==nullptr) {
+            this->right= new Nodo(key, data);
+            return true; 
+        } else {
+            return this->right->InsertarDato(key, data);
+        }
+    }
 }
 
 void Nodo::EliminarDato(int data) {
