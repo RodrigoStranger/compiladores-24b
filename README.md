@@ -24,4 +24,4 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Implementar una función para eliminar elementos.
   
 ### Entregables
-- `compiladores-24b/binarytrees/binarytree.cpp
+- `compiladores-24b/binarytrees/binarytree.cpp`
