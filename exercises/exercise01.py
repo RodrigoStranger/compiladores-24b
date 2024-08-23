@@ -6,7 +6,7 @@ vector = [1, 2, 3, 4, 5]
 def enque(vector, valor):
     vector.append(valor)
 
-def deque():
+def deque(vector):
     del vector[0]
 
 
@@ -15,4 +15,10 @@ def push(vector, valor):
     vector.append(valor)
 
 def pop(vector):
-    return vector.pop()
+    del vector[-1]
+
+
+
+print(vector)
+deque()
+print(vector)
