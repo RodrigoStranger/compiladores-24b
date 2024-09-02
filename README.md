@@ -40,7 +40,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 ### Entregables
 - `compiladores-24b/sketch/hola_mundo.txt`
 - `compiladores-24b/sketch/factorial_iterativo.txt`
-- `compiladores-24b/sketch/fibonacci_recursivo`
+- `compiladores-24b/sketch/fibonacci_recursivo.txt`
 
 ## Requisitos mínimos del lenguaje de programación
 - Estructuras de control: if-else, bucle.
