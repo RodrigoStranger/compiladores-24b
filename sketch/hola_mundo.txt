@@ -1,0 +1,4 @@
+function main [] {
+	log["hola mundo"];
+	echo;
+}

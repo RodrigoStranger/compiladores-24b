@@ -1,0 +1,10 @@
+function fibonacci_recursivo [n interger] interger {
+	if [n<=1] { echo n; }
+	echo fibonacci_recursivo[n-1] + fibonacci_recursivo[n-2];
+}
+
+function main [] {
+	numero interger = 5;
+	log["El término " $ numero $ " de la secuencia de Fibonacci es: " $ fibonacci_recursivo[numero]];
+	echo;
+}
