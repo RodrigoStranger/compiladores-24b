@@ -1,4 +1,4 @@
-# Compiladores
+# Compiladores 2024-B
 
 ## Rodrigo Emerson Infanzón Acosta
   
@@ -32,3 +32,25 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - `compiladores-24b/exercises/exercise01.py`
 - `compiladores-24b/exercises/exercise02.py`
 - `compiladores-24b/exercises/exercise03.py`
+
+## Práctica 3
+- Traer 3 ejemplos de código fuente en el lenguaje que ustedes proponen e implementen: hola mundo, factorial iterativo, fibonacci recursivo.
+- Los ejemplos deben estar en formato .txt.
+
+### Entregables
+- `compiladores-24b/sketch/hola_mundo.txt`
+- `compiladores-24b/sketch/factorial_iterativo.txt`
+- `compiladores-24b/sketch/fibonacci_recursivo.txt`
+
+## Requisitos mínimos del lenguaje de programación
+- Estructuras de control: if-else, bucle.
+- Funciones y recursividad de funciones.
+- Creación de variables y asignación de variables.
+- Uso de operadores: +, -, *, /,  or, and, <, <=, >, >=, ==, !=
+- Comentarios en linea o bloque.
+- Tipos de datos: entero, flotante, booleano y string
+
+## Especificación Lexica
+
+
+  
