@@ -79,7 +79,9 @@ reserved = {
     'elif': 'SINO',
     'else': 'ENTONCES',
     'while': 'MIENTRAS',
-    'for': 'PARA'
+    'for': 'PARA',
+    'true': 'NBOOLEANO',
+    'false': 'NBOOLEANO'
 }
 
 print(reserved)
