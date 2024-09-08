@@ -1,6 +1,10 @@
+import os
 import ply.lex as lex
 
-# Tokens de NetCode
+directory = os.path.dirname(__file__)
+sketch = 'hola_mundo.txt'
+pathfile = os.path.join(directory, '..', 'sketch', sketch)
+
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'COMILLAS', 'ID', 'FINALSENTENCIA', 
           'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
           'TIPOVACIO', 'SI', 'Y', 'O', 'NO', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
@@ -8,7 +12,29 @@ tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'CO
           'AUMENTAR', 'DISMINUIR', 'SUMAIGUAL', 'RESTAIGUAL', 'MULTIPLICACIONIGUAL', 'DIVISIONIGUAL', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 
           'NCADENA', 'NBOOLEANO', 'COMENTARIO')
 
-# Expresiones regulares para los tokens
+reserved = {
+    'function': 'FUNCION',
+    'main': 'PRINCIPAL',
+    'log': 'IMPRIMIR',
+    'echo': 'RETORNAR',
+    'stop': 'DETENER',
+    'interger': 'TIPOENTERO',
+    'text': 'TIPOCADENA',
+    'decimal': 'TIPODECIMAL',
+    'boolean': 'TIPOBOOLEANO',
+    'void': 'TIPOVACIO',
+    'if': 'SI',
+    'and': 'Y',
+    'or': 'O',
+    'not': 'NO',
+    'elif': 'SINO',
+    'else': 'ENTONCES',
+    'while': 'MIENTRAS',
+    'for': 'PARA',
+    'true': 'NBOOLEANO',
+    'false': 'NBOOLEANO'
+}
+
 t_FUNCION = r'function'
 t_PRINCIPAL = r'main'
 t_CORCHETEABI = r'\['
@@ -52,37 +78,79 @@ t_RESTAIGUAL = r'-='
 t_MULTIPLICACIONIGUAL = r'\*='
 t_DIVISIONIGUAL = r'/='
 t_CONCATENAR = r'\$'
-t_NENTERO = r'-?\d+'
-t_NDECIMAL = r'-?\d+\.\d+'
-t_NCADENA = r'\"[^\"\n]*\"'
 t_NBOOLEANO = r'(true|false)'
-t_COMENTARIO = r'//.*'
+
+def t_NCADENA(t):
+    r'"[^"]*"'
+    t.value = t.value[1:-1]
+    return t
+
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, 'ID')
+    return t
+
+def t_NDECIMAL(t):
+    r'-?\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
+def t_NENTERO(t):
+    r'-?\d+'
+    t.value = int(t.value)
+    return t
+
+def t_COMENTARIO(t):
+    r'//.*'
+    pass
+
+def t_SALTOLINEA(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
 t_ignore = ' \t'
 
+def t_error(t):
+    print("Caracter Ilegal %s " % t.value[0])
+    t.lexer.skip(1)
+    
+lexer = lex.lex()
 
-# Palabras reservadas de NetCode
-reserved = {
-    'function': 'FUNCION',
-    'main': 'PRINCIPAL',
-    'log': 'IMPRIMIR',
-    'echo': 'RETORNAR',
-    'stop': 'DETENER',
-    'interger': 'TIPOENTERO',
-    'text': 'TIPOCADENA',
-    'decimal': 'TIPODECIMAL',
-    'boolean': 'TIPOBOOLEANO',
-    'void': 'TIPOVACIO',
-    'if': 'SI',
-    'and': 'Y',
-    'or': 'O',
-    'not': 'NO',
-    'elif': 'SINO',
-    'else': 'ENTONCES',
-    'while': 'MIENTRAS',
-    'for': 'PARA',
-    'true': 'NBOOLEANO',
-    'false': 'NBOOLEANO'
-}
+#data = ''' '''
 
-print(reserved)
-print(tokens)
+try:
+    with open(pathfile, 'r') as file:
+        data = file.read()
+except FileNotFoundError:
+    print(f"Error: El archivo '{pathfile}' no se encontró.")
+    data = ''
+
+lexer.input(data)
+
+class Token:
+    def __init__(self, type, value, line, column):
+        self.type = type
+        self.value = value
+        self.line = line
+        self.column = column
+
+listtokens = []
+
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
+    listtokens.append(token_obj)
+
+print("Código NetCode:")
+
+print(data)
+
+print(" ")
+
+print("Tokens NetCode:")
+
+for token in listtokens:
+    print(token.type, token.value)
+    #print(token.type)
