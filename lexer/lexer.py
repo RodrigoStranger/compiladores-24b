@@ -2,8 +2,8 @@ import os
 import ply.lex as lex
 
 directory = os.path.dirname(__file__)
-sketch = 'hola_mundo.txt'
-pathfile = os.path.join(directory, '..', 'sketch', sketch)
+sketchfile = 'hola_mundo.txt'
+pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'COMILLAS', 'ID', 'FINALSENTENCIA', 
           'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
