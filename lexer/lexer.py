@@ -2,17 +2,17 @@ import os
 import ply.lex as lex
 
 directory = os.path.dirname(__file__)
-sketchfile = 'hola_mundo.txt'
+sketchfile = 'sumar_numeros.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
-tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'COMILLAS', 'ID', 'FINALSENTENCIA', 
+tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 'FINALSENTENCIA', 
           'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
           'TIPOVACIO', 'SI', 'Y', 'O', 'NO', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
           'DIVISION', 'RESIDUO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 'MAYORIGUALQUE', 'IGUAL', 'IGUALBOOLEANO', 'DIFERENTEDE', 
           'AUMENTAR', 'DISMINUIR', 'SUMAIGUAL', 'RESTAIGUAL', 'MULTIPLICACIONIGUAL', 'DIVISIONIGUAL', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 
-          'NCADENA', 'NBOOLEANO', 'COMENTARIO')
+          'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA')
 
-reserved = {
+reserved = {    
     'function': 'FUNCION',
     'main': 'PRINCIPAL',
     'log': 'IMPRIMIR',
@@ -35,30 +35,11 @@ reserved = {
     'false': 'NBOOLEANO'
 }
 
-t_FUNCION = r'function'
-t_PRINCIPAL = r'main'
 t_CORCHETEABI = r'\['
 t_CORCHETECERR = r'\]'
-t_IMPRIMIR = r'log'
-t_COMILLAS = r'\"'
 t_FINALSENTENCIA = r';'
-t_RETORNAR = r'echo'
-t_DETENER = r'stop'
 t_LLAVEABI = r'\{'
 t_LLAVECERR = r'\}'
-t_TIPOENTERO = r'integer'
-t_TIPOCADENA = r'text'
-t_TIPODECIMAL = r'decimal'
-t_TIPOBOOLEANO = r'boolean'
-t_TIPOVACIO = r'void'
-t_SI = r'if'
-t_Y = r'and'
-t_O = r'or'
-t_NO = r'not'
-t_SINO = r'elif'
-t_ENTONCES = r'else'
-t_MIENTRAS = r'while'
-t_PARA = r'for'
 t_SUMA = r'\+'
 t_RESTA = r'-'
 t_MULTIPLICACION = r'\*'
@@ -78,7 +59,7 @@ t_RESTAIGUAL = r'-='
 t_MULTIPLICACIONIGUAL = r'\*='
 t_DIVISIONIGUAL = r'/='
 t_CONCATENAR = r'\$'
-t_NBOOLEANO = r'(true|false)'
+t_COMA = r','
 
 def t_NCADENA(t):
     r'"[^"]*"'
@@ -104,7 +85,7 @@ def t_COMENTARIO(t):
     r'//.*'
     pass
 
-def t_SALTOLINEA(t):
+def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
@@ -116,7 +97,8 @@ def t_error(t):
     
 lexer = lex.lex()
 
-#data = ''' '''
+#data = '''function suma[x interger, y interger] interger {echo x+y;}'''
+#data = '''-3.0'''
 
 try:
     with open(pathfile, 'r') as file:
