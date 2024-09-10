@@ -5,7 +5,7 @@ Para utilizar este analizador léxico, es necesario instalar Python en su ultima
 - Sitio web oficial: https://www.python.org/
 - Video de ayuda: https://www.youtube.com/watch?v=i6j8jT_OdEU
 
-En caso de `Linux` ya viene preinstalada para la mayoria de las distros.
+En el caso de `Linux` ya viene preinstalada para la mayoria de las distros.
 ## Instalación de [pip](https://pypi.org/project/pip/)
 
 
