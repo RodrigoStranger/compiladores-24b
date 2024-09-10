@@ -1,6 +1,6 @@
 # Compiladores 2024-B
 
-## Rodrigo Emerson Infanzón Acosta
+Rodrigo Emerson Infanzón Acosta
   
 ## Práctica 1
 - Crear una clase para en C++ o Python para representar un nodo de un
