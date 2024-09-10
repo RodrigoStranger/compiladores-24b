@@ -1,18 +1,18 @@
 # NetCode lexer
 Este proyecto implementa un analizador léxico para el lenguaje de programación propuesto **NetCode**. El analizador léxico se encarga de leer un archivo de código fuente, identificar los tokens del lenguaje y mostrar estos tokens en una lista de objetos.
 ## Instalación de [Python](https://www.python.org/)
-Para utilizar este analizador léxico, es necesario instalar Python en su ultima versión disponible:
+Para utilizar este analizador léxico, es necesario instalar Python en su ultima versión disponible para `windows`:
 - Sitio web oficial: https://www.python.org/
 - Video de ayuda: https://www.youtube.com/watch?v=i6j8jT_OdEU
 ## Instalación de [pip](https://pypi.org/project/pip/)
 
 
-En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para windows:
+En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para `windows`:
 - Sitio web oficial: https://pypi.org/project/pip/
 - Video de ayuda: https://www.youtube.com/watch?v=2wGveK_AQE4
 
 
-En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para linux:
+En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para `Linux`
 ```bash
    sudo apt update
    sudo apt install python3-pip
@@ -22,7 +22,7 @@ El módulo PLY (Python Lex-Yacc). Se puede instalar utilizando cmd en windows:
 ```bash
 pip install ply
 ```
-El módulo PLY (Python Lex-Yacc). Se puede instalar utilizando la terminal en linux:
+El módulo PLY (Python Lex-Yacc). Se puede instalar utilizando la terminal en `Linux`:
 ```bash
 sudo apt update
 sudo apt install python3-pip
