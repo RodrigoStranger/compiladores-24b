@@ -45,3 +45,4 @@ El lexer toma como entrada un archivo de texto que contiene el código fuente y 
 - Línea donde se encuentra
 - Posición en el código
 ## Código Fuente: [`AQUI`](./lexer.py)
+## EJEMPLOS: [`EXPLICACIÓN DETALLADA`](https://github.com/dabeaz/ply)
