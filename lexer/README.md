@@ -28,14 +28,14 @@ pip show ply
 ```
 ## Descripción del lexer 
 El lexer de **NetCode** utiliza el módulo **PLY** para identificar diferentes componentes léxicos como:
-- **Funciones**
-- **Tipos de datos**
-- **Operadores**
-- **Literales**
-- **Comentarios**
-- **Identificadores** <br>
+- Funciones
+- Tipos de datos
+- Operadores
+- Literales
+- Comentarios
+- Identificadores <br>
 El lexer toma como entrada un archivo de texto que contiene el código fuente y genera una lista de tokens que representan los elementos sintácticos del lenguaje. Estos tokens se almacenan en una lista de objetos `Token`, donde cada objeto contiene:
-- **Tipo del token**
-- **Valor del token**
-- **Línea donde se encuentra**
-- **Posición en el código**
+- Tipo del token
+- Valor del token
+- Línea donde se encuentra
+- Posición en el código
