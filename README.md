@@ -1,6 +1,6 @@
 # Compiladores 2024-B
 
-Rodrigo Emerson Infanzón Acosta
+Autor: Rodrigo Emerson Infanzón Acosta
   
 ## [`Practica 1`](./binarytrees)
 - Crear una clase para en C++ o Python para representar un nodo de un
