@@ -33,7 +33,9 @@ El lexer de **NetCode** utiliza el módulo **PLY** para identificar diferentes c
 - Operadores
 - Literales
 - Comentarios
-- Identificadores <br>
+- Identificadores
+
+  
 El lexer toma como entrada un archivo de texto que contiene el código fuente y genera una lista de tokens que representan los elementos sintácticos del lenguaje. Estos tokens se almacenan en una lista de objetos `Token`, donde cada objeto contiene:
 - Tipo del token
 - Valor del token
