@@ -51,7 +51,13 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Tipos de datos: entero, flotante, booleano y string
 
 ## [`Especificación Léxica`](./lexical_specification)
--
+Como parte del desarrollo de un nuevo lenguaje de programación, se debe definir una especificación léxica que incluya los siguientes componentes:
+- Definición de los comentarios: Establecer cómo se declararán los comentarios en el código fuente (ej. líneas simples o bloques de comentario).
+- Definición de los identificadores: Especificar las reglas para los nombres de variables, funciones, clases, etc. (ej. permitir letras, números, y subrayados, pero que no empiecen con un número).
+- Definición de las palabras clave: Definir las palabras reservadas del lenguaje que no se pueden usar como identificadores (ej. if, else, for).
+- Definición de los literales: Establecer los diferentes tipos de literales que el lenguaje soportará, como enteros, flotantes, cadenas de texto, etc.
+- Definición de los operadores: Definir los operadores aritméticos, lógicos, de comparación, etc., que el lenguaje soportará.
+- Expresión regular de cada componente léxico: Crear una tabla donde se describan las expresiones regulares que definen cada uno de los componentes léxicos anteriores.
 ### Entregables
 - [`lexical_specification.pdf`](./lexical_specification/lexical_specification.pdf)
 - [`lexical_specification.zip`](./lexical_specification/lexical_specification.zip)
