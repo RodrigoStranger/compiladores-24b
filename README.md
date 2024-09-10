@@ -21,7 +21,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 ### Entregables
 - [`binarytree.cpp`](./binarytrees/binarytree.cpp)
 
-## Práctica 2
+## [`Practica 2`](./exercises)
 - Implemente una cola y una pila respectivamente con los metodos pop y push.
 
 - Implemente una funcion que ordene una coleccion de datos. La solucion debe tener como maximo un costo de nlog(n).
@@ -33,7 +33,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - [`exercise02.py`](./exercises/exercise02.py)
 - [`exercise03.py`](./exercises/exercise03.py)
 
-## Práctica 3
+## [`Practica 3`](./sketch)
 - Traer 3 ejemplos de código fuente en el lenguaje que ustedes proponen e implementen: hola mundo, factorial iterativo, fibonacci recursivo.
 - Los ejemplos deben estar en formato .txt.
 
@@ -50,7 +50,9 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Comentarios en linea o bloque.
 - Tipos de datos: entero, flotante, booleano y string
 
-## Especificación Lexica
+## [`Especificación Léxica`](./lexical specification)
+
+## [`Lexer`](./lexer)
 
 
   
