@@ -8,7 +8,9 @@ Para utilizar este analizador léxico, es necesario instalar Python en su ultima
 - En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para windows:
 - Sitio web oficial: https://pypi.org/project/pip/
 - Video de ayuda: https://www.youtube.com/watch?v=2wGveK_AQE4
-- En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para linux:
+
+
+En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para linux:
 ```bash
    sudo apt update
    sudo apt install python3-pip
