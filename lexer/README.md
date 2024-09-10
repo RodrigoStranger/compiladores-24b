@@ -24,12 +24,11 @@ pip install ply
 ```
 El módulo PLY (Python Lex-Yacc). Se puede instalar utilizando la terminal en linux:
 ```bash
-sudo pip3 install ply
+sudo apt update
+sudo apt install python3-pip
+pip3 install ply
 ```
-## Verificación de instalación de [ply](https://ericknavarro.io/2020/02/10/24-Mi-primer-proyecto-utilizando-PLY/)
-```bash
-pip show ply
-```
+
 ## Descripción del lexer 
 El lexer de **NetCode** utiliza el módulo **PLY** para identificar diferentes componentes léxicos como:
 - Funciones
