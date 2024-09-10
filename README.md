@@ -38,9 +38,9 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Los ejemplos deben estar en formato .txt.
 
 ### Entregables
-- `compiladores-24b/sketch/hola_mundo.txt`
-- `compiladores-24b/sketch/factorial_iterativo.txt`
-- `compiladores-24b/sketch/fibonacci_recursivo.txt`
+- [`hola_mundo.txt`](./sketch/hola_mundo.txt)
+- [`factorial_iterativo.txt`](./sketch/factorial_iterativo.txt)
+- [`fibonacci_recursivo.txt`](./sketch/fibonacci_recursivo.txt)
 
 ## Elaboración de un lenguaje de programación compilado: requisitos mínimos
 - Estructuras de control: if-else, bucle.
