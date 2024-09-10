@@ -69,7 +69,7 @@ El objetivo de esta tarea es implementar el analizador léxico para el lenguaje 
 - Asegurarse de que los tokens retornados se almacenen en una lista de objetos o en un diccionario, de forma que cada token tenga una representación clara y accesible.
 
 
-Nota: la explicación más detallada se encontrará en la sección [`detalles lexer NetCode`](./lexer/README.md)
+Nota: la explicación más detallada se encontrará en la sección [`NetCode lexer`](./lexer/README.md)
 ### Entregables
 - [`lexer.py`](./lexer/lexer.py)
 
