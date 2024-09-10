@@ -44,4 +44,4 @@ El lexer toma como entrada un archivo de texto que contiene el código fuente y 
 - Valor del token
 - Línea donde se encuentra
 - Posición en el código
-## Código Fuente: [`AQUI`](./lexer/lexer.py)
+## Código Fuente: [`AQUI`](./lexer.py)
