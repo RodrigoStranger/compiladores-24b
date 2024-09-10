@@ -4,6 +4,8 @@ Este proyecto implementa un analizador léxico para el lenguaje de programación
 Para utilizar este analizador léxico, es necesario instalar Python en su ultima versión disponible para `windows`:
 - Sitio web oficial: https://www.python.org/
 - Video de ayuda: https://www.youtube.com/watch?v=i6j8jT_OdEU
+
+En caso de `Linux` ya viene preinstalada para la mayoria de las distros.
 ## Instalación de [pip](https://pypi.org/project/pip/)
 
 
@@ -12,7 +14,7 @@ En caso no posean el comando pip nativo de Python, seguir las siguientes indicac
 - Video de ayuda: https://www.youtube.com/watch?v=2wGveK_AQE4
 
 
-En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para `Linux`
+En caso no posean el comando pip nativo de Python, seguir las siguientes indicaciones para `Linux`:
 ```bash
    sudo apt update
    sudo apt install python3-pip
