@@ -19,6 +19,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Implementar una función para eliminar elementos.
   
 ### Entregables
+- [`binarytree.cpp`](.binarytrees/binarytree.cpp)
 - `compiladores-24b/binarytrees/binarytree.cpp`
 
 ## Práctica 2
@@ -42,7 +43,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - `compiladores-24b/sketch/factorial_iterativo.txt`
 - `compiladores-24b/sketch/fibonacci_recursivo.txt`
 
-## Requisitos mínimos del lenguaje de programación
+## Elaboración de un lenguaje de programación compilado: requisitos mínimos
 - Estructuras de control: if-else, bucle.
 - Funciones y recursividad de funciones.
 - Creación de variables y asignación de variables.
