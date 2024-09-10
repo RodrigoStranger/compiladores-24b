@@ -50,10 +50,11 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Comentarios en linea o bloque.
 - Tipos de datos: entero, flotante, booleano y string
 
-## [`Especificación Léxica`](./lexical specification)
+## [`Especificación Léxica`](./lexical_specification)
 -
 ### Entregables
-- [`Lexical Specification.zip`](./lexical specification/lexical specification.)
+- [`lexical_specification.pdf`](./lexical_specification/lexical_specification.pdf)
+- [`lexical_specification.zip`](./lexical_specification/lexical_specification.zip)
 ## [`Lexer`](./lexer)
 
 
