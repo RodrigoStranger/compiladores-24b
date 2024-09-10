@@ -2,7 +2,7 @@
 
 Rodrigo Emerson Infanzón Acosta
   
-## Práctica 1
+## [`Practica 1`](./binarytrees)
 - Crear una clase para en C++ o Python para representar un nodo de un
 árbol binario. Este debe contener datos como: key, data, left, y right.
 La clase debe tener un constructor para inicializar los atributos, usted
@@ -20,7 +20,6 @@ Salida: True si lo llego a insertar y False si el dato ya existe
   
 ### Entregables
 - [`binarytree.cpp`](./binarytrees/binarytree.cpp)
-- `compiladores-24b/binarytrees/binarytree.cpp`
 
 ## Práctica 2
 - Implemente una cola y una pila respectivamente con los metodos pop y push.
@@ -30,9 +29,9 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Dada una coleccion de numeros y un valor x, encuentre un par de numeros en la coleccion que sea igual a x. Considere que la coleccion de datos puede estar desordenada y puede tener elementos repetidos. Implemente una solucion a ese problema al menor costo computacional.
 
 ### Entregables
-- `compiladores-24b/exercises/exercise01.py`
-- `compiladores-24b/exercises/exercise02.py`
-- `compiladores-24b/exercises/exercise03.py`
+- [`exercise01.py`](./exercises/exercise01.py)
+- [`exercise02.py`](./exercises/exercise02.py)
+- [`exercise03.py`](./exercises/exercise03.py)
 
 ## Práctica 3
 - Traer 3 ejemplos de código fuente en el lenguaje que ustedes proponen e implementen: hola mundo, factorial iterativo, fibonacci recursivo.
