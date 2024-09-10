@@ -19,7 +19,7 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Implementar una función para eliminar elementos.
   
 ### Entregables
-- [`binarytree.cpp`](.binarytrees/binarytree.cpp)
+- [`binarytree.cpp`](./binarytrees/binarytree.cpp)
 - `compiladores-24b/binarytrees/binarytree.cpp`
 
 ## Práctica 2
