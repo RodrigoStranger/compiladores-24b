@@ -52,16 +52,22 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 
 ## [`Especificación Léxica`](./lexical_specification)
 Como parte del desarrollo de un nuevo lenguaje de programación, se debe definir una especificación léxica que incluya los siguientes componentes:
-- Definición de los comentarios: Establecer cómo se declararán los comentarios en el código fuente (ej. líneas simples o bloques de comentario).
-- Definición de los identificadores: Especificar las reglas para los nombres de variables, funciones, clases, etc. (ej. permitir letras, números, y subrayados, pero que no empiecen con un número).
-- Definición de las palabras clave: Definir las palabras reservadas del lenguaje que no se pueden usar como identificadores (ej. if, else, for).
-- Definición de los literales: Establecer los diferentes tipos de literales que el lenguaje soportará, como enteros, flotantes, cadenas de texto, etc.
-- Definición de los operadores: Definir los operadores aritméticos, lógicos, de comparación, etc., que el lenguaje soportará.
-- Expresión regular de cada componente léxico: Crear una tabla donde se describan las expresiones regulares que definen cada uno de los componentes léxicos anteriores.
+- Definición de los comentarios: establecer cómo se declararán los comentarios en el código fuente (ej. líneas simples o bloques de comentario).
+- Definición de los identificadores: especificar las reglas para los nombres de variables, funciones, clases, etc. (ej. permitir letras, números, y subrayados, pero que no empiecen con un número).
+- Definición de las palabras clave: definir las palabras reservadas del lenguaje que no se pueden usar como identificadores (ej. if, else, for).
+- Definición de los literales: establecer los diferentes tipos de literales que el lenguaje soportará, como enteros, flotantes, cadenas de texto, etc.
+- Definición de los operadores: definir los operadores aritméticos, lógicos, de comparación, etc., que el lenguaje soportará.
+- Expresión regular de cada componente léxico: crear una tabla donde se describan las expresiones regulares que definen cada uno de los componentes léxicos anteriores.
 ### Entregables
 - [`lexical_specification.pdf`](./lexical_specification/lexical_specification.pdf)
 - [`lexical_specification.zip`](./lexical_specification/lexical_specification.zip)
 ## [`Lexer`](./lexer)
+El objetivo de esta tarea es implementar el analizador léxico para el lenguaje de programación propuesto. El programa debe:
+- Leer el código fuente desde un archivo en disco.
+- Procesar el archivo fuente y generar los tokens correspondientes. Estos tokens deben seguir las reglas definidas en la especificación léxica.
+- Mostrar todos los tokens detectados en un formato estructurado, similar al ejemplo proporcionado en la [`Especificación Léxica`](./lexical_specification).
+- Asegurarse de que los tokens retornados se almacenen en una lista de objetos o en un diccionario, de forma que cada token tenga una representación clara y accesible.
+Nota: la explicación más detallada se encontrará en la sección . . . . . . . 
 
 
   
