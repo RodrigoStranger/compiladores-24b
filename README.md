@@ -51,7 +51,9 @@ Salida: True si lo llego a insertar y False si el dato ya existe
 - Tipos de datos: entero, flotante, booleano y string
 
 ## [`Especificación Léxica`](./lexical specification)
-
+-
+### Entregables
+- [`Lexical Specification.zip`](./lexical specification/lexical specification.)
 ## [`Lexer`](./lexer)
 
 
