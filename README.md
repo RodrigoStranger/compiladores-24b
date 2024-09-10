@@ -67,7 +67,10 @@ El objetivo de esta tarea es implementar el analizador léxico para el lenguaje 
 - Procesar el archivo fuente y generar los tokens correspondientes. Estos tokens deben seguir las reglas definidas en la especificación léxica.
 - Mostrar todos los tokens detectados en un formato estructurado, similar al ejemplo proporcionado en la [`Especificación Léxica`](./lexical_specification).
 - Asegurarse de que los tokens retornados se almacenen en una lista de objetos o en un diccionario, de forma que cada token tenga una representación clara y accesible.
-Nota: la explicación más detallada se encontrará en la sección . . . . . . . 
 
+
+Nota: la explicación más detallada se encontrará en la sección [`lexer.py`](./lexer/README.md)
+### Entregables
+- [`lexer.py`](./lexer/lexer.py)
 
   
