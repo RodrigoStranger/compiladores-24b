@@ -61,7 +61,7 @@ Como parte del desarrollo de un nuevo lenguaje de programación, se debe definir
 ### Entregables
 - [`lexical_specification.pdf`](./lexical_specification/lexical_specification.pdf)
 - [`lexical_specification.zip`](./lexical_specification/lexical_specification.zip)
-## [`Lexer`](./lexer)
+## [`Lexer`](./netcode)
 El objetivo de esta tarea es implementar el analizador léxico para el lenguaje de programación propuesto. El programa debe:
 - Leer el código fuente desde un archivo en disco.
 - Procesar el archivo fuente y generar los tokens correspondientes. Estos tokens deben seguir las reglas definidas en la especificación léxica.
@@ -69,7 +69,7 @@ El objetivo de esta tarea es implementar el analizador léxico para el lenguaje 
 - Asegurarse de que los tokens retornados se almacenen en una lista de objetos o en un diccionario, de forma que cada token tenga una representación clara y accesible.
 
 
-Nota: la explicación más detallada se encontrará en la sección [`NetCode lexer`](./netcode/README.md)
+Nota: la explicación más detallada se encontrará en la sección [`README NetCode`](./netcode/README.md)
 ### Entregables
 - [`lexer.py`](./netcode/lexer.py)
 
