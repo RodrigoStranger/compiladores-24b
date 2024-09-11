@@ -6,8 +6,8 @@ function factorial[n interger] interger {
 	echo result;
 }
 
-function main [] {
+function main interger [] {
 	numero interger = 5;
 	log["El factorial de " $  numero " es: " $ factorial[numero]];
-	echo;
+	echo 0;
 }

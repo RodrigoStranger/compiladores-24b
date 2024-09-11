@@ -3,8 +3,8 @@ function fibonacci_recursivo [n interger] interger {
 	echo fibonacci_recursivo[n-1] + fibonacci_recursivo[n-2];
 }
 
-function main [] {
+function main interger [] {
 	numero interger = 5;
 	log["El término " $ numero $ " de la secuencia de Fibonacci es: " $ fibonacci_recursivo[numero]];
-	echo;
+	echo 0;
 }

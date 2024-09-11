@@ -2,7 +2,7 @@ import os
 import ply.lex as lex
 
 directory = os.path.dirname(__file__)
-sketchfile = 'sumar_numeros.txt'
+sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 'FINALSENTENCIA', 
@@ -133,6 +133,6 @@ while True:
 
 #print("Tokens NetCode:")
 
-#for token in listtokens:
+for token in listtokens:
     #print(token.type, token.value)
-    #print(token.type)
+    print(token.type)

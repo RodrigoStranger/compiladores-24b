@@ -2,9 +2,9 @@ function sumar[x interger,y interger] interger {
     echo x + y;
 }
 
-function main [] {
+function main interger [] {
     n1 interger = 5;
     n2 interger = 10;
     log[sumar[n1,n2]];
-    echo;
+    echo 0;
 }
