@@ -5,12 +5,12 @@ directory = os.path.dirname(__file__)
 sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
-tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 'FINALSENTENCIA', 
+tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
           'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
           'TIPOVACIO', 'SI', 'Y', 'O', 'NO', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
           'DIVISION', 'RESIDUO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 'MAYORIGUALQUE', 'IGUAL', 'IGUALBOOLEANO', 'DIFERENTEDE', 
           'AUMENTAR', 'DISMINUIR', 'SUMAIGUAL', 'RESTAIGUAL', 'MULTIPLICACIONIGUAL', 'DIVISIONIGUAL', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 
-          'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA')
+          'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA') 
 
 reserved = {    
     'function': 'FUNCION',
@@ -37,7 +37,6 @@ reserved = {
 
 t_CORCHETEABI = r'\['
 t_CORCHETECERR = r'\]'
-t_FINALSENTENCIA = r';'
 t_LLAVEABI = r'\{'
 t_LLAVECERR = r'\}'
 t_SUMA = r'\+'
@@ -134,5 +133,5 @@ while True:
 #print("Tokens NetCode:")
 
 for token in listtokens:
-    #print(token.type, token.value)
-    print(token.type)
+    print(token.type, token.value)
+    #print(token.type)

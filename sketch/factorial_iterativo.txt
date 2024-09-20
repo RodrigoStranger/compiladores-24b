@@ -1,13 +1,13 @@
 function factorial[n interger] interger {
-	result interger = 1;
+	result interger = 1
 	for[i interger;i<=n;i++] {
-		result = result * i;
+		result = result * i
 	}
-	echo result;
+	echo result
 }
 
 function main interger [] {
-	numero interger = 5;
-	log["El factorial de " $  numero " es: " $ factorial[numero]];
-	echo 0;
+	numero interger = 5
+	log["El factorial de " $  numero " es: " $ factorial[numero]]
+	echo 0
 }
