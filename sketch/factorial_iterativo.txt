@@ -1,6 +1,6 @@
 function factorial[n interger] interger {
 	result interger = 1
-	for[i interger;i<=n;i++] {
+	for[i interger,i<=n,i++] {
 		result = result * i
 	}
 	echo result

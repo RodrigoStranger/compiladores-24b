@@ -1,5 +1,6 @@
 function sumar[x interger,y interger] interger {
-    echo x + y
+    suma = x + y
+    echo suma
 }
 
 function main interger [] {
