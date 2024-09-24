@@ -1,8 +1,9 @@
 import os
 import ply.lex as lex
 
+
 directory = os.path.dirname(__file__)
-sketchfile = 'hola_mundo.txt'
+sketchfile = 'fibonacci_recursivo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
@@ -126,14 +127,18 @@ while True:
     token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
     listtokens.append(token_obj)
 
-#print("Código NetCode:")
+#print("-----------------------------------------------------------------------------")
+'''
+print("Código NetCode:")
 
-#print(data)
+print(data)
 
-#print(" ")
+print("-----------------------------------------------------------------------------")
 
-#print("Tokens NetCode:")
-
+print("Tokens NetCode: ")
 for token in listtokens:
-    print(token.type, token.value)
-    #print(token.type)
+    #print(token.type, token.value)
+    print(token.type)
+
+print("-----------------------------------------------------------------------------")
+'''
