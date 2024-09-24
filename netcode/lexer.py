@@ -10,7 +10,7 @@ tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID
           'TIPOVACIO', 'SI', 'Y', 'O', 'NO', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
           'DIVISION', 'RESIDUO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 'MAYORIGUALQUE', 'IGUAL', 'IGUALBOOLEANO', 'DIFERENTEDE', 
           'AUMENTAR', 'DISMINUIR', 'SUMAIGUAL', 'RESTAIGUAL', 'MULTIPLICACIONIGUAL', 'DIVISIONIGUAL', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 
-          'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA') 
+          'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA', 'VARIABLE', 'PUNTOYCOMA') 
 
 reserved = {    
     'function': 'FUNCION',
@@ -32,9 +32,11 @@ reserved = {
     'while': 'MIENTRAS',
     'for': 'PARA',
     'true': 'NBOOLEANO',
-    'false': 'NBOOLEANO'
+    'false': 'NBOOLEANO',
+    'var' : 'VARIABLE'
 }
 
+t_PUNTOYCOMA = r';'
 t_CORCHETEABI = r'\['
 t_CORCHETECERR = r'\]'
 t_LLAVEABI = r'\{'
