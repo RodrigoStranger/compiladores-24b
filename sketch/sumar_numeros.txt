@@ -2,7 +2,7 @@ function sumar[var x interger, var y interger] interger {
     echo x + y
 }
 
-function main interger [] {
+program main interger [] {
     var n1 interger = 5
     var n2 interger = 10
     log[sumar[n1,n2]]
