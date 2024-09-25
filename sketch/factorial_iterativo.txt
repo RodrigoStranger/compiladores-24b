@@ -6,7 +6,7 @@ function factorial[var n interger] interger {
 	echo result
 }
 
-function main interger [] {
+program main interger [] {
 	var numero interger = 5
 	log["El factorial de " $  numero $ " es: " $ factorial[numero]]
 	echo 0
