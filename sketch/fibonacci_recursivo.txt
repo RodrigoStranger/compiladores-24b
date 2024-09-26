@@ -2,7 +2,7 @@ function fibonacci_recursivo [var n interger] interger {
 	if [n<=1] { 
 		echo n 
 	}
-	echo fibonacci_recursivo[n-1] + fibonacci_recursivo[n-2]
+	echo fibonacci_recursivo[n - 1] + fibonacci_recursivo[n - 2]
 }
 
 program main interger [] {

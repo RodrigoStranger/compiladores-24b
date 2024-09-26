@@ -24,7 +24,7 @@ def write_tokens_in_txt(lista_tokens, nombre_archivo):
         print(f"Error al escribir los tokens en el archivo: {str(e)}")
 
 # cambiar nombre cuando se quiere sacar tokens de cada codigo
-namelisttokens = 'output_tokens_fibonacci_recursivo.txt'
+namelisttokens = 'fibonacci_recursivo12121.txt'
 
 write_tokens_in_txt(listtokens, namelisttokens)
 
