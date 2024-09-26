@@ -3,7 +3,7 @@ import ply.lex as lex
 
 
 directory = os.path.dirname(__file__)
-sketchfile = 'mezclas.txt'
+sketchfile = 'areas.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
@@ -99,8 +99,7 @@ def t_error(t):
     
 lexer = lex.lex()
 
-#data = '''function suma[x interger, y interger] interger {echo x+y;}'''
-#data = '''-3.0'''
+#data = ''''''
 
 try:
     with open(pathfile, 'r') as file:

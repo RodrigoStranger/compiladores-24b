@@ -1,0 +1,43 @@
+function area_triangulo [var base decimal, var altura decimal] decimal {
+    echo [base * altura] / 2
+}
+
+function area_cuadrado [var lado decimal] decimal {
+    echo lado * lado
+}
+
+function area_circulo [var radio decimal] decimal {
+    echo 3.1416 * radio * radio
+}
+
+function area_rombo [var diagonal_mayor decimal, var diagonal_menor decimal] decimal {
+    echo [diagonal_mayor * diagonal_menor] / 2
+}
+
+function area_rectangulo [var base decimal, var altura decimal] decimal {
+    echo base * altura
+}
+
+function area_trapecio [var base_mayor decimal, var base_menor decimal, var altura decimal] decimal {
+    echo [base_mayor + base_menor] * altura / 2
+}
+
+program main interger [] {
+    var base decimal = 10.5
+    var altura decimal = 5.2
+    var lado decimal = 4.0
+    var radio decimal = 7.8
+    var diagonal_mayor decimal = 8.3
+    var diagonal_menor decimal = 6.7
+    var base_mayor decimal = 12.4
+    var base_menor decimal = 6.1
+
+    log["area del triangulo: " $ area_triangulo[base, altura]]
+    log["area del cuadrado: " $ area_cuadrado[lado]]
+    log["area del circulo: " $ area_circulo[radio]]
+    log["area del rombo: " $ area_rombo[diagonal_mayor, diagonal_menor]]
+    log["area del rectangulo: " $ area_rectangulo[base, altura]]
+    log["area del trapecio: " $ area_trapecio[base_mayor, base_menor, altura]]
+    
+    echo 0
+}
