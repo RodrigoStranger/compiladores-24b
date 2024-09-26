@@ -1,0 +1,36 @@
+function proceso_anidado [] interger {
+    var suma interger = 0
+    var i interger = 0
+    var j interger = 0
+    var k interger = 0
+
+    for [i = 1; i <= 3; i = i + 1] {
+        var count_i interger = i
+        while [j < 2] {
+            j = j + 1
+            var count_j interger = j
+            while [k < 2] {
+                k = k + 1
+                var count_k interger = k
+                if [i == 2 and j == 1 and k == 2] {
+                    log["Condicion especial alcanzada: i=" $ i $ ", j=" $ j $ ", k=" $ k]
+                } elif [i == 3 and j == 2 and k == 1] {
+                    log["Otra condicion especial alcanzada: i=" $ i $ ", j=" $ j $ ", k=" $ k]
+                } else {
+                    log["Sumando valores: i=" $ i $ ", j=" $ j $ ", k=" $ k]
+                    suma = suma + i + j + k
+                }
+            }
+            k = 0  
+        }
+        j = 0  
+    }
+
+    echo suma
+}
+
+program main interger [] {
+    var resultado interger = proceso_anidado[]
+    log["El resultado de la suma es: " $ resultado]
+    echo 0
+}

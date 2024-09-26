@@ -1,0 +1,15 @@
+function verificar_numero [var n interger] text {
+    if [n > 0] {
+        echo "El número es positivo"
+    } elif [n < 0] {
+        echo "El número es negativo"
+    } else {
+        echo "El número es cero"
+    }
+}
+
+program main interger [] {
+    var numero interger = -3
+    log["El número ingresado es: " $ numero $ ". Resultado: " $ verificar_numero[numero]]
+    echo 0
+}
