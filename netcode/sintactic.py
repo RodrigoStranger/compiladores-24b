@@ -44,11 +44,11 @@ def seleccionar_pagina():
     if opcion == '1':
         url = "https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/"
         print("Copie la gramatica grammar_ll1_parser y peguela en la web")
-        open_page_with_wait(url, 3)
+        open_page_with_wait(url, 6)
     elif opcion == '2':
         url = "https://jsmachines.sourceforge.net/machines/ll1.html"
         print("Copie la gramatica grammar_js_machine y peguela en la web")
-        open_page_with_wait(url, 3)
+        open_page_with_wait(url, 6)
     elif opcion == '3':
         print("Listo.")
     else:
