@@ -1,6 +1,6 @@
 function factorial[var n interger] interger {
 	var result interger = 1
-	for[var i interger;i<=n;i++] {
+	for[var i interger = 1;i<=n;i++] {
 		result = result * i
 	}
 	echo result

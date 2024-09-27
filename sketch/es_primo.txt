@@ -1,0 +1,17 @@
+function es_primo [var n interger] boolean {
+    if [n <= 1] {
+        echo false
+    }
+    for [var i interger = 2; i * i <= n; i = i + 1] {
+        if [n % i == 0] {
+            echo false
+        }
+    }
+    echo true
+}
+
+program main interger [] {
+    var numero interger = 11
+    log[es_primo[numero]]
+    echo 0
+}
