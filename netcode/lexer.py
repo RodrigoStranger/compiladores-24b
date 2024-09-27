@@ -3,7 +3,7 @@ import ply.lex as lex
 
 
 directory = os.path.dirname(__file__)
-sketchfile = 'areas.txt'
+sketchfile = 'hola_mundo2.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 

@@ -1,0 +1,4 @@
+program main interger [] {
+	log[f[]]
+	echo 0
+}
