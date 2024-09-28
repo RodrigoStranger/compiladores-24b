@@ -126,18 +126,19 @@ while True:
     token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
     listtokens.append(token_obj)
 
-#print("-----------------------------------------------------------------------------")
 '''
-print("Código NetCode:")
+#print("-----------------------------------------------------------------------------")
 
-print(data)
+#print("Código NetCode:")
 
-print("-----------------------------------------------------------------------------")
+#print(data)
 
-print("Tokens NetCode: ")
-for token in listtokens:
+#print("-----------------------------------------------------------------------------")
+
+#print("Tokens NetCode: ")
+#for token in listtokens:
     #print(token.type, token.value)
-    print(token.type)
+    #print(token.type)
 
-print("-----------------------------------------------------------------------------")
+#print("-----------------------------------------------------------------------------")
 '''
