@@ -100,14 +100,16 @@ lexer = lex.lex()
 
 #data = ''''''
 
-try:
-    with open(pathfile, 'r') as file:
-        data = file.read()
-except FileNotFoundError:
-    print(f"Error: El archivo '{pathfile}' no se encontró.")
-    data = ''
+def generate_data(name_pathfile):
+    try:
+        with open(name_pathfile, 'r') as file:
+            data = file.read()
+    except FileNotFoundError:
+        print(f"Error: El archivo '{name_pathfile}' no se encontró.")
+        data = ''
+    return data
 
-lexer.input(data)
+lexer.input(generate_data(pathfile))
 
 class Token:
     def __init__(self, type, value, line, column):
@@ -118,26 +120,40 @@ class Token:
 
 listtokens = []
 
-while True:
-    tok = lexer.token()
-    if not tok:
-        break
-    token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
-    listtokens.append(token_obj)
+def generate_tokens(list_tokens):
+    while True:
+        tok = lexer.token()
+        if not tok: break
+        token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
+        list_tokens.append(token_obj)
+    print("Log: Tokens generados correctamente.\n")
+
+def print_tokens(list_tokens):
+    print("Tokens NetCode: ")
+    for token in list_tokens:
+    #print(token.type, token.value)
+        print(token.type)
+
+#generate_tokens(listtokens)
+
+#print_tokens(listtokens)
 
 '''
-#print("-----------------------------------------------------------------------------")
+def write_tokens_in_txt(lista_tokens, nombre_archivo):
+    carpeta_salida = 'listtokens'
+    if not os.path.exists(carpeta_salida):
+        os.makedirs(carpeta_salida)
+    archivo_salida = os.path.join(carpeta_salida, nombre_archivo)
+    try:
+        with open(archivo_salida, 'w') as file:
+            tokens = ' '.join([token.type for token in lista_tokens])
+            file.write(tokens)
+            print(f"Tokens escritos exitosamente en el archivo '{archivo_salida}'.")
+    except Exception as e:
+        print(f"Error al escribir los tokens en el archivo: {str(e)}")
 
-#print("Código NetCode:")
+# cambiar nombre cuando se quiere sacar tokens de cada codigo
+namelisttokens = 'hola_mundo_tokens.txt'
 
-#print(data)
-
-#print("-----------------------------------------------------------------------------")
-
-#print("Tokens NetCode: ")
-#for token in listtokens:
-    #print(token.type, token.value)
-    #print(token.type)
-
-#print("-----------------------------------------------------------------------------")
+write_tokens_in_txt(listtokens, namelisttokens)
 '''
