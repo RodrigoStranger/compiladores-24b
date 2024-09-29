@@ -1,7 +1,6 @@
 import os
 import ply.lex as lex
 
-
 directory = os.path.dirname(__file__)
 sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)

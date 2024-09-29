@@ -1,15 +1,10 @@
-import ply.yacc as yacc
 from lexer import listtokens
-from lexer import data
+import pandas as pd
 import os
 import webbrowser
 import time
 
-# Crear el parser
-#parser = yacc.yacc()
-# Analizar los datos de ejemplo
-#parser.parse(data)
-
+'''
 def write_tokens_in_txt(lista_tokens, nombre_archivo):
     carpeta_salida = 'listtokens'
     if not os.path.exists(carpeta_salida):
@@ -55,5 +50,8 @@ def seleccionar_pagina():
         print("Opción no válida. Por favor, elija 1, 2 o 3.")
 
 seleccionar_pagina()
-
-#print("-----------------------------------------------------------------------------")
+'''
+# usando pandas
+df = pd.read_csv('table.csv', index_col = 0)
+df = df.fillna(' ')
+print(df)
