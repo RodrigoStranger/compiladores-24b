@@ -12,6 +12,7 @@ df = pd.read_csv(pathfile2, index_col = 0)
 df = df.fillna('null')
 print("Tabla ll1:")
 print(df)
+print(" ")
 
 listtokens_example = []
 
@@ -23,14 +24,18 @@ def generate_token_example(type, listtokens):
 generate_token_example("(", listtokens_example)
 generate_token_example("int", listtokens_example)
 generate_token_example(")", listtokens_example)
-generate_token_example("+", listtokens_example)
-generate_token_example("int", listtokens_example)
+#generate_token_example("+", listtokens_example)
+#generate_token_example("int", listtokens_example)
+
+# no comentar
 generate_token_example("$", listtokens_example)
 
 #print_tokens(listtokens_example)
+print("Entrada:",' '.join(token.type for token in listtokens_example))
+
 
 print(" ")
-print("Detalles del análisis sintactico: ")
+print("Detalles del análisis sintáctico: ")
 def ll1_parse(tokens, parsing_table):
     stack = ['$','E']
     index = 0
@@ -43,6 +48,7 @@ def ll1_parse(tokens, parsing_table):
                 print(f"Coincidencia encontrada: {top}")
                 index += 1
             else:
+                print(" ")
                 print(f"Error: Se esperaba {top}, pero se encontró {tokens[index].type if index < len(tokens) else 'fin de entrada'}")
                 return False
         # si el símbolo en la cima es un no terminal
@@ -58,12 +64,15 @@ def ll1_parse(tokens, parsing_table):
                     else:
                         print(f"Producción vacía encontrada para {top}")
                 else:
+                    print(" ")
                     print(f"Error: No hay producción válida para {top} con el token {current_token}")
                     return False  # no hay producción válida
             else:
+                print(" ")
                 print("Error: Se acabaron los tokens, pero aún hay no terminales en el stack")
                 return False  # se acabaron los tokens, pero aún hay no terminales en el stack
         else:
+            print(" ")
             print(f"Error: símbolo no reconocido {top}")
             return False  # símbolo no reconocido
     # verifica si se ha consumido toda la entrada
