@@ -77,5 +77,4 @@ def ll1_parse(tokens, parsing_table):
     return success
 
 result = ll1_parse(listtokens_example, df)
-print(" ")
 print("Resultado del análisis ll(1):", result)
