@@ -16,6 +16,7 @@ print(" ")
 
 listtokens_example = []
 
+# atributes: type , value, line, column
 def generate_token_example(type, listtokens):
     token_obj = Token(type, type, 0, 0)
     listtokens.append(token_obj)
@@ -27,7 +28,7 @@ generate_token_example(")", listtokens_example)
 #generate_token_example("+", listtokens_example)
 #generate_token_example("int", listtokens_example)
 
-# no comentar
+# nunca comentar
 generate_token_example("$", listtokens_example)
 
 #print_tokens(listtokens_example)
