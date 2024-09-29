@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 directory2 = os.path.dirname(__file__)
-sketchfile = 'table_ll1_example.csv'
+sketchfile = 'table_ll1_example2.csv'
 pathfile2 = os.path.join(directory2, '..', 'table_ll1', sketchfile)
 
 df = pd.read_csv(pathfile2, index_col = 0)
@@ -22,11 +22,43 @@ def generate_token_example(type, listtokens):
     listtokens.append(token_obj)
 
 # aqui podemos introducir ejemplos:
-generate_token_example("(", listtokens_example)
-generate_token_example("int", listtokens_example)
-generate_token_example(")", listtokens_example)
+#generate_token_example("(", listtokens_example)
+#generate_token_example("int", listtokens_example)
+#generate_token_example(")", listtokens_example)
 #generate_token_example("+", listtokens_example)
 #generate_token_example("int", listtokens_example)
+
+'''
+generate_token_example("if", listtokens_example)
+generate_token_example("true", listtokens_example)
+generate_token_example("then", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("true", listtokens_example)
+generate_token_example("}", listtokens_example)
+generate_token_example("else", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("if", listtokens_example)
+generate_token_example("false", listtokens_example)
+generate_token_example("then", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("false", listtokens_example)
+generate_token_example("}", listtokens_example)
+generate_token_example("}", listtokens_example)
+'''
+
+generate_token_example("if", listtokens_example)
+generate_token_example("true", listtokens_example)
+generate_token_example("then", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("if", listtokens_example)
+generate_token_example("false", listtokens_example)
+generate_token_example("then", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("}", listtokens_example)
+generate_token_example("else", listtokens_example)
+generate_token_example("{", listtokens_example)
+generate_token_example("}", listtokens_example)
+generate_token_example("}", listtokens_example)
 
 # nunca comentar
 generate_token_example("$", listtokens_example)
