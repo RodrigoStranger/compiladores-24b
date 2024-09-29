@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import ply.lex as lex
 import os
 
 #class Token
