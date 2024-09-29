@@ -29,8 +29,8 @@ listtokens_example = []
 generate_token_example("(", listtokens_example)
 generate_token_example("int", listtokens_example)
 generate_token_example(")", listtokens_example)
-generate_token_example("+", listtokens_example)
-generate_token_example("int", listtokens_example)
+#generate_token_example("+", listtokens_example)
+#generate_token_example("int", listtokens_example)
 
 
 '''
@@ -81,4 +81,4 @@ result = ll1_parse(listtokens_example, table_ll1)
 
 print("Resultado del análisis ll(1):", result)
 
-generate_syntax_table(pathfile2, output_pdf_path)
+#generate_syntax_table(pathfile2, output_pdf_path)
