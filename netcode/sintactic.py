@@ -3,15 +3,29 @@ from lexer import Token
 from lexer import print_tokens
 import pandas as pd
 import os
+import matplotlib.pyplot as plt
 
 directory2 = os.path.dirname(__file__)
-sketchfile = 'table_ll1_example2.csv'
+sketchfile = 'table_ll1_example.csv'
 pathfile2 = os.path.join(directory2, '..', 'table_ll1', sketchfile)
 
-df = pd.read_csv(pathfile2, index_col = 0)
-df = df.fillna('null')
+output_folder = 'table_ll1'
+
+if not os.path.exists(output_folder): os.makedirs(output_folder)
+
+output_pdf_path = os.path.join(output_folder, 'table_ll1_example.png')
+
+def generate_table_ll1(pathfile):
+    df = pd.read_csv(pathfile, index_col = 0)
+    df = df.fillna('null')
+    return df
+
 print("Tabla ll1:")
-print(df)
+
+table_ll1 = generate_table_ll1(pathfile2)
+
+print(table_ll1)
+
 print(" ")
 
 listtokens_example = []
@@ -22,11 +36,13 @@ def generate_token_example(type, listtokens):
     listtokens.append(token_obj)
 
 # aqui podemos introducir ejemplos:
-#generate_token_example("(", listtokens_example)
-#generate_token_example("int", listtokens_example)
-#generate_token_example(")", listtokens_example)
-#generate_token_example("+", listtokens_example)
-#generate_token_example("int", listtokens_example)
+
+generate_token_example("(", listtokens_example)
+generate_token_example("int", listtokens_example)
+generate_token_example(")", listtokens_example)
+generate_token_example("+", listtokens_example)
+generate_token_example("int", listtokens_example)
+
 
 '''
 generate_token_example("if", listtokens_example)
@@ -46,6 +62,7 @@ generate_token_example("}", listtokens_example)
 generate_token_example("}", listtokens_example)
 '''
 
+'''
 generate_token_example("if", listtokens_example)
 generate_token_example("true", listtokens_example)
 generate_token_example("then", listtokens_example)
@@ -59,6 +76,7 @@ generate_token_example("else", listtokens_example)
 generate_token_example("{", listtokens_example)
 generate_token_example("}", listtokens_example)
 generate_token_example("}", listtokens_example)
+'''
 
 # nunca comentar
 generate_token_example("$", listtokens_example)
@@ -66,6 +84,25 @@ generate_token_example("$", listtokens_example)
 #print_tokens(listtokens_example)
 print("Entrada:",' '.join(token.type for token in listtokens_example))
 
+def generate_syntax_table(csv_path, output_png_path):
+    table_print = generate_table_ll1(csv_path)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.axis('tight')
+    ax.axis('off')
+    table = ax.table(cellText=table_print.values, 
+                     colLabels=table_print.columns, 
+                     rowLabels=table_print.index, 
+                     loc='center', 
+                     cellLoc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(12)
+    table.scale(1.2, 1.2)
+    for j in range(len(table_print.columns) + 1):
+        for (i, j2) in table.get_celld().keys():
+            if j2 == j: table[(i, j2)].set_width(0.2)
+    plt.savefig(output_png_path, bbox_inches='tight', dpi=300)
+    plt.close(fig)
+    print(f"Imagen png generada exitosamente en: {output_png_path}")
 
 print(" ")
 print("Detalles del análisis sintáctico: ")
@@ -118,5 +155,7 @@ def ll1_parse(tokens, parsing_table):
         print("Falló el análisis.")
     return success
 
-result = ll1_parse(listtokens_example, df)
+result = ll1_parse(listtokens_example, table_ll1)
 print("Resultado del análisis ll(1):", result)
+
+generate_syntax_table(pathfile2, output_pdf_path)
