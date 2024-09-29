@@ -138,7 +138,6 @@ def print_tokens(list_tokens):
 
 #print_tokens(listtokens)
 
-'''
 def write_tokens_in_txt(lista_tokens, nombre_archivo):
     carpeta_salida = 'listtokens'
     if not os.path.exists(carpeta_salida):
@@ -153,7 +152,6 @@ def write_tokens_in_txt(lista_tokens, nombre_archivo):
         print(f"Error al escribir los tokens en el archivo: {str(e)}")
 
 # cambiar nombre cuando se quiere sacar tokens de cada codigo
-namelisttokens = 'hola_mundo_tokens.txt'
+#namelisttokens = 'hola_mundo_tokens.txt'
 
-write_tokens_in_txt(listtokens, namelisttokens)
-'''
+#write_tokens_in_txt(listtokens, namelisttokens)
