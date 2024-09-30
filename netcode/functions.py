@@ -78,48 +78,61 @@ def generate_syntax_table(csv_path, output_png_path):
 def ll1_parse(tokens, parsing_table):
     stack = ['$','E']
     index = 0
+    
     while stack:
         print(f"Estado de la pila: {stack}, Tokens restantes: {[token.type for token in tokens[index:]]}")
         top = stack.pop()
+        
         # si el símbolo en la cima es un terminal
-        if top in [token.type for token in tokens]:  # compara con tipos de tokens
+        if top in [token.type for token in tokens]:
             if index < len(tokens) and tokens[index].type == top:
                 print(f"Coincidencia encontrada: {top}")
                 index += 1
             else:
-                print(" ")
-                print(f"Error: Se esperaba {top}, pero se encontró {tokens[index].type if index < len(tokens) else 'fin de entrada'}")
+                print("\nError: Se esperaba '{}' pero se encontró '{}'".format(
+                    top, tokens[index].type if index < len(tokens) else 'fin de entrada'))
+                print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
                 return False
+        
         # si el símbolo en la cima es un no terminal
         elif top in parsing_table.index:
             if index < len(tokens):
                 current_token = tokens[index].type
-                production = parsing_table.at[top, current_token]
-                if production != 'null':
-                    # descomponer la producción y añadir al stack
-                    if production != 'e':
-                        print(f"Producción encontrada para {top}: {production}")
-                        stack.extend(reversed(production.split()))  # añadir en orden inverso
+                try:
+                    production = parsing_table.at[top, current_token]
+                    if production != 'null':
+                        # descomponer la producción y añadir al stack
+                        if production != 'e':  # 'e' representa la producción vacía
+                            print(f"Producción encontrada para {top}: {production}")
+                            stack.extend(reversed(production.split()))  # añadir en orden inverso
+                        else:
+                            print(f"Producción vacía encontrada para {top}")
                     else:
-                        print(f"Producción vacía encontrada para {top}")
-                else:
-                    print(" ")
-                    print(f"Error: No hay producción válida para {top} con el token {current_token}")
-                    return False  # no hay producción válida
+                        print("\nError: No hay producción válida para el no terminal '{}' con el token '{}'".format(
+                            top, current_token))
+                        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                        return False
+                except KeyError as e:
+                    print(f"\nError: No se encontró una producción en la tabla LL(1) para el no terminal '{top}' con el token '{current_token}'.")
+                    print("Error específico:", str(e))
+                    return False
             else:
-                print(" ")
-                print("Error: Se acabaron los tokens, pero aún hay no terminales en el stack")
-                return False  # se acabaron los tokens, pero aún hay no terminales en el stack
+                print("\nError: Se acabaron los tokens, pero aún hay no terminales en la pila: ", stack)
+                return False
+        
+        # símbolo no reconocido (ni terminal ni no terminal)
         else:
-            print(" ")
-            print(f"Error: símbolo no reconocido {top}")
-            return False  # símbolo no reconocido
+            print("\nError: símbolo no reconocido en la pila '{}'".format(top))
+            print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+            return False
+    
     # verifica si se ha consumido toda la entrada
     success = index == len(tokens)
+    
     if success:
-        print(" ")
-        print("Análisis exitoso.")
+        print("\nAnálisis exitoso.")
     else:
-        print(" ")
-        print("Falló el análisis.")
+        print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")
+        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+    
     return success
