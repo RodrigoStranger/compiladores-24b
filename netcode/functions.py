@@ -78,11 +78,9 @@ def generate_syntax_table(csv_path, output_png_path):
 def ll1_parse(tokens, parsing_table):
     stack = ['$','E']
     index = 0
-    
     while stack:
         print(f"Estado de la pila: {stack}, Tokens restantes: {[token.type for token in tokens[index:]]}")
         top = stack.pop()
-        
         # si el símbolo en la cima es un terminal
         if top in [token.type for token in tokens]:
             if index < len(tokens) and tokens[index].type == top:
@@ -93,7 +91,6 @@ def ll1_parse(tokens, parsing_table):
                     top, tokens[index].type if index < len(tokens) else 'fin de entrada'))
                 print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
                 return False
-        
         # si el símbolo en la cima es un no terminal
         elif top in parsing_table.index:
             if index < len(tokens):
@@ -119,20 +116,16 @@ def ll1_parse(tokens, parsing_table):
             else:
                 print("\nError: Se acabaron los tokens, pero aún hay no terminales en la pila: ", stack)
                 return False
-        
         # símbolo no reconocido (ni terminal ni no terminal)
         else:
             print("\nError: símbolo no reconocido en la pila '{}'".format(top))
             print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
             return False
-    
     # verifica si se ha consumido toda la entrada
     success = index == len(tokens)
-    
     if success:
         print("\nAnálisis exitoso.")
     else:
         print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")
         print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
-    
     return success
