@@ -7,7 +7,7 @@ from functions import write_tokens_in_txt
 from functions import Token
 
 directory = os.path.dirname(__file__)
-sketchfile = 'fibonacci_recursivo.txt'
+sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
@@ -118,6 +118,6 @@ generate_tokens(listtokens)
 #print_tokens(listtokens)
 
 # cambiar nombre cuando se quiere sacar tokens de cada codigo
-#namelisttokens = 'fibonacci_recursivo_tokens.txt'
+#namelisttokens = 'mezclas_tokens.txt'
 
 #write_tokens_in_txt(listtokens, namelisttokens)

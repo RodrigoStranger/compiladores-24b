@@ -37,7 +37,7 @@ def write_tokens_in_txt(lista_tokens, nombre_archivo):
         with open(archivo_salida, 'w') as file:
             tokens = ' '.join([token.type for token in lista_tokens])
             file.write(tokens)
-            print(f"Tokens escritos exitosamente en el archivo '{archivo_salida}'.")
+            print(f"Tokens escritos exitosamente en el archivo '{archivo_salida}'.\n")
     except Exception as e:
         print(f"Error al escribir los tokens en el archivo: {str(e)}")
 
