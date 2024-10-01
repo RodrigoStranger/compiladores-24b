@@ -111,7 +111,7 @@ def generate_tokens(list_tokens):
         if not tok: break
         token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
         list_tokens.append(token_obj)
-    print("Log: Tokens generados correctamente.\n")
+    print("Tokens generados correctamente.\n")
 
 generate_tokens(listtokens)
 

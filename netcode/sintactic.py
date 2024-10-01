@@ -20,65 +20,17 @@ output_pdf_path = os.path.join(output_folder, 'table_ll1.png')
 table_ll1 = generate_table_ll1(pathfile2)
 
 #print(table_ll1)
-
 #print(" ")
-
-listtokens_example = []
-
-# aqui podemos introducir ejemplos:
-#generate_token_example("(", listtokens_example)
-#generate_token_example("int", listtokens_example)
-#generate_token_example(")", listtokens_example)
-#generate_token_example("+", listtokens_example)
-#generate_token_example("int", listtokens_example)
-
-
-'''
-generate_token_example("if", listtokens_example)
-generate_token_example("true", listtokens_example)
-generate_token_example("then", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("true", listtokens_example)
-generate_token_example("}", listtokens_example)
-generate_token_example("else", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("if", listtokens_example)
-generate_token_example("false", listtokens_example)
-generate_token_example("then", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("false", listtokens_example)
-generate_token_example("}", listtokens_example)
-generate_token_example("}", listtokens_example)
-'''
-
-'''
-generate_token_example("if", listtokens_example)
-generate_token_example("true", listtokens_example)
-generate_token_example("then", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("if", listtokens_example)
-generate_token_example("false", listtokens_example)
-generate_token_example("then", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("}", listtokens_example)
-generate_token_example("else", listtokens_example)
-generate_token_example("{", listtokens_example)
-generate_token_example("}", listtokens_example)
-generate_token_example("}", listtokens_example)
-'''
 
 # nunca comentar
 generate_token_example("$", listtokens)
 
 #print_tokens(listtokens_example)
-print("Entrada:",' '.join(token.type for token in listtokens))
 
+print("Entrada:",' '.join(token.type for token in listtokens))
 print(" ")
 
 print("Detalles del análisis sintáctico: ")
-
 result = ll1_parse(listtokens, table_ll1)
 
 print("Resultado del análisis ll(1):", result)
-
-#generate_syntax_table(pathfile2, output_pdf_path)
