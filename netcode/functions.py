@@ -69,14 +69,14 @@ def generate_syntax_table(csv_path, output_png_path):
     table.scale(1.2, 1.2)
     for j in range(len(table_print.columns) + 1):
         for (i, j2) in table.get_celld().keys():
-            if j2 == j: table[(i, j2)].set_width(0.2)
+            if j2 == j: table[(i, j2)].set_width(0.3)
     plt.savefig(output_png_path, bbox_inches='tight', dpi=300)
     plt.close(fig)
     print(f"Imagen png generada exitosamente en: {output_png_path}")
 
 #funcion en la cual verifica si una lista de tokens pertenece al lenguaje
 def ll1_parse(tokens, parsing_table):
-    stack = ['$','E']
+    stack = ['$','NETCODE']
     index = 0
     while stack:
         print(f"Estado de la pila: {stack}, Tokens restantes: {[token.type for token in tokens[index:]]}")

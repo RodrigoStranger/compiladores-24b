@@ -7,6 +7,6 @@ function fibonacci_recursivo [var n interger] interger {
 
 program main interger [] {
 	var numero interger = 5
-	log["El término " $ numero $ " de la secuencia de Fibonacci es: " $ fibonacci_recursivo[numero]]
+	log[fibonacci_recursivo[numero]]
 	echo 0
 }
