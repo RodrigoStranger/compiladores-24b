@@ -1,6 +1,6 @@
 import os
-from lexer import listtokens
-from lexer import print_tokens
+from netcode.lexic import listtokens
+from netcode.lexic import print_tokens
 
 from functions import generate_table_ll1
 from functions import generate_token_example
