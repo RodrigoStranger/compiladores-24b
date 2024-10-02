@@ -2,6 +2,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
+#class StackElement
+class StackElement:
+    def __init__(self, id, type, value):
+        self.id = id
+        self.type = type
+        self.value = value
+
+    def __repr__(self):
+        return f"({self.type})"
+        #return f"StackElement(id={self.id}, type={self.type}, value={self.value})"
+
 #class Token
 class Token:
     def __init__(self, type, value, line, column):
@@ -124,6 +135,67 @@ def ll1_parse(tokens, parsing_table):
     # verifica si se ha consumido toda la entrada
     success = index == len(tokens)
     if success:
+        print("\nAnálisis exitoso.")
+    else:
+        print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")
+        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+    return success
+
+#lo mismo pero usando objetos
+def ll1_parse_use_objects(tokens, parsing_table):
+    # Crear elementos del stack usando la clase StackElement
+    stack = [StackElement(1, '$', '$'), StackElement(2, 'NETCODE', 'NETCODE')]  # Añadir $ al stack
+    index = 0
+    while stack:
+        print(f"Estado de la pila: {stack}")
+        print(f"Tokens restantes: {[token.type for token in tokens[index:]]}")
+        top = stack.pop()
+        # Si el símbolo en la cima es un terminal
+        if top.type in [token.type for token in tokens]:
+            if index < len(tokens) and tokens[index].type == top.type:
+                print(f"Coincidencia encontrada: {top.type}\n")
+                index += 1
+            else:
+                print("\nError: Se esperaba '{}' pero se encontró '{}'".format(
+                    top.type, tokens[index].type if index < len(tokens) else 'fin de entrada'))
+                print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                return False
+        # Si el símbolo en la cima es un no terminal
+        elif top.type in parsing_table.index:
+            if index < len(tokens):
+                current_token = tokens[index].type
+                try:
+                    production = parsing_table.at[top.type, current_token]
+                    if production != 'null':
+                        # Descomponer la producción y añadir al stack
+                        if production != 'e':  # 'e' representa la producción vacía
+                            print(f"Producción encontrada para {top.type}: {production}\n")
+                            # Añadir nuevos elementos del stack en orden inverso
+                            for i, symbol in enumerate(reversed(production.split()), start=1):
+                                stack.append(StackElement(i, symbol, symbol))  # Añadir id, type y value
+                        else:
+                            print(f"Producción vacía 'e' encontrada para {top.type}\n")
+                    else:
+                        print("\nError: No hay producción válida para el no terminal '{}' con el token '{}'".format(
+                            top.type, current_token))
+                        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                        return False
+                except KeyError as e:
+                    print(f"\nError: No se encontró una producción en la tabla LL(1) para el no terminal '{top.type}' con el token '{current_token}'.")
+                    print("Error específico:", str(e))
+                    return False
+            else:
+                print("\nError: Se acabaron los tokens, pero aún hay no terminales en la pila: ", stack)
+                return False
+        # Si el símbolo no es reconocido (ni terminal ni no terminal)
+        else:
+            print("\nError: símbolo no reconocido en la pila '{}'".format(top.type))
+            print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+            return False
+    # Verifica si se ha consumido toda la entrada
+    success = index == len(tokens)
+    if success:
+        print("Pila Vacia")
         print("\nAnálisis exitoso.")
     else:
         print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")

@@ -7,7 +7,7 @@ from functions import write_tokens_in_txt
 from functions import Token
 
 directory = os.path.dirname(__file__)
-sketchfile = 'hola_mundo.txt'
+sketchfile = 'hola_mundo2.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
@@ -93,16 +93,12 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-
-
 def t_error(t):
     print("Caracter Ilegal %s " % t.value[0])
     t.lexer.skip(1)
     
 lexer = lex.lex()
-
 lexer.input(generate_data(pathfile))
-
 listtokens = []
 
 def generate_tokens(list_tokens):
@@ -115,9 +111,12 @@ def generate_tokens(list_tokens):
 
 generate_tokens(listtokens)
 
+print("Nombre del codigo: ", sketchfile)
+print(" ")
+
 #print_tokens(listtokens)
 
-# cambiar nombre cuando se quiere sacar tokens de cada codigo
+#cambiar nombre cuando se quiere sacar tokens de cada codigo
 #namelisttokens = 'mezclas_tokens.txt'
 
 #write_tokens_in_txt(listtokens, namelisttokens)
