@@ -25,3 +25,7 @@ print("Detalles del análisis sintáctico: ")
 result= ll1_parse_use_objects(listtokens, table_ll1)
 
 print("Resultado del análisis ll(1):", result)
+
+#tareas:
+#1. Crear una funcion en la cual me genere el arbol sintáctico
+#2. Crear una funcion en la cual me genere la tabla ll1 en csv (entrada: gramatica, salida: tabla ll1.csv)
