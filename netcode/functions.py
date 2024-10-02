@@ -8,7 +8,6 @@ class StackElement:
         self.id = id
         self.type = type
         self.value = value
-
     def __repr__(self):
         return f"({self.type})"
         #return f"StackElement(id={self.id}, type={self.type}, value={self.value})"
@@ -65,7 +64,7 @@ def generate_token_example(type, listtokens):
     listtokens.append(token_obj)
 
 #funcion que genera un png de una tabla ll1
-def generate_syntax_table(csv_path, output_png_path):
+def generate_syntax_table_png(csv_path, output_png_path):
     table_print = generate_table_ll1(csv_path)
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.axis('tight')

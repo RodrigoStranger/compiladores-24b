@@ -1,10 +1,8 @@
 import os
-from netcode.lexic import listtokens
-from netcode.lexic import print_tokens
+from lexic import listtokens
 
 from functions import generate_table_ll1
 from functions import generate_token_example
-from functions import generate_syntax_table
 from functions import ll1_parse
 from functions import ll1_parse_use_objects
 
