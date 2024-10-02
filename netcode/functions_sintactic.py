@@ -1,56 +1,15 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
+
+from functions_lexic import Token
 
 #class StackElement
 class StackElement:
-    def __init__(self, id, type, value):
-        self.id = id
+    def __init__(self, type, value):
         self.type = type
         self.value = value
-    def __repr__(self):
-        return f"({self.type})"
-        #return f"StackElement(id={self.id}, type={self.type}, value={self.value})"
-
-#class Token
-class Token:
-    def __init__(self, type, value, line, column):
-        self.type = type
-        self.value = value
-        self.line = line
-        self.column = column
-
-#funcion que genera una data a partir de un boceto de lenguaje
-def generate_data(name_pathfile):
-    try:
-        with open(name_pathfile, 'r') as file:
-            data = file.read()
-    except FileNotFoundError:
-        print(f"Error: El archivo '{name_pathfile}' no se encontró.")
-        data = ''
-    return data
-
-#funcion que imprime tokens
-def print_tokens(list_tokens):
-    print("Tokens NetCode: ")
-    for token in list_tokens:
-    #print(token.type, token.value)
-        print(token.type)
-
-#funcion que escribe tokens en un txt
-def write_tokens_in_txt(lista_tokens, nombre_archivo):
-    carpeta_salida = 'listtokens'
-    if not os.path.exists(carpeta_salida):
-        os.makedirs(carpeta_salida)
-    archivo_salida = os.path.join(carpeta_salida, nombre_archivo)
-    try:
-        with open(archivo_salida, 'w') as file:
-            tokens = ' '.join([token.type for token in lista_tokens])
-            file.write(tokens)
-            print(f"Tokens escritos exitosamente en el archivo '{archivo_salida}'.\n")
-    except Exception as e:
-        print(f"Error al escribir los tokens en el archivo: {str(e)}")
-
+    def printElement(self): print(self.value)
+   
 #funcion que genera una tabla ll1 
 def generate_table_ll1(pathfile):
     df = pd.read_csv(pathfile, index_col = 0)
@@ -143,60 +102,69 @@ def ll1_parse(tokens, parsing_table):
 #lo mismo pero usando objetos
 def ll1_parse_use_objects(tokens, parsing_table):
     # Crear elementos del stack usando la clase StackElement
-    stack = [StackElement(1, '$', '$'), StackElement(2, 'NETCODE', 'NETCODE')]  # Añadir $ al stack
+    stack = [StackElement(None, '$'), StackElement('No Terminal', 'NETCODE')]
     index = 0
     while stack:
-        print(f"Estado de la pila: {stack}")
-        print(f"Tokens restantes: {[token.type for token in tokens[index:]]}")
+        #print(f"Estado de la pila: {[element.value for element in stack]}")  # Mostrar solo el valor
+        #print(f"Tokens restantes: {[token.type for token in tokens[index:]]}")
         top = stack.pop()
+        # Determinar el tipo de símbolo basado en si está en la tabla de producciones
+        if top.value == '$':
+            top.type = None  # Para el símbolo $
+        elif top.value in parsing_table.index:  # Si hay producciones para este símbolo
+            top.type = 'No Terminal'
+        else:  # Si no tiene producciones, debe ser un terminal
+            top.type = 'Terminal'
+        # Caso especial para manejar el símbolo final
+        if top.value == '$' and index < len(tokens) and tokens[index].type == '$':
+            # Salir del ciclo ya que ambos $ coinciden y el análisis terminó
+            #print(f"Coincidencia encontrada: {top.value}\n")
+            return True
         # Si el símbolo en la cima es un terminal
-        if top.type in [token.type for token in tokens]:
-            if index < len(tokens) and tokens[index].type == top.type:
-                print(f"Coincidencia encontrada: {top.type}\n")
-                index += 1
+        if top.type == 'Terminal':
+            if index < len(tokens) and tokens[index].type == top.value:
+                #print(f"Coincidencia encontrada: {top.value}\n")  # Usar top.value
+                index += 1  # Avanzar al siguiente token
             else:
-                print("\nError: Se esperaba '{}' pero se encontró '{}'".format(
-                    top.type, tokens[index].type if index < len(tokens) else 'fin de entrada'))
-                print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                #print("Error: Se esperaba '{}' pero se encontro '{}' en la linea {}, columna {}.".format(
+                #top.value, tokens[index].value if index < len(tokens) else 'fin de entrada',
+                #tokens[index].line if index < len(tokens) else 'desconocida', tokens[index].column if index < len(tokens) else 'desconocida'))
+                #print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
                 return False
         # Si el símbolo en la cima es un no terminal
-        elif top.type in parsing_table.index:
+        elif top.type == 'No Terminal':
             if index < len(tokens):
                 current_token = tokens[index].type
                 try:
-                    production = parsing_table.at[top.type, current_token]
-                    if production != 'null':
-                        # Descomponer la producción y añadir al stack
-                        if production != 'e':  # 'e' representa la producción vacía
-                            print(f"Producción encontrada para {top.type}: {production}\n")
-                            # Añadir nuevos elementos del stack en orden inverso
-                            for i, symbol in enumerate(reversed(production.split()), start=1):
-                                stack.append(StackElement(i, symbol, symbol))  # Añadir id, type y value
-                        else:
-                            print(f"Producción vacía 'e' encontrada para {top.type}\n")
+                    # Aquí se utiliza top.value y current_token para buscar la producción
+                    production = parsing_table.at[top.value, current_token]  # Usar top.value
+                    if production and production != 'e':
+                        # Si se encuentra una producción válida
+                        #print(f"Producción encontrada para {top.value}: {production}\n")  # Usar top.value
+                        # Añadir nuevos elementos del stack en orden inverso
+                        for symbol in reversed(production.split()):
+                            # Establecer type como 'No Terminal' si hay producciones para el símbolo
+                            symbol_type = 'No Terminal' if symbol in parsing_table.index else 'Terminal'
+                            stack.append(StackElement(symbol_type, symbol))  # Añadir al stack
+                    elif production == 'e':
+                        pass
                     else:
-                        print("\nError: No hay producción válida para el no terminal '{}' con el token '{}'".format(
-                            top.type, current_token))
-                        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                       #print("Error: No hay producción válida para el no terminal '{}' con el token '{}' en la línea {}, columna {}.".format(
+                        #top.value, tokens[index].value if index < len(tokens) else 'fin de entrada', tokens[index].line if index < len(tokens) else 'desconocida',
+                        #tokens[index].column if index < len(tokens) else 'desconocida'))
+                        #print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
                         return False
                 except KeyError as e:
-                    print(f"\nError: No se encontró una producción en la tabla LL(1) para el no terminal '{top.type}' con el token '{current_token}'.")
-                    print("Error específico:", str(e))
+                    #print(f"Error de sintaxis en la línea {tokens[index].line}, columna {tokens[index].column}:")
+                    #print(f"  Se encontró '{tokens[index].value}' pero no se esperaba en este contexto.")
                     return False
             else:
-                print("\nError: Se acabaron los tokens, pero aún hay no terminales en la pila: ", stack)
+                #print(f"Error de sintaxis: Se alcanzó el fin de la entrada inesperadamente en la línea {tokens[index-1].line}, columna {tokens[index-1].column}.")
+                #print(f"Se esperaba un elemento relacionado con '{stack[-2].value}'.")
                 return False
-        # Si el símbolo no es reconocido (ni terminal ni no terminal)
-        else:
-            print("\nError: símbolo no reconocido en la pila '{}'".format(top.type))
-            print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
-            return False
-    # Verifica si se ha consumido toda la entrada
-    success = index == len(tokens)
-    if success:
-        print("Pila Vacia")
-        print("\nAnálisis exitoso.")
+    # Verifica si se ha consumido toda la entrada correctamente
+    if not stack and index == len(tokens):  # La pila está vacía y hemos procesado todos los tokens
+        print("Análisis exitoso.")
+        return True
     else:
-        print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")
-        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
-    return success
+        return False
