@@ -116,5 +116,5 @@ print(" ")
 
 #print_tokens(listtokens)
 #cambiar nombre cuando se quiere sacar tokens de cada codigo
-#namelisttokens = 'mezclas_tokens.txt'
+#namelisttokens = 'hola_mundo_tokens.txt'
 #write_tokens_in_txt(listtokens, namelisttokens)

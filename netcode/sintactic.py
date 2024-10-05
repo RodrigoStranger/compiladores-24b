@@ -14,16 +14,16 @@ output_folder = 'tree'
 if not os.path.exists(output_folder): os.makedirs(output_folder)
 output_pdf_path = os.path.join(output_folder, 'tree_sintactic.png')
 
-table_ll1 = generate_table_ll1(pathfile2)
-generate_token_example("$", listtokens)
+#table_ll1 = generate_table_ll1(pathfile2)
+#generate_token_example("$", listtokens)
 
-print("Entrada:",' '.join(token.type for token in listtokens))
-print(" ")
+#print("Entrada:",' '.join(token.type for token in listtokens))
+#print(" ")
 
-print("Detalles del análisis sintáctico: ")
+#print("Detalles del análisis sintáctico: ")
 #result= ll1_parse_use_objects(listtokens, table_ll1)
-result= ll1_parse(listtokens, table_ll1)
-print("Resultado del análisis ll(1):", result)
+#result= ll1_parse(listtokens, table_ll1)
+#print("Resultado del análisis ll(1):", result)
 
 #tareas:
 #1. Crear una funcion en la cual me genere el arbol sintáctico

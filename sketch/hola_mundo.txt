@@ -1,4 +1,3 @@
 program main interger [] {
 	log["hola mundo"]
-	echo 0
 }
