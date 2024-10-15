@@ -100,7 +100,7 @@ class Simbolo:
         self.function = function
         self.valor = valor
 
-class Arbol:
+class Node:
     def __init__(self, simbolo_lexer, lexema, line, column, es_terminal, id, tipo_data=None, valor=None):
         self.id = id
         self.lexema = lexema
@@ -164,7 +164,7 @@ def parser_sintactico_ll1(listtokens, table_ll1):
     node_PROGRAMA = Pila("NETCODE", False)
     node_dolar = Pila("$", True)
     stack = [node_PROGRAMA, node_dolar]
-    nodoPadre = Arbol("NETCODE", None, None, None, False, node_PROGRAMA.id)
+    nodoPadre = Node("NETCODE", None, None, None, False, node_PROGRAMA.id)
     listtokens_copy = list(listtokens)  # Copia de tokens para no modificar la lista original
     while True:
         if len(stack) == 0 or len(listtokens) == 0:
@@ -180,26 +180,26 @@ def parser_sintactico_ll1(listtokens, table_ll1):
             break
         else:
             try:
-                jiafei = table_ll1.loc[stack[0].simboloLex][listtokens[0].type]
+                vacio = table_ll1.loc[stack[0].simboloLex][listtokens[0].type]
             except KeyError:
                 error = True
                 break
-            if jiafei == "e":
+            if vacio == "e":
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
-                nodo_e = Arbol("e", None, None, None, True, count)
+                nodo_e = Node("e", None, None, None, True, count)
                 nodo_e.padre = padre
                 padre.children.append(nodo_e)
                 count += 1
             else:
-                jiafei = jiafei.split(" ")
+                vacio = vacio.split(" ")
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
-                for Symlexer in reversed(jiafei):
+                for Symlexer in reversed(vacio):
                     is_terminal = Symlexer in table_ll1.columns
                     node = Pila(Symlexer, is_terminal)
                     stack.insert(0, node)
-                    nod = Arbol(Symlexer, None, None, None, is_terminal, node.id)
+                    nod = Node(Symlexer, None, None, None, is_terminal, node.id)
                     padre.children.insert(0, nod)
                     nod.padre = padre
                     if nod.es_terminal:
