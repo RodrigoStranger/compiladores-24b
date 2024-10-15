@@ -110,7 +110,7 @@ def generate_tokens(list_tokens):
     print("Tokens generados correctamente.\n")
 
 generate_tokens(listtokens)
-listtokens.append(Token('$', '$', None, None))
+listtokens.append(Token("$", "$", None, None))
 
 print("Nombre del codigo: ", sketchfile)
 print(" ")
