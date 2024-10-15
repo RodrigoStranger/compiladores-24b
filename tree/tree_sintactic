@@ -1,0 +1,369 @@
+digraph {
+	0 [label=NETCODE fillcolor=white style=filled]
+	4 [label=FUNC fillcolor=white style=filled]
+	0 -> 4
+	13 [label=FUNCION fillcolor=white style=filled]
+	4 -> 13
+	12 [label=ID fillcolor=white style=filled]
+	4 -> 12
+	11 [label=CORCHETEABI fillcolor=white style=filled]
+	4 -> 11
+	10 [label=PARAMETROS fillcolor=white style=filled]
+	4 -> 10
+	17 [label=VARIABLE fillcolor=white style=filled]
+	10 -> 17
+	16 [label=ID fillcolor=white style=filled]
+	10 -> 16
+	15 [label=TIPODATO fillcolor=white style=filled]
+	10 -> 15
+	18 [label=TIPOENTERO fillcolor=white style=filled]
+	15 -> 18
+	14 [label=MASPARAMETROS fillcolor=white style=filled]
+	10 -> 14
+	19 [label=e fillcolor=white style=filled]
+	14 -> 19
+	9 [label=CORCHETECERR fillcolor=white style=filled]
+	4 -> 9
+	8 [label=OPDATO fillcolor=white style=filled]
+	4 -> 8
+	20 [label=TIPODATO fillcolor=white style=filled]
+	8 -> 20
+	21 [label=TIPOENTERO fillcolor=white style=filled]
+	20 -> 21
+	7 [label=LLAVEABI fillcolor=white style=filled]
+	4 -> 7
+	6 [label=INS fillcolor=white style=filled]
+	4 -> 6
+	23 [label=INSTRUCCION fillcolor=white style=filled]
+	6 -> 23
+	24 [label=ASIG fillcolor=white style=filled]
+	23 -> 24
+	28 [label=VARIABLE fillcolor=white style=filled]
+	24 -> 28
+	27 [label=ID fillcolor=white style=filled]
+	24 -> 27
+	26 [label=TIPODATO fillcolor=white style=filled]
+	24 -> 26
+	29 [label=TIPOENTERO fillcolor=white style=filled]
+	26 -> 29
+	25 [label=OPC fillcolor=white style=filled]
+	24 -> 25
+	31 [label=IGUAL fillcolor=white style=filled]
+	25 -> 31
+	30 [label=EXPRESION fillcolor=white style=filled]
+	25 -> 30
+	33 [label=DATO fillcolor=white style=filled]
+	30 -> 33
+	34 [label=NENTERO fillcolor=white style=filled]
+	33 -> 34
+	32 [label=MASEXPRESION fillcolor=white style=filled]
+	30 -> 32
+	35 [label=e fillcolor=white style=filled]
+	32 -> 35
+	22 [label=MASINSTRUCCION fillcolor=white style=filled]
+	6 -> 22
+	37 [label=INSTRUCCION fillcolor=white style=filled]
+	22 -> 37
+	38 [label=BUCLEFOR fillcolor=white style=filled]
+	37 -> 38
+	50 [label=PARA fillcolor=white style=filled]
+	38 -> 50
+	49 [label=CORCHETEABI fillcolor=white style=filled]
+	38 -> 49
+	48 [label=ASIG fillcolor=white style=filled]
+	38 -> 48
+	54 [label=VARIABLE fillcolor=white style=filled]
+	48 -> 54
+	53 [label=ID fillcolor=white style=filled]
+	48 -> 53
+	52 [label=TIPODATO fillcolor=white style=filled]
+	48 -> 52
+	55 [label=TIPOENTERO fillcolor=white style=filled]
+	52 -> 55
+	51 [label=OPC fillcolor=white style=filled]
+	48 -> 51
+	57 [label=IGUAL fillcolor=white style=filled]
+	51 -> 57
+	56 [label=EXPRESION fillcolor=white style=filled]
+	51 -> 56
+	59 [label=DATO fillcolor=white style=filled]
+	56 -> 59
+	60 [label=NENTERO fillcolor=white style=filled]
+	59 -> 60
+	58 [label=MASEXPRESION fillcolor=white style=filled]
+	56 -> 58
+	61 [label=e fillcolor=white style=filled]
+	58 -> 61
+	47 [label=PUNTOYCOMA fillcolor=white style=filled]
+	38 -> 47
+	46 [label=EXPRESION fillcolor=white style=filled]
+	38 -> 46
+	64 [label=ID fillcolor=white style=filled]
+	46 -> 64
+	63 [label=OPCION fillcolor=white style=filled]
+	46 -> 63
+	65 [label=e fillcolor=white style=filled]
+	63 -> 65
+	62 [label=MASEXPRESION fillcolor=white style=filled]
+	46 -> 62
+	67 [label=OPERACION fillcolor=white style=filled]
+	62 -> 67
+	68 [label=MENORIGUALQUE fillcolor=white style=filled]
+	67 -> 68
+	66 [label=EXPRESION fillcolor=white style=filled]
+	62 -> 66
+	71 [label=ID fillcolor=white style=filled]
+	66 -> 71
+	70 [label=OPCION fillcolor=white style=filled]
+	66 -> 70
+	72 [label=e fillcolor=white style=filled]
+	70 -> 72
+	69 [label=MASEXPRESION fillcolor=white style=filled]
+	66 -> 69
+	73 [label=e fillcolor=white style=filled]
+	69 -> 73
+	45 [label=PUNTOYCOMA fillcolor=white style=filled]
+	38 -> 45
+	44 [label=ID fillcolor=white style=filled]
+	38 -> 44
+	43 [label=DERIVA2 fillcolor=white style=filled]
+	38 -> 43
+	74 [label=UNARIOS fillcolor=white style=filled]
+	43 -> 74
+	75 [label=AUMENTAR fillcolor=white style=filled]
+	74 -> 75
+	42 [label=CORCHETECERR fillcolor=white style=filled]
+	38 -> 42
+	41 [label=LLAVEABI fillcolor=white style=filled]
+	38 -> 41
+	40 [label=INS fillcolor=white style=filled]
+	38 -> 40
+	77 [label=INSTRUCCION fillcolor=white style=filled]
+	40 -> 77
+	78 [label=ASIG fillcolor=white style=filled]
+	77 -> 78
+	80 [label=ID fillcolor=white style=filled]
+	78 -> 80
+	79 [label=OG fillcolor=white style=filled]
+	78 -> 79
+	82 [label=IGUAL fillcolor=white style=filled]
+	79 -> 82
+	81 [label=EXPRESION fillcolor=white style=filled]
+	79 -> 81
+	85 [label=ID fillcolor=white style=filled]
+	81 -> 85
+	84 [label=OPCION fillcolor=white style=filled]
+	81 -> 84
+	86 [label=e fillcolor=white style=filled]
+	84 -> 86
+	83 [label=MASEXPRESION fillcolor=white style=filled]
+	81 -> 83
+	88 [label=OPERACION fillcolor=white style=filled]
+	83 -> 88
+	89 [label=MULTIPLICACION fillcolor=white style=filled]
+	88 -> 89
+	87 [label=EXPRESION fillcolor=white style=filled]
+	83 -> 87
+	92 [label=ID fillcolor=white style=filled]
+	87 -> 92
+	91 [label=OPCION fillcolor=white style=filled]
+	87 -> 91
+	93 [label=e fillcolor=white style=filled]
+	91 -> 93
+	90 [label=MASEXPRESION fillcolor=white style=filled]
+	87 -> 90
+	94 [label=e fillcolor=white style=filled]
+	90 -> 94
+	76 [label=MASINSTRUCCION fillcolor=white style=filled]
+	40 -> 76
+	95 [label=e fillcolor=white style=filled]
+	76 -> 95
+	39 [label=LLAVECERR fillcolor=white style=filled]
+	38 -> 39
+	36 [label=MASINSTRUCCION fillcolor=white style=filled]
+	22 -> 36
+	97 [label=INSTRUCCION fillcolor=white style=filled]
+	36 -> 97
+	99 [label=RETORNAR fillcolor=white style=filled]
+	97 -> 99
+	98 [label=EXPRESION fillcolor=white style=filled]
+	97 -> 98
+	102 [label=ID fillcolor=white style=filled]
+	98 -> 102
+	101 [label=OPCION fillcolor=white style=filled]
+	98 -> 101
+	103 [label=e fillcolor=white style=filled]
+	101 -> 103
+	100 [label=MASEXPRESION fillcolor=white style=filled]
+	98 -> 100
+	104 [label=e fillcolor=white style=filled]
+	100 -> 104
+	96 [label=MASINSTRUCCION fillcolor=white style=filled]
+	36 -> 96
+	105 [label=e fillcolor=white style=filled]
+	96 -> 105
+	5 [label=LLAVECERR fillcolor=white style=filled]
+	4 -> 5
+	3 [label=MASFUNCIONES fillcolor=white style=filled]
+	0 -> 3
+	106 [label=e fillcolor=white style=filled]
+	3 -> 106
+	2 [label=MAIN fillcolor=white style=filled]
+	0 -> 2
+	114 [label=PROGRAMA fillcolor=white style=filled]
+	2 -> 114
+	113 [label=PRINCIPAL fillcolor=white style=filled]
+	2 -> 113
+	112 [label=TIPOENTERO fillcolor=white style=filled]
+	2 -> 112
+	111 [label=CORCHETEABI fillcolor=white style=filled]
+	2 -> 111
+	110 [label=CORCHETECERR fillcolor=white style=filled]
+	2 -> 110
+	109 [label=LLAVEABI fillcolor=white style=filled]
+	2 -> 109
+	108 [label=INS fillcolor=white style=filled]
+	2 -> 108
+	116 [label=INSTRUCCION fillcolor=white style=filled]
+	108 -> 116
+	117 [label=ASIG fillcolor=white style=filled]
+	116 -> 117
+	121 [label=VARIABLE fillcolor=white style=filled]
+	117 -> 121
+	120 [label=ID fillcolor=white style=filled]
+	117 -> 120
+	119 [label=TIPODATO fillcolor=white style=filled]
+	117 -> 119
+	122 [label=TIPOENTERO fillcolor=white style=filled]
+	119 -> 122
+	118 [label=OPC fillcolor=white style=filled]
+	117 -> 118
+	124 [label=IGUAL fillcolor=white style=filled]
+	118 -> 124
+	123 [label=EXPRESION fillcolor=white style=filled]
+	118 -> 123
+	126 [label=DATO fillcolor=white style=filled]
+	123 -> 126
+	127 [label=NENTERO fillcolor=white style=filled]
+	126 -> 127
+	125 [label=MASEXPRESION fillcolor=white style=filled]
+	123 -> 125
+	128 [label=e fillcolor=white style=filled]
+	125 -> 128
+	115 [label=MASINSTRUCCION fillcolor=white style=filled]
+	108 -> 115
+	130 [label=INSTRUCCION fillcolor=white style=filled]
+	115 -> 130
+	131 [label=IMP fillcolor=white style=filled]
+	130 -> 131
+	135 [label=IMPRIMIR fillcolor=white style=filled]
+	131 -> 135
+	134 [label=CORCHETEABI fillcolor=white style=filled]
+	131 -> 134
+	133 [label=CMDS fillcolor=white style=filled]
+	131 -> 133
+	137 [label=EXPRESION fillcolor=white style=filled]
+	133 -> 137
+	139 [label=DATO fillcolor=white style=filled]
+	137 -> 139
+	140 [label=NCADENA fillcolor=white style=filled]
+	139 -> 140
+	138 [label=MASEXPRESION fillcolor=white style=filled]
+	137 -> 138
+	141 [label=e fillcolor=white style=filled]
+	138 -> 141
+	136 [label=MASCOMANDOS fillcolor=white style=filled]
+	133 -> 136
+	144 [label=CONCATENAR fillcolor=white style=filled]
+	136 -> 144
+	143 [label=EXPRESION fillcolor=white style=filled]
+	136 -> 143
+	147 [label=ID fillcolor=white style=filled]
+	143 -> 147
+	146 [label=OPCION fillcolor=white style=filled]
+	143 -> 146
+	148 [label=e fillcolor=white style=filled]
+	146 -> 148
+	145 [label=MASEXPRESION fillcolor=white style=filled]
+	143 -> 145
+	149 [label=e fillcolor=white style=filled]
+	145 -> 149
+	142 [label=MASCOMANDOS fillcolor=white style=filled]
+	136 -> 142
+	152 [label=CONCATENAR fillcolor=white style=filled]
+	142 -> 152
+	151 [label=EXPRESION fillcolor=white style=filled]
+	142 -> 151
+	154 [label=DATO fillcolor=white style=filled]
+	151 -> 154
+	155 [label=NCADENA fillcolor=white style=filled]
+	154 -> 155
+	153 [label=MASEXPRESION fillcolor=white style=filled]
+	151 -> 153
+	156 [label=e fillcolor=white style=filled]
+	153 -> 156
+	150 [label=MASCOMANDOS fillcolor=white style=filled]
+	142 -> 150
+	159 [label=CONCATENAR fillcolor=white style=filled]
+	150 -> 159
+	158 [label=EXPRESION fillcolor=white style=filled]
+	150 -> 158
+	162 [label=ID fillcolor=white style=filled]
+	158 -> 162
+	161 [label=OPCION fillcolor=white style=filled]
+	158 -> 161
+	165 [label=CORCHETEABI fillcolor=white style=filled]
+	161 -> 165
+	164 [label=PAR fillcolor=white style=filled]
+	161 -> 164
+	167 [label=TF fillcolor=white style=filled]
+	164 -> 167
+	170 [label=ID fillcolor=white style=filled]
+	167 -> 170
+	169 [label=OPCION fillcolor=white style=filled]
+	167 -> 169
+	171 [label=e fillcolor=white style=filled]
+	169 -> 171
+	168 [label=MASEXPRESION fillcolor=white style=filled]
+	167 -> 168
+	172 [label=e fillcolor=white style=filled]
+	168 -> 172
+	166 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	164 -> 166
+	173 [label=e fillcolor=white style=filled]
+	166 -> 173
+	163 [label=CORCHETECERR fillcolor=white style=filled]
+	161 -> 163
+	160 [label=MASEXPRESION fillcolor=white style=filled]
+	158 -> 160
+	174 [label=e fillcolor=white style=filled]
+	160 -> 174
+	157 [label=MASCOMANDOS fillcolor=white style=filled]
+	150 -> 157
+	175 [label=e fillcolor=white style=filled]
+	157 -> 175
+	132 [label=CORCHETECERR fillcolor=white style=filled]
+	131 -> 132
+	129 [label=MASINSTRUCCION fillcolor=white style=filled]
+	115 -> 129
+	177 [label=INSTRUCCION fillcolor=white style=filled]
+	129 -> 177
+	179 [label=RETORNAR fillcolor=white style=filled]
+	177 -> 179
+	178 [label=EXPRESION fillcolor=white style=filled]
+	177 -> 178
+	181 [label=DATO fillcolor=white style=filled]
+	178 -> 181
+	182 [label=NENTERO fillcolor=white style=filled]
+	181 -> 182
+	180 [label=MASEXPRESION fillcolor=white style=filled]
+	178 -> 180
+	183 [label=e fillcolor=white style=filled]
+	180 -> 183
+	176 [label=MASINSTRUCCION fillcolor=white style=filled]
+	129 -> 176
+	184 [label=e fillcolor=white style=filled]
+	176 -> 184
+	107 [label=LLAVECERR fillcolor=white style=filled]
+	2 -> 107
+}

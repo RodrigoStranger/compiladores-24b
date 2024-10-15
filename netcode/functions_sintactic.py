@@ -155,18 +155,17 @@ def arbolSintactico(raiz):
     generar_nodos(raiz)
     return graph
 
+count = 0
 def parser_sintactico_ll1(listtokens, table_ll1):
     global count
-    count = 1  # Inicializamos el contador global
     error = False
-    listtokens_copy = []
+    count = 0
+    # Inicializar la pila con los símbolos iniciales
     node_PROGRAMA = Pila("NETCODE", False)
     node_dolar = Pila("$", True)
     stack = [node_PROGRAMA, node_dolar]
-    nodo_actual = 1
     nodoPadre = Arbol("NETCODE", None, None, None, False, node_PROGRAMA.id)
-    for token_actual in listtokens:
-        listtokens_copy.append(token_actual)
+    listtokens_copy = list(listtokens)  # Copia de tokens para no modificar la lista original
     while True:
         if len(stack) == 0 or len(listtokens) == 0:
             error = True
@@ -175,49 +174,37 @@ def parser_sintactico_ll1(listtokens, table_ll1):
             break
         elif stack[0].es_terminal and stack[0].simboloLex == listtokens[0].type:
             stack.pop(0)
-            token = listtokens.pop(0)
-            tipo_data = listtokens[0].type if listtokens else None
-            if tipo_data is not None:
-                padre = buscar(nodoPadre, nodo_actual)
-                padre.tipo_data = tipo_data
-
+            listtokens.pop(0)
         elif stack[0].es_terminal and stack[0].simboloLex != listtokens[0].type:
             error = True
             break
         else:
-            jiafei = table_ll1.loc[stack[0].simboloLex][listtokens[0].type]
+            try:
+                jiafei = table_ll1.loc[stack[0].simboloLex][listtokens[0].type]
+            except KeyError:
+                error = True
+                break
             if jiafei == "e":
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
-                # Crear un nodo para "e" y agregarlo como hijo del padre actual
                 nodo_e = Arbol("e", None, None, None, True, count)
                 nodo_e.padre = padre
-                padre.children.append(nodo_e)  # Aquí agregamos correctamente el nodo "e"
-                # Avanzar el contador de nodos
+                padre.children.append(nodo_e)
                 count += 1
             else:
-                if isinstance(jiafei, float) and math.isnan(jiafei):
-                    error = True
-                    break
-                else:
-                    jiafei = jiafei.split(" ")
-                    padre_stack = stack.pop(0)
-                    padre = buscar(nodoPadre, padre_stack.id)
-                    for Symlexer in jiafei[::-1]:
-                        is_terminal = Symlexer in table_ll1.columns
-                        node = Pila(Symlexer, is_terminal)
-                        stack.insert(0, node)
-                        nodo_actual = node.id
-                        nod = Arbol(Symlexer, None, None, None, is_terminal, node.id)
-                        padre.children.insert(0, nod)
-                        nod.padre = padre
-                        if nod.es_terminal:
-                            for token_actual in listtokens_copy:
-                                if token_actual.type == nod.simbolo_lexer:
-                                    listtokens_copy.remove(token_actual)
-                                    break
-    if not error:
-        return True, nodoPadre  # Devolver 'success' (True) y el árbol (nodoPadre)
-    else:
-        print("Error durante el análisis sintáctico.")
-        return False, None  # Devolver 'error' (False) y 'None' en caso de fallo
+                jiafei = jiafei.split(" ")
+                padre_stack = stack.pop(0)
+                padre = buscar(nodoPadre, padre_stack.id)
+                for Symlexer in reversed(jiafei):
+                    is_terminal = Symlexer in table_ll1.columns
+                    node = Pila(Symlexer, is_terminal)
+                    stack.insert(0, node)
+                    nod = Arbol(Symlexer, None, None, None, is_terminal, node.id)
+                    padre.children.insert(0, nod)
+                    nod.padre = padre
+                    if nod.es_terminal:
+                        for token_actual in listtokens_copy:
+                            if token_actual.type == nod.simbolo_lexer:
+                                listtokens_copy.remove(token_actual)
+                                break
+    return (not error), nodoPadre if not error else None
