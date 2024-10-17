@@ -54,9 +54,8 @@ def calcular_first_gramatica(gramatica, tokens):
     return first
 
 def calcular_follow_gramatica(gramatica, first, tokens, start_symbol):
-    # Initialize FOLLOW sets for both non-terminals and terminals
-    symbols = list(gramatica.keys()) + tokens
-    follow = {symbol: set() for symbol in symbols}
+    # Initialize FOLLOW sets only for non-terminals
+    follow = {symbol: set() for symbol in gramatica.keys()}
     # Add end-of-input marker to FOLLOW of start symbol
     follow[start_symbol].add('$')
     changed = True
@@ -68,23 +67,16 @@ def calcular_follow_gramatica(gramatica, first, tokens, start_symbol):
                 for symbol in reversed(production):
                     if symbol == 'e':
                         continue  # Skip epsilon symbol
-                    if symbol in gramatica:  # Non-terminal
+                    elif symbol in gramatica:  # Non-terminal
                         if not follow[symbol].issuperset(trailer):
-                            before_update = follow[symbol].copy()
                             follow[symbol].update(trailer)
-                            if follow[symbol] != before_update:
-                                changed = True
+                            changed = True
                         if 'e' in first[symbol]:
                             trailer.update(first[symbol] - {'e'})
                         else:
                             trailer = first[symbol]
                     else:  # Terminal
-                        if not follow[symbol].issuperset(trailer):
-                            before_update = follow[symbol].copy()
-                            follow[symbol].update(trailer)
-                            if follow[symbol] != before_update:
-                                changed = True
-                        trailer = first[symbol]  # For terminals, FIRST is the symbol itself
+                        trailer = first[symbol]  # FIRST of terminal is the terminal itself
     return follow
 
 def construir_tabla_LL1(gramatica, first, follow, tokens):
@@ -106,34 +98,39 @@ def construir_tabla_LL1(gramatica, first, follow, tokens):
 
             # For each terminal in FIRST(alpha)
             for terminal in first_alpha - {'e'}:
-                if terminal in tokens:
-                    tabla[no_terminal][terminal] = ' '.join(produccion)
+                tabla[no_terminal][terminal] = ' '.join(produccion)
 
             # If epsilon is in FIRST(alpha), add the production to FOLLOW(non_terminal)
             if 'e' in first_alpha:
                 for terminal in follow[no_terminal]:
-                    if terminal in tokens + ['$']:
-                        tabla[no_terminal][terminal] = ' '.join(produccion)
+                    tabla[no_terminal][terminal] = ' '.join(produccion)
     return tabla
 
 def escribir_tabla_csv(tabla, tokens, output_file):
+    # Ensure all tokens are included, and include the end-of-input marker '$'
+    all_terminals = tokens + ['$']
+
     # Prepare the header row with terminals
-    header = [''] + tokens + ['$']
+    header = [''] + all_terminals
     non_terminals = list(tabla.keys())
 
-    with open(output_file, 'w', newline='') as csvfile:
+    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(header)
 
         for non_terminal in non_terminals:
             row = [non_terminal]
-            for terminal in tokens + ['$']:
+            for terminal in all_terminals:
                 entry = tabla[non_terminal].get(terminal, '')
+                if entry:
+                    entry = f"{non_terminal} -> {entry}"
                 row.append(entry)
             writer.writerow(row)
 
-# Example tokens (terminals)
-tokens_example = ['id', '+', '*']
+
+# Import tokens from lexic module
+from lexic import tokens  # Assuming tokens is correctly defined
+
 # Read the grammar from the file
 directory2 = os.path.dirname(__file__)
 sketchfile = 'grammar.txt'
@@ -162,3 +159,5 @@ tabla_LL1 = construir_tabla_LL1(gramatica_netcode, conjunto_first, conjunto_foll
 # Output the parsing table to CSV
 output_csv_file = 'parsing_table.csv'
 escribir_tabla_csv(tabla_LL1, tokens, output_csv_file)
+
+print(f"Parsing table has been written to {output_csv_file}")
