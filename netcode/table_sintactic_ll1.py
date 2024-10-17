@@ -136,16 +136,16 @@ def escribir_tabla_csv(tabla, tokens, output_file):
 tokens_example = ['id', '+', '*']
 # Read the grammar from the file
 directory2 = os.path.dirname(__file__)
-sketchfile = 'grammar_example.txt'
+sketchfile = 'grammar.txt'
 pathfile2 = os.path.join(directory2, '..', 'grammar', sketchfile)
 
 gramatica_netcode = read_grammar(pathfile2)
-conjunto_first = calcular_first_gramatica(gramatica_netcode, tokens_example)
+conjunto_first = calcular_first_gramatica(gramatica_netcode, tokens)
 
 # Assuming the start symbol is the first non-terminal in the grammar
 start_symbol = next(iter(gramatica_netcode))
 
-conjunto_follow = calcular_follow_gramatica(gramatica_netcode, conjunto_first, tokens_example, start_symbol)
+conjunto_follow = calcular_follow_gramatica(gramatica_netcode, conjunto_first, tokens, start_symbol)
 
 # Display the FIRST sets
 print("FIRST sets:")
@@ -157,8 +157,8 @@ print("\nFOLLOW sets:")
 for simbolo, follow_set in conjunto_follow.items():
     print(f"Follow({simbolo}) = {follow_set}")
 
-tabla_LL1 = construir_tabla_LL1(gramatica_netcode, conjunto_first, conjunto_follow, tokens_example)
+tabla_LL1 = construir_tabla_LL1(gramatica_netcode, conjunto_first, conjunto_follow, tokens)
 
 # Output the parsing table to CSV
 output_csv_file = 'parsing_table.csv'
-escribir_tabla_csv(tabla_LL1, tokens_example, output_csv_file)
+escribir_tabla_csv(tabla_LL1, tokens, output_csv_file)
