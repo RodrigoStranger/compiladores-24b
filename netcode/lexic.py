@@ -10,12 +10,12 @@ directory = os.path.dirname(__file__)
 sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
-tokens = ('FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
+tokens = ['FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
           'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
           'TIPOVACIO', 'SI', 'Y', 'O', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
           'DIVISION', 'RESIDUO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 'MAYORIGUALQUE', 'IGUAL', 'IGUALBOOLEANO', 'DIFERENTEDE', 
           'AUMENTAR', 'DISMINUIR', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA', 'VARIABLE', 
-          'PUNTOYCOMA', 'PROGRAMA')
+          'PUNTOYCOMA', 'PROGRAMA']
 
 reserved = {    
     'function': 'FUNCION',
