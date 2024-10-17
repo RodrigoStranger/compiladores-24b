@@ -3,6 +3,33 @@ import csv
 from collections import defaultdict
 from lexic import tokens
 
+def read_grammar_from_file(filename):
+    grammar = {}
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            # Eliminar comentarios y espacios en blanco
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue  # Saltar líneas vacías y comentarios
+            if '->' not in line:
+                continue  # Saltar líneas no válidas
+            lhs, rhs = line.split('->', 1)
+            lhs = lhs.strip()
+            rhs = rhs.strip()
+            productions = rhs.split('|')
+            grammar.setdefault(lhs, [])
+            for production in productions:
+                # Dividir la producción en símbolos
+                symbols = production.strip().split()
+                grammar[lhs].append(symbols)
+    return grammar
+
+directory5 = os.path.dirname(__file__)
+sketchfile = 'grammar.txt'
+pathfile5 = os.path.join(directory5, '..', 'grammar', sketchfile)
+
+grammar = read_grammar_from_file(pathfile5)
+'''
 # Definir la gramática
 grammar = {
     'NETCODE': [['FUNC', 'MASFUNCIONES', 'MAIN'], ['MAIN']],
@@ -37,6 +64,7 @@ grammar = {
     'TIPODATO': [['TIPOENTERO'], ['TIPOCADENA'], ['TIPODECIMAL'], ['TIPOBOOLEANO']],
     'UNARIOS': [['AUMENTAR'], ['DISMINUIR']],
 }
+'''
 
 # Añadimos el símbolo $ para representar el fin de entrada
 tokens.append('$')
