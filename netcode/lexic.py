@@ -7,15 +7,14 @@ from functions_lexic import write_tokens_in_txt
 from functions_lexic import Token
 
 directory = os.path.dirname(__file__)
-sketchfile = 'hola_mundo.txt'
+sketchfile = 'fibonacci_recursivo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
-tokens = ['FUNCION', 'PRINCIPAL', 'CORCHETEABI', 'CORCHETECERR', 'IMPRIMIR', 'ID', 
-          'RETORNAR', 'DETENER', 'LLAVEABI', 'LLAVECERR', 'TIPOENTERO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
-          'TIPOVACIO', 'SI', 'Y', 'O', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'SUMA', 'RESTA', 'MULTIPLICACION', 
-          'DIVISION', 'RESIDUO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 'MAYORIGUALQUE', 'IGUAL', 'IGUALBOOLEANO', 'DIFERENTEDE', 
-          'AUMENTAR', 'DISMINUIR', 'CONCATENAR', 'NENTERO', 'NDECIMAL', 'NCADENA', 'NBOOLEANO', 'COMENTARIO', 'COMA', 'VARIABLE', 
-          'PUNTOYCOMA', 'PROGRAMA']
+tokens = ['FUNCION', 'ID', 'CORCHETEABI', 'CORCHETECERR', 'LLAVEABI', 'LLAVECERR', 'PROGRAMA', 'PRINCIPAL', 'TIPOENTERO', 'TIPOVACIO', 
+             'VARIABLE', 'COMA', 'SI', 'SINO', 'ENTONCES', 'MIENTRAS', 'PARA', 'PUNTOYCOMA', 'IGUAL', 'DETENER', 'RETORNAR', 'IMPRIMIR', 
+             'CONCATENAR', 'SUMA', 'RESTA', 'MULTIPLICACION', 'DIVISION', 'RESIDUO', 'IGUALBOOLEANO', 'MENORQUE', 'MAYORQUE', 'MENORIGUALQUE', 
+             'MAYORIGUALQUE', 'DIFERENTEDE', 'Y', 'O', 'NCADENA', 'NDECIMAL', 'NENTERO', 'NBOOLEANO', 'TIPOCADENA', 'TIPODECIMAL', 'TIPOBOOLEANO', 
+             'AUMENTAR', 'DISMINUIR']
 
 reserved = {    
     'function': 'FUNCION',

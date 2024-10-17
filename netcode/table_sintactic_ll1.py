@@ -1,163 +1,161 @@
 import os
-from lexic import tokens
 import csv
+from collections import defaultdict
+from lexic import tokens
 
-def read_grammar(ruta_archivo):
-    gramatica = {}
-    with open(ruta_archivo, 'r') as archivo:
-        for linea in archivo:
-            if linea.strip():
-                lado_izquierdo, lado_derecho = linea.split('->')
-                lado_izquierdo = lado_izquierdo.strip()
-                producciones = [p.strip().split() for p in lado_derecho.split('|')]
-                if lado_izquierdo in gramatica:
-                    gramatica[lado_izquierdo].extend(producciones)
-                else:
-                    gramatica[lado_izquierdo] = producciones
-    return gramatica
+# Definir la gramática
+grammar = {
+    'NETCODE': [['FUNC', 'MASFUNCIONES', 'MAIN'], ['MAIN']],
+    'MASFUNCIONES': [['FUNC', 'MASFUNCIONES'], ['e']],
+    'FUNC': [['FUNCION', 'ID', 'CORCHETEABI', 'PARAMETROS', 'CORCHETECERR', 'OPDATO', 'LLAVEABI', 'INS', 'LLAVECERR']],
+    'MAIN': [['PROGRAMA', 'PRINCIPAL', 'TIPOENTERO', 'CORCHETEABI', 'CORCHETECERR', 'LLAVEABI', 'INS', 'LLAVECERR']],
+    'OPDATO': [['TIPODATO'], ['TIPOVACIO']],
+    'PARAMETROS': [['VARIABLE', 'ID', 'TIPODATO', 'MASPARAMETROS'], ['e']],
+    'MASPARAMETROS': [['COMA', 'PARAMETROS'], ['e']],
+    'CONDICIONAL': [['SI', 'CORCHETEABI', 'EXPRESION', 'CORCHETECERR', 'LLAVEABI', 'INS', 'LLAVECERR', 'POSIBILIDAD']],
+    'POSIBILIDAD': [['SINO', 'CORCHETEABI', 'EXPRESION', 'CORCHETECERR', 'LLAVEABI', 'INS', 'LLAVECERR', 'POSIBILIDAD'], ['ENTONCES', 'LLAVEABI', 'INS', 'LLAVECERR'], ['e']],
+    'BUCLEWHILE': [['MIENTRAS', 'CORCHETEABI', 'EXPRESION', 'CORCHETECERR', 'LLAVEABI', 'INS', 'LLAVECERR']],
+    'BUCLEFOR': [['PARA', 'CORCHETEABI', 'ASIG', 'PUNTOYCOMA', 'EXPRESION', 'PUNTOYCOMA', 'ID', 'DERIVA2', 'CORCHETECERR', 'LLAVEABI', 'INS', 'LLAVECERR']],
+    'INS': [['INSTRUCCION', 'MASINSTRUCCION'], ['e']],
+    'DERIVA2': [['IGUAL', 'EXPRESION'], ['UNARIOS']],
+    'INSTRUCCION': [['ASIG'], ['IMP'], ['BUCLEFOR'], ['BUCLEWHILE'], ['CONDICIONAL'], ['DETENER'], ['RETORNAR', 'EXPRESION']],
+    'MASINSTRUCCION': [['INSTRUCCION', 'MASINSTRUCCION'], ['e']],
+    'IMP': [['IMPRIMIR', 'CORCHETEABI', 'CMDS', 'CORCHETECERR']],
+    'CMDS': [['EXPRESION', 'MASCOMANDOS'], ['e']],
+    'MASCOMANDOS': [['CONCATENAR', 'EXPRESION', 'MASCOMANDOS'], ['e']],
+    'ASIG': [['VARIABLE', 'ID', 'TIPODATO', 'OPC'], ['ID', 'OG']],
+    'OG': [['IGUAL', 'EXPRESION'], ['CORCHETEABI', 'PAR', 'CORCHETECERR']],
+    'OPC': [['IGUAL', 'EXPRESION'], ['e']],
+    'EXPRESION': [['CORCHETEABI', 'EXPRESION', 'CORCHETECERR', 'MASEXPRESION'], ['ID', 'OPCION', 'MASEXPRESION'], ['DATO', 'MASEXPRESION']],
+    'MASEXPRESION': [['OPERACION', 'EXPRESION'], ['e']],
+    'OPCION': [['CORCHETEABI', 'PAR', 'CORCHETECERR'], ['e']],
+    'PAR': [['TF', 'RESTO_PARAMETROS'], ['e']],
+    'RESTO_PARAMETROS': [['COMA', 'TF', 'RESTO_PARAMETROS'], ['e']],
+    'TF': [['ID', 'OPCION', 'MASEXPRESION'], ['DATO', 'MASEXPRESION']],
+    'OPERACION': [['SUMA'], ['RESTA'], ['MULTIPLICACION'], ['DIVISION'], ['RESIDUO'], ['IGUALBOOLEANO'], ['MENORQUE'], ['MAYORQUE'], ['MENORIGUALQUE'], ['MAYORIGUALQUE'], ['DIFERENTEDE'], ['Y'], ['O']],
+    'DATO': [['NCADENA'], ['NDECIMAL'], ['NENTERO'], ['NBOOLEANO']],
+    'TIPODATO': [['TIPOENTERO'], ['TIPOCADENA'], ['TIPODECIMAL'], ['TIPOBOOLEANO']],
+    'UNARIOS': [['AUMENTAR'], ['DISMINUIR']],
+}
 
-def inicializar_first_terminales(tokens):
-    first = {}
-    for token in tokens:
-        first[token] = {token}
-    return first
+# Añadimos el símbolo $ para representar el fin de entrada
+tokens.append('$')
 
-def calcular_first(simbolo, gramatica, first, visitados):
-    if simbolo in first and first[simbolo]:
-        return first[simbolo]
+# Lista de símbolos no terminales
+non_terminals = list(grammar.keys())
 
-    if simbolo in visitados:
-        return set()
+# Inicializar FIRST y FOLLOW
+FIRST = defaultdict(set)
+FOLLOW = defaultdict(set)
 
-    visitados.add(simbolo)
-    first[simbolo] = set()
-
-    for produccion in gramatica.get(simbolo, []):
-        if produccion == ['e']:
-            first[simbolo].add('e')
+# Función para calcular FIRST de un símbolo
+def compute_first(symbol):
+    if symbol in FIRST and FIRST[symbol]:
+        return FIRST[symbol]
+    if symbol in tokens:
+        FIRST[symbol] = set([symbol])
+        return FIRST[symbol]
+    first = set()
+    for production in grammar[symbol]:
+        if production[0] == 'e':
+            first.add('e')
         else:
-            for simbolo_produccion in produccion:
-                simbolo_first = calcular_first(simbolo_produccion, gramatica, first, visitados)
-                first[simbolo].update(simbolo_first - {'e'})
-                if 'e' not in simbolo_first:
+            for sym in production:
+                sym_first = compute_first(sym)
+                first.update(sym_first - set(['e']))
+                if 'e' not in sym_first:
                     break
             else:
-                first[simbolo].add('e')
-
-    visitados.remove(simbolo)
-    return first[simbolo]
-
-def calcular_first_gramatica(gramatica, tokens):
-    first = inicializar_first_terminales(tokens)
-    for no_terminal in gramatica:
-        calcular_first(no_terminal, gramatica, first, set())
+                first.add('e')
+    FIRST[symbol] = first
     return first
 
-def calcular_follow_gramatica(gramatica, first, tokens, start_symbol):
-    # Initialize FOLLOW sets only for non-terminals
-    follow = {symbol: set() for symbol in gramatica.keys()}
-    # Add end-of-input marker to FOLLOW of start symbol
-    follow[start_symbol].add('$')
-    changed = True
-    while changed:
-        changed = False
-        for lhs in gramatica:
-            for production in gramatica[lhs]:
-                trailer = follow[lhs].copy()
-                for symbol in reversed(production):
-                    if symbol == 'e':
-                        continue  # Skip epsilon symbol
-                    elif symbol in gramatica:  # Non-terminal
-                        if not follow[symbol].issuperset(trailer):
-                            follow[symbol].update(trailer)
-                            changed = True
-                        if 'e' in first[symbol]:
-                            trailer.update(first[symbol] - {'e'})
-                        else:
-                            trailer = first[symbol]
-                    else:  # Terminal
-                        trailer = first[symbol]  # FIRST of terminal is the terminal itself
-    return follow
+# Función para calcular FOLLOW de un símbolo
+def compute_follow(symbol):
+    if symbol == 'NETCODE':
+        FOLLOW[symbol].add('$')
+    for lhs in grammar:
+        for production in grammar[lhs]:
+            for i, sym in enumerate(production):
+                if sym == symbol:
+                    # Verificamos el siguiente símbolo
+                    if i + 1 < len(production):
+                        next_sym = production[i + 1]
+                        next_first = compute_first(next_sym)
+                        FOLLOW[symbol].update(next_first - set(['e']))
+                        if 'e' in next_first:
+                            FOLLOW[symbol].update(FOLLOW[lhs])
+                    else:
+                        if lhs != symbol:
+                            FOLLOW[symbol].update(FOLLOW[lhs])
 
-def construir_tabla_LL1(gramatica, first, follow, tokens):
-    tabla = {}
-    for no_terminal in gramatica:
-        tabla[no_terminal] = {}
-        for produccion in gramatica[no_terminal]:
-            first_alpha = set()
-            if produccion == ['e']:
-                first_alpha.add('e')
+# Calcular FIRST para todos los símbolos
+for non_terminal in non_terminals:
+    compute_first(non_terminal)
+
+# Calcular FOLLOW para todos los símbolos
+for non_terminal in non_terminals:
+    FOLLOW[non_terminal] = set()
+
+# Repetimos hasta que no haya cambios
+changed = True
+while changed:
+    changed = False
+    for non_terminal in non_terminals:
+        before = len(FOLLOW[non_terminal])
+        compute_follow(non_terminal)
+        after = len(FOLLOW[non_terminal])
+        if before != after:
+            changed = True
+
+# Construir la tabla LL(1)
+ll1_table = defaultdict(dict)
+
+for lhs in grammar:
+    for production in grammar[lhs]:
+        firsts = set()
+        if production[0] == 'e':
+            firsts.add('e')
+        else:
+            for sym in production:
+                sym_first = compute_first(sym)
+                firsts.update(sym_first - set(['e']))
+                if 'e' not in sym_first:
+                    break
             else:
-                # Compute FIRST of the production
-                for simbolo in produccion:
-                    first_alpha.update(first[simbolo] - {'e'})
-                    if 'e' not in first[simbolo]:
-                        break
-                else:
-                    first_alpha.add('e')
+                firsts.add('e')
 
-            # For each terminal in FIRST(alpha)
-            for terminal in first_alpha - {'e'}:
-                tabla[no_terminal][terminal] = ' '.join(produccion)
+        for terminal in firsts - set(['e']):
+            ll1_table[lhs][terminal] = ' '.join(production)
+        if 'e' in firsts:
+            for terminal in FOLLOW[lhs]:
+                ll1_table[lhs][terminal] = 'e'
 
-            # If epsilon is in FIRST(alpha), add the production to FOLLOW(non_terminal)
-            if 'e' in first_alpha:
-                for terminal in follow[no_terminal]:
-                    tabla[no_terminal][terminal] = ' '.join(produccion)
-    return tabla
+# Crear la tabla LL(1) en formato CSV
+csv_filename = 'table_ll1_replic.csv'
+carpeta_salida = 'table_ll1'
+if not os.path.exists(carpeta_salida):
+        os.makedirs(carpeta_salida)
+archivo_salida = os.path.join(carpeta_salida, csv_filename)
 
-def escribir_tabla_csv(tabla, tokens, output_file):
-    # Ensure all tokens are included, and include the end-of-input marker '$'
-    all_terminals = tokens + ['$']
+with open(archivo_salida, 'w', newline='', encoding='utf-8') as csvfile:
+    csvwriter = csv.writer(csvfile, lineterminator='\n')
+    # Escribir encabezados
+    headers = [''] + tokens
+    csvwriter.writerow(headers)
+    # Escribir filas de la tabla
+    total_rows = len(non_terminals)
+    for idx, nt in enumerate(non_terminals):
+        row = [nt]
+        for t in tokens:
+            action = ll1_table[nt].get(t, '')
+            row.append(action)
+        csvwriter.writerow(row)
+    # Mover el cursor al final del archivo
+    csvfile.seek(0, 2)
+    # Obtener la posición actual
+    pos = csvfile.tell()
+    # Mover el cursor dos posiciones atrás (para eliminar el salto de línea)
+    csvfile.truncate(pos - 1)
 
-    # Prepare the header row with terminals
-    header = [''] + all_terminals
-    non_terminals = list(tabla.keys())
-
-    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(header)
-
-        for non_terminal in non_terminals:
-            row = [non_terminal]
-            for terminal in all_terminals:
-                entry = tabla[non_terminal].get(terminal, '')
-                if entry:
-                    entry = f"{non_terminal} -> {entry}"
-                row.append(entry)
-            writer.writerow(row)
-
-
-# Import tokens from lexic module
-from lexic import tokens  # Assuming tokens is correctly defined
-
-# Read the grammar from the file
-directory2 = os.path.dirname(__file__)
-sketchfile = 'grammar.txt'
-pathfile2 = os.path.join(directory2, '..', 'grammar', sketchfile)
-
-gramatica_netcode = read_grammar(pathfile2)
-conjunto_first = calcular_first_gramatica(gramatica_netcode, tokens)
-
-# Assuming the start symbol is the first non-terminal in the grammar
-start_symbol = next(iter(gramatica_netcode))
-
-conjunto_follow = calcular_follow_gramatica(gramatica_netcode, conjunto_first, tokens, start_symbol)
-
-# Display the FIRST sets
-print("FIRST sets:")
-for simbolo, first_set in conjunto_first.items():
-    print(f"First({simbolo}) = {first_set}")
-
-# Display the FOLLOW sets
-print("\nFOLLOW sets:")
-for simbolo, follow_set in conjunto_follow.items():
-    print(f"Follow({simbolo}) = {follow_set}")
-
-tabla_LL1 = construir_tabla_LL1(gramatica_netcode, conjunto_first, conjunto_follow, tokens)
-
-# Output the parsing table to CSV
-output_csv_file = 'parsing_table.csv'
-escribir_tabla_csv(tabla_LL1, tokens, output_csv_file)
-
-print(f"Parsing table has been written to {output_csv_file}")
+print(f"Tabla LL(1) exportada a {archivo_salida}")
