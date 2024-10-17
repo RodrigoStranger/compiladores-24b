@@ -1,5 +1,7 @@
 import os
 from lexic import tokens
+import csv
+
 def read_grammar(ruta_archivo):
     gramatica = {}
     with open(ruta_archivo, 'r') as archivo:
@@ -55,10 +57,8 @@ def calcular_follow_gramatica(gramatica, first, tokens, start_symbol):
     # Initialize FOLLOW sets for both non-terminals and terminals
     symbols = list(gramatica.keys()) + tokens
     follow = {symbol: set() for symbol in symbols}
-
     # Add end-of-input marker to FOLLOW of start symbol
     follow[start_symbol].add('$')
-
     changed = True
     while changed:
         changed = False
@@ -87,6 +87,51 @@ def calcular_follow_gramatica(gramatica, first, tokens, start_symbol):
                         trailer = first[symbol]  # For terminals, FIRST is the symbol itself
     return follow
 
+def construir_tabla_LL1(gramatica, first, follow, tokens):
+    tabla = {}
+    for no_terminal in gramatica:
+        tabla[no_terminal] = {}
+        for produccion in gramatica[no_terminal]:
+            first_alpha = set()
+            if produccion == ['e']:
+                first_alpha.add('e')
+            else:
+                # Compute FIRST of the production
+                for simbolo in produccion:
+                    first_alpha.update(first[simbolo] - {'e'})
+                    if 'e' not in first[simbolo]:
+                        break
+                else:
+                    first_alpha.add('e')
+
+            # For each terminal in FIRST(alpha)
+            for terminal in first_alpha - {'e'}:
+                if terminal in tokens:
+                    tabla[no_terminal][terminal] = ' '.join(produccion)
+
+            # If epsilon is in FIRST(alpha), add the production to FOLLOW(non_terminal)
+            if 'e' in first_alpha:
+                for terminal in follow[no_terminal]:
+                    if terminal in tokens + ['$']:
+                        tabla[no_terminal][terminal] = ' '.join(produccion)
+    return tabla
+
+def escribir_tabla_csv(tabla, tokens, output_file):
+    # Prepare the header row with terminals
+    header = [''] + tokens + ['$']
+    non_terminals = list(tabla.keys())
+
+    with open(output_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(header)
+
+        for non_terminal in non_terminals:
+            row = [non_terminal]
+            for terminal in tokens + ['$']:
+                entry = tabla[non_terminal].get(terminal, '')
+                row.append(entry)
+            writer.writerow(row)
+
 # Example tokens (terminals)
 tokens_example = ['id', '+', '*']
 # Read the grammar from the file
@@ -111,3 +156,9 @@ for simbolo, first_set in conjunto_first.items():
 print("\nFOLLOW sets:")
 for simbolo, follow_set in conjunto_follow.items():
     print(f"Follow({simbolo}) = {follow_set}")
+
+tabla_LL1 = construir_tabla_LL1(gramatica_netcode, conjunto_first, conjunto_follow, tokens_example)
+
+# Output the parsing table to CSV
+output_csv_file = 'parsing_table.csv'
+escribir_tabla_csv(tabla_LL1, tokens_example, output_csv_file)
