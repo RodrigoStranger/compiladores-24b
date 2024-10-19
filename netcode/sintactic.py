@@ -7,7 +7,7 @@ from lexic import listtokens
 from functions_sintactic import generate_table_ll1
 
 directory2 = os.path.dirname(__file__)
-sketchfile = 'table_ll1_replic.csv'
+sketchfile = 'table_ll1_pariente.csv'
 pathfile2 = os.path.join(directory2, '..', 'table_ll1', sketchfile)
 
 table_ll1 = generate_table_ll1(pathfile2)

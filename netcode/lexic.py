@@ -7,7 +7,7 @@ from functions_lexic import write_tokens_in_txt
 from functions_lexic import Token
 
 directory = os.path.dirname(__file__)
-sketchfile = 'fibonacci_recursivo.txt'
+sketchfile = 'hola_mundo.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ['FUNCION', 'ID', 'CORCHETEABI', 'CORCHETECERR', 'LLAVEABI', 'LLAVECERR', 'PROGRAMA', 'PRINCIPAL', 'TIPOENTERO', 'TIPOVACIO', 
