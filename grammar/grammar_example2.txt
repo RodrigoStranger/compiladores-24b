@@ -1,0 +1,4 @@
+E -> T X
+X -> + E | e
+T -> ( E ) | int Y
+Y -> * T | e

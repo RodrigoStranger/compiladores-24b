@@ -7,7 +7,7 @@ from functions_lexic import Token
 #funcion que genera una tabla ll1 
 def generate_table_ll1(pathfile):
     df = pd.read_csv(pathfile, index_col = 0)
-    df = df.fillna('null')
+    df = df.fillna('')
     return df
 
 #funcion que genera tokens
@@ -60,7 +60,7 @@ def ll1_parse(tokens, parsing_table):
                 current_token = tokens[index].type
                 try:
                     production = parsing_table.at[top, current_token]
-                    if production != 'null':
+                    if production != '':
                         # descomponer la producción y añadir al stack
                         if production != 'e':  # 'e' representa la producción vacía
                             print(f"Producción encontrada para {top}: {production}")

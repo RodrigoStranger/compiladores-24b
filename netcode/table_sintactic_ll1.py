@@ -2,6 +2,7 @@ import os
 import csv
 from collections import defaultdict
 from lexic import tokens
+from functions_sintactic import generate_syntax_table_png
 
 def read_grammar_from_file(filename):
     grammar = {}
@@ -29,7 +30,9 @@ sketchfile = 'grammar.txt'
 pathfile = os.path.join(directory, '..', 'grammar', sketchfile)
 
 grammar = read_grammar_from_file(pathfile)
+#tokens = ['int', '*', '+', '(', ')']
 #tokens = ['id', '+', '*']
+#tokens = ['if', 'then', 'else', '{', '}', 'true', 'false']
 tokens.append('$')
 # Lista de símbolos no terminales
 non_terminals = list(grammar.keys())
@@ -119,11 +122,13 @@ for lhs in grammar:
                 ll1_table[lhs][terminal] = 'e'
 
 # Crear la tabla LL(1) en formato CSV
-csv_filename = 'table_ll1_pariente.csv'
+csv_filename = 'table_ll1_parent.csv'
+csv_png = 'table_ll1_parent.png'
 carpeta_salida = 'table_ll1'
 if not os.path.exists(carpeta_salida):
     os.makedirs(carpeta_salida)
 archivo_salida = os.path.join(carpeta_salida, csv_filename)
+archivo_salida2 = os.path.join(carpeta_salida, csv_png)
 
 with open(archivo_salida, 'w', newline='', encoding='utf-8') as csvfile:
     csvwriter = csv.writer(csvfile)
@@ -145,5 +150,8 @@ with open(archivo_salida, 'rb+') as csvfile:
         csvfile.seek(-2, os.SEEK_CUR)
     if csvfile.tell() > 0:
         csvfile.truncate()
+
+#generate_syntax_table_png(archivo_salida, archivo_salida2)
+
 
 print(f"Tabla LL(1) exportada a {archivo_salida}")
