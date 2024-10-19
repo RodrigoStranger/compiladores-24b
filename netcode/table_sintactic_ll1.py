@@ -4,7 +4,34 @@ from collections import defaultdict
 from lexic import tokens
 from functions_sintactic import generate_syntax_table_png
 
-def read_grammar_from_file(filename):
+def read_grammar_word_file(filename):
+    grammar = {}
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            # Eliminar comentarios y espacios en blanco
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue  # Saltar líneas vacías y comentarios
+            # Manejar diferentes operadores de producción (-> o ::=)
+            if '->' in line:
+                lhs, rhs = line.split('->', 1)
+            elif '::=' in line:
+                lhs, rhs = line.split('::=', 1)
+            else:
+                continue  # Saltar líneas no válidas
+            lhs = lhs.strip()
+            rhs = rhs.strip()
+            # Dividir la producción en símbolos
+            symbols = rhs.split()
+            # Reemplazar '' por 'e' en producciones vacías
+            symbols = ['e' if symbol == "''" else symbol for symbol in symbols]
+            # Agregar cada producción de manera separada
+            if lhs not in grammar:
+                grammar[lhs] = []
+            grammar[lhs].append(symbols)
+    return grammar
+
+def read_grammar_comun_file(filename):
     grammar = {}
     with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
@@ -26,10 +53,10 @@ def read_grammar_from_file(filename):
     return grammar
 
 directory = os.path.dirname(__file__)
-sketchfile = 'grammar.txt'
+sketchfile = 'grammar_js_machines.txt'
 pathfile = os.path.join(directory, '..', 'grammar', sketchfile)
 
-grammar = read_grammar_from_file(pathfile)
+grammar = read_grammar_word_file(pathfile)
 #tokens = ['int', '*', '+', '(', ')']
 #tokens = ['id', '+', '*']
 #tokens = ['if', 'then', 'else', '{', '}', 'true', 'false']
@@ -122,11 +149,13 @@ for lhs in grammar:
                 ll1_table[lhs][terminal] = 'e'
 
 # Crear la tabla LL(1) en formato CSV
-csv_filename = 'table_ll1_parent.csv'
-csv_png = 'table_ll1_parent.png'
+csv_filename = 'table_ll1_parent2.csv'
+csv_png = 'table_ll1_parent2.png'
 carpeta_salida = 'table_ll1'
+
 if not os.path.exists(carpeta_salida):
     os.makedirs(carpeta_salida)
+
 archivo_salida = os.path.join(carpeta_salida, csv_filename)
 archivo_salida2 = os.path.join(carpeta_salida, csv_png)
 
@@ -152,6 +181,5 @@ with open(archivo_salida, 'rb+') as csvfile:
         csvfile.truncate()
 
 #generate_syntax_table_png(archivo_salida, archivo_salida2)
-
 
 print(f"Tabla LL(1) exportada a {archivo_salida}")
