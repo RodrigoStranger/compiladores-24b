@@ -16,7 +16,7 @@ if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
     graph = arbolSintactico(parse_tree_root)
-    output_pdf_path = os.path.join(output_folder, 'tree_sintactic') 
+    output_pdf_path = os.path.join(output_folder, 'tree_sintactic_sumar_numeros') 
     graph.render(output_pdf_path, format='png', view=True)
 else:
     print(" ")
