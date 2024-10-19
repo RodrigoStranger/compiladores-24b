@@ -38,26 +38,26 @@ def generate_syntax_table_png(csv_path, output_png_path):
     print(f"Imagen png generada exitosamente en: {output_png_path}")
 
 #funcion que verifica con el algoritmo ll1
-def ll1_parse(tokens, parsing_table):
+def ll1_parse(listatokens, parsing_table):
     stack = ['$','NETCODE']
     index = 0
     while stack:
-        print(f"Estado de la pila: {stack}, Tokens restantes: {[token.type for token in tokens[index:]]}")
+        print(f"Estado de la pila: {stack}, Tokens restantes: {[token.type for token in listatokens[index:]]}")
         top = stack.pop()
         # si el símbolo en la cima es un terminal
-        if top in [token.type for token in tokens]:
-            if index < len(tokens) and tokens[index].type == top:
+        if top in [token.type for token in listatokens]:
+            if index < len(listatokens) and listatokens[index].type == top:
                 print(f"Coincidencia encontrada: {top}")
                 index += 1
             else:
                 print("\nError: Se esperaba '{}' pero se encontró '{}'".format(
-                    top, tokens[index].type if index < len(tokens) else 'fin de entrada'))
-                print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                    top, listatokens[index].type if index < len(listatokens) else 'fin de entrada'))
+                print("Lista de tokens restantes: ", [token.type for token in listatokens[index:]])
                 return False
         # si el símbolo en la cima es un no terminal
         elif top in parsing_table.index:
-            if index < len(tokens):
-                current_token = tokens[index].type
+            if index < len(listatokens):
+                current_token = listatokens[index].type
                 try:
                     production = parsing_table.at[top, current_token]
                     if production != '':
@@ -70,7 +70,7 @@ def ll1_parse(tokens, parsing_table):
                     else:
                         print("\nError: No hay producción válida para el no terminal '{}' con el token '{}'".format(
                             top, current_token))
-                        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+                        print("Lista de tokens restantes: ", [token.type for token in listatokens[index:]])
                         return False
                 except KeyError as e:
                     print(f"\nError: No se encontró una producción en la tabla LL(1) para el no terminal '{top}' con el token '{current_token}'.")
@@ -82,51 +82,48 @@ def ll1_parse(tokens, parsing_table):
         # símbolo no reconocido (ni terminal ni no terminal)
         else:
             print("\nError: símbolo no reconocido en la pila '{}'".format(top))
-            print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+            print("Lista de tokens restantes: ", [token.type for token in listatokens[index:]])
             return False
     # verifica si se ha consumido toda la entrada
-    success = index == len(tokens)
+    success = index == len(listatokens)
     if success:
         print("\nAnálisis exitoso.")
     else:
         print("\nFalló el análisis. Se esperaban más tokens pero la entrada se terminó.")
-        print("Lista de tokens restantes: ", [token.type for token in tokens[index:]])
+        print("Lista de tokens restantes: ", [token.type for token in listatokens[index:]])
     return success
 
 class Simbolo:
     def __init__(self, tipo_data, nom_sym, function, valor=None):
-        self.tipo_data = tipo_data
-        self.nom_sym = nom_sym
-        self.function = function
-        self.valor = valor
+        self.tipo_data = tipo_data  # Tipo de dato del símbolo (e.g., int, float, string)
+        self.nom_sym = nom_sym      # Nombre del símbolo
+        self.function = function    # Contexto o función donde se define el símbolo
+        self.valor = valor          # Valor asignado al símbolo (si lo tiene)
 
 class Node:
     def __init__(self, simbolo_lexer, lexema, line, column, es_terminal, id, tipo_data=None, valor=None):
-        self.id = id
-        self.lexema = lexema
-        self.simbolo_lexer = simbolo_lexer
-        self.es_terminal = es_terminal
-        self.line = line
-        self.column = column
-        self.children = []
-        self.padre = None
-        self.simbolos = []
-        self.tipo_data = tipo_data
-        self.valor = valor
+        self.id = id                        # Identificador único del nodo
+        self.lexema = lexema                # Lexema asociado al nodo
+        self.simbolo_lexer = simbolo_lexer  # Tipo de símbolo del analizador léxico (e.g., identificador, palabra clave)
+        self.es_terminal = es_terminal      # Booleano que indica si es un nodo terminal
+        self.line = line                    # Línea en la que se encuentra el símbolo en el código fuente
+        self.column = column                # Columna donde comienza el símbolo en el código fuente
+        self.children = []                  # Lista de nodos hijos
+        self.padre = None                   # Nodo padre (para referencia en el árbol)
+        self.simbolos = []                  # Lista de símbolos definidos en este nodo
+        self.tipo_data = tipo_data          # Tipo de dato asociado (para análisis semántico)
+        self.valor = valor                  # Valor asociado al nodo (si lo tiene)
+
+    def add_child(self, child):
+        self.children.append(child)
+        child.padre = self  # Establecer al nodo actual como padre del hijo
 
     def agregar_simbolo(self, tipo_data, nom_sym, function, valor=None):
-        simbolo_lexer = Simbolo(tipo_data, nom_sym, function, valor=valor)
-        self.simbolos.append(simbolo_lexer)
+        simbolo = Simbolo(tipo_data, nom_sym, function, valor=valor)
+        self.simbolos.append(simbolo)
+        # Actualizar el tipo de dato y el valor del nodo si corresponde a un símbolo
         self.tipo_data = tipo_data
         self.valor = valor
-
-class Pila:
-    def __init__(self, simbolo, es_terminal):
-        global count
-        self.id = count
-        self.simboloLex = simbolo
-        self.es_terminal = es_terminal
-        count += 1
 
 def buscar(node, id):
     if node.id == id:
@@ -155,56 +152,70 @@ def arbolSintactico(raiz):
     generar_nodos(raiz)
     return graph
 
-count = 0
 def parser_sintactico_ll1(listtokens, table_ll1):
     global count
     error = False
     count = 0
     # Inicializar la pila con los símbolos iniciales
-    node_PROGRAMA = Pila("NETCODE", False)
-    node_dolar = Pila("$", True)
+    node_PROGRAMA = Node("NETCODE", "NETCODE", None, None, False, count)
+    node_dolar = Node("$", "$", None, None, True, count + 1)
     stack = [node_PROGRAMA, node_dolar]
-    nodoPadre = Node("NETCODE", None, None, None, False, node_PROGRAMA.id)
+    nodoPadre = node_PROGRAMA
     listtokens_copy = list(listtokens)  # Copia de tokens para no modificar la lista original
+    count += 2
     while True:
+        print(f"Estado de la pila: {[s.simbolo_lexer for s in stack]}")
+        print(f"Tokens restantes: {[token.type for token in listtokens]}")
         if len(stack) == 0 or len(listtokens) == 0:
             error = True
+            print("Error: Pila vacía o lista de tokens vacía antes de tiempo.")
             break
-        if stack[0].simboloLex == "$" and listtokens[0].type == "$":
+        if stack[0].simbolo_lexer == "$" and listtokens[0].type == "$":
+            print(" ")
+            print("Análisis exitoso: Se alcanzó el símbolo de fin de entrada.")
             break
-        elif stack[0].es_terminal and stack[0].simboloLex == listtokens[0].type:
+        elif stack[0].es_terminal and stack[0].simbolo_lexer == listtokens[0].type:
+            print(f"Coincidencia encontrada: {stack[0].simbolo_lexer}")
             stack.pop(0)
             listtokens.pop(0)
-        elif stack[0].es_terminal and stack[0].simboloLex != listtokens[0].type:
+            print(" ")
+        elif stack[0].es_terminal and stack[0].simbolo_lexer != listtokens[0].type:
             error = True
+            print(f"Error: Se esperaba '{stack[0].simbolo_lexer}', pero se encontró '{listtokens[0].type}'.")
             break
         else:
             try:
-                vacio = table_ll1.loc[stack[0].simboloLex][listtokens[0].type]
+                production = table_ll1.loc[stack[0].simbolo_lexer][listtokens[0].type]
+                print(f"Producción encontrada para {stack[0].simbolo_lexer}: {production}")
+                print(" ")
             except KeyError:
                 error = True
+                print(f"Error: No hay producción válida para el no terminal '{stack[0].simbolo_lexer}' con el token '{listtokens[0].type}'.")
                 break
-            if vacio == "e":
+            if production == "e":
+                print(f"Producción vacía aplicada para {stack[0].simbolo_lexer}.")
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
-                nodo_e = Node("e", None, None, None, True, count)
+                nodo_e = Node("e", "e", None, None, True, count)
                 nodo_e.padre = padre
-                padre.children.append(nodo_e)
+                padre.add_child(nodo_e)
                 count += 1
+                print(" ")
             else:
-                vacio = vacio.split(" ")
+                symbols = production.split(" ")
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
-                for Symlexer in reversed(vacio):
-                    is_terminal = Symlexer in table_ll1.columns
-                    node = Pila(Symlexer, is_terminal)
-                    stack.insert(0, node)
-                    nod = Node(Symlexer, None, None, None, is_terminal, node.id)
-                    padre.children.insert(0, nod)
-                    nod.padre = padre
-                    if nod.es_terminal:
-                        for token_actual in listtokens_copy:
-                            if token_actual.type == nod.simbolo_lexer:
-                                listtokens_copy.remove(token_actual)
-                                break
+                for Symlexer in reversed(symbols):
+                    if Symlexer:  # Evitar agregar símbolos vacíos
+                        is_terminal = Symlexer in table_ll1.columns
+                        node = Node(Symlexer, Symlexer, None, None, is_terminal, count)
+                        count += 1
+                        stack.insert(0, node)
+                        padre.children.insert(0, node)
+                        node.padre = padre
+                        if node.es_terminal:
+                            for token_actual in listtokens_copy:
+                                if token_actual.type == node.simbolo_lexer:
+                                    listtokens_copy.remove(token_actual)
+                                    break
     return (not error), nodoPadre if not error else None
