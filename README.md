@@ -83,8 +83,24 @@ El objetivo de esta tarea es implementar el analizador sintáctico para el lengu
 - Definir la estructura de los nodos, simbolos, etc. Del árbol sintáctico.
 - Obtener el resultado: la salida de la función debe ser: si la lista de tokens posee o no errores sintácticos, de no tener errores, la función támbien dará como salida el árbol sintáctico.
 - Exportar el árbol sintáctico en un formato .png.
+- Observación: el analizador sintáctico debe usar al analizador lexico
+
+
 Nota: la explicación más detallada se encontrará en la sección [`README NetCode`](./netcode/README.md)
 ### Entregables
 - [`sintactic.py`](./netcode/sintactic.py)
 - [`functions_sintactic.py`](./netcode/functions_sintactic.py)
 - [`table_sintactic_ll1`](./netcode/table_sintactic_ll1.py)
+
+## [`Parcial`](./partial_specification)
+Elaborar un documento que describa el lenguaje propuesto. El documento debe contener lo siguiente:
+- Introducción.
+- Propuesta.
+- Especificación lexica.
+- Especificación Sintáctica.
+
+
+### Entregables
+- [`partial_compilers.pdf`](./partial_specification/partial_compilers.pdf)
+- [`partial_compilers.zip`](./partial_specification/partial_compilers.zip)
+
