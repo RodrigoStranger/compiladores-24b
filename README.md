@@ -75,5 +75,16 @@ Nota: la explicación más detallada se encontrará en la sección [`README NetC
 - [`functions_lexic.py`](./netcode/functions_lexic.py)
 
 ## [`sintactic`](./netcode)
-
-  
+El objetivo de esta tarea es implementar el analizador sintáctico para el lenguaje de programación propuesto. El programa debe:
+- Utilizar la lista de objetos de lexic denominado listtokens en la funcion de analizador sintactico.
+- Definir la gramática de NetCode: cuya gramática debe ser de tipo ll1 y debe estar en un formato .txt para su posterior lectura y procesamiento.
+- Utilizar la gramática definida para poder generar la tabla sintactica en formato .csv.
+- Definir la funcion de analizador sintáctico: la función debe tomar como entrada la lista de tokens, la tabla sintactica y el simbolo inicial de donde empieza la grámatica.
+- Definir la estructura de los nodos, simbolos, etc. Del árbol sintáctico.
+- Obtener el resultado: la salida de la función debe ser: si la lista de tokens posee o no errores sintácticos, de no tener errores, la función támbien dará como salida el árbol sintáctico.
+- Exportar el árbol sintáctico en un formato .png.
+Nota: la explicación más detallada se encontrará en la sección [`README NetCode`](./netcode/README.md)
+### Entregables
+- [`sintactic.py`](./netcode/sintactic.py)
+- [`functions_sintactic.py`](./netcode/functions_sintactic.py)
+- [`table_sintactic_ll1`](./netcode/table_sintactic_ll1.py)
