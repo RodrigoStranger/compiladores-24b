@@ -74,5 +74,5 @@ El sintactic de **NetCode** utiliza diferentes componentes léxicos como:
 - Estructura de datos: Node, Simbolo
 - Gramática.txt
   
-## Código Fuente Functions sintactic: [`AQUI`](./netcode/functions_sintactic.py)
+## Código Fuente Functions sintactic: [`AQUI`](./functions_sintactic.py)
 ## Código Fuente Sintactic: [`AQUI`](./sintactic.py)
