@@ -152,12 +152,12 @@ def arbolSintactico(raiz):
     generar_nodos(raiz)
     return graph
 
-def parser_sintactico_ll1(listtokens, table_ll1):
+def parser_sintactico_ll1(listtokens, table_ll1, inicial):
     global count
     error = False
     count = 0
     # Inicializar la pila con los símbolos iniciales
-    node_PROGRAMA = Node("NETCODE", "NETCODE", None, None, False, count)
+    node_PROGRAMA = Node(inicial, inicial, None, None, False, count)
     node_dolar = Node("$", "$", None, None, True, count + 1)
     stack = [node_PROGRAMA, node_dolar]
     nodoPadre = node_PROGRAMA
@@ -193,7 +193,7 @@ def parser_sintactico_ll1(listtokens, table_ll1):
                 print(f"Error: No hay producción válida para el no terminal '{stack[0].simbolo_lexer}' con el token '{listtokens[0].type}'.")
                 break
             if production == "e":
-                print(f"Producción vacía aplicada para {stack[0].simbolo_lexer}.")
+                print(f"Producción vacía aplicada para {stack[0].simbolo_lexer}")
                 padre_stack = stack.pop(0)
                 padre = buscar(nodoPadre, padre_stack.id)
                 nodo_e = Node("e", "e", None, None, True, count)

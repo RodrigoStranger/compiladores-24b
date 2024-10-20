@@ -1,3 +1,7 @@
-E -> if B then { E } E' | B | e
-E' -> else { E } | e
-B -> true | false
+E -> if B then { E } E'
+E -> B
+E -> ''
+E' -> else { E }
+E' -> ''
+B -> true
+B -> false

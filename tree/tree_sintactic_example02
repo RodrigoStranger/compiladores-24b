@@ -1,0 +1,29 @@
+digraph {
+	0 [label=E fillcolor=white style=filled]
+	3 [label=T fillcolor=white style=filled]
+	0 -> 3
+	5 [label=int fillcolor=white style=filled]
+	3 -> 5
+	4 [label=Y fillcolor=white style=filled]
+	3 -> 4
+	6 [label=e fillcolor=white style=filled]
+	4 -> 6
+	2 [label=X fillcolor=white style=filled]
+	0 -> 2
+	8 [label="+" fillcolor=white style=filled]
+	2 -> 8
+	7 [label=E fillcolor=white style=filled]
+	2 -> 7
+	10 [label=T fillcolor=white style=filled]
+	7 -> 10
+	12 [label=int fillcolor=white style=filled]
+	10 -> 12
+	11 [label=Y fillcolor=white style=filled]
+	10 -> 11
+	13 [label=e fillcolor=white style=filled]
+	11 -> 13
+	9 [label=X fillcolor=white style=filled]
+	7 -> 9
+	14 [label=e fillcolor=white style=filled]
+	9 -> 14
+}

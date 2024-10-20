@@ -1,3 +1,5 @@
 A -> id B C
-B -> + id | e
-C -> * id | e
+B -> + id
+B -> ''
+C -> * id
+C -> ''
