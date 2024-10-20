@@ -150,14 +150,14 @@ for lhs in grammar:
 
 # Crear la tabla LL(1) en formato CSV
 csv_filename = 'table_ll1_parent2.csv'
-csv_png = 'table_ll1_parent2.png'
+#csv_png = 'table_ll1_parent3.png'
 carpeta_salida = 'table_ll1'
 
 if not os.path.exists(carpeta_salida):
     os.makedirs(carpeta_salida)
 
 archivo_salida = os.path.join(carpeta_salida, csv_filename)
-archivo_salida2 = os.path.join(carpeta_salida, csv_png)
+#archivo_salida2 = os.path.join(carpeta_salida, csv_png)
 
 with open(archivo_salida, 'w', newline='', encoding='utf-8') as csvfile:
     csvwriter = csv.writer(csvfile)

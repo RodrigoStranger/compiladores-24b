@@ -1,0 +1,7 @@
+// ESTE ES UN HOLA MUNDO PERO EN FUNCION Y VACIO
+function holamundo [] void {
+    log["hola mundo"]
+}
+program main interger [] {
+	holamundo[]
+}
