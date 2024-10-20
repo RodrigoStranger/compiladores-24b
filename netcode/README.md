@@ -46,7 +46,7 @@ El lexer toma como entrada un archivo de texto que contiene el código fuente y 
 - Valor del token
 - Línea donde se encuentra
 - Posición en el código
-## Código Fuente Lexer: [`AQUI`](./netcode/lexic.py)
+## Código Fuente Lexer: [`AQUI`](./lexic.py)
 ## EJEMPLOS: [`EXPLICACIÓN DETALLADA`](https://github.com/dabeaz/ply)
 
 ## Instalación de [Graphviz](https://graphviz.org/)
@@ -75,4 +75,4 @@ El sintactic de **NetCode** utiliza diferentes componentes léxicos como:
 - Gramática.txt
   
 ## Código Fuente Functions sintactic: [`AQUI`](./netcode/functions_sintactic.py)
-## Código Fuente Sintactic: [`AQUI`](./netcode/sintactic.py)
+## Código Fuente Sintactic: [`AQUI`](./sintactic.py)
