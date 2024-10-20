@@ -46,5 +46,33 @@ El lexer toma como entrada un archivo de texto que contiene el código fuente y 
 - Valor del token
 - Línea donde se encuentra
 - Posición en el código
-## Código Fuente: [`AQUI`](./lexer.py)
+## Código Fuente Lexer: [`AQUI`](./netcode/lexic.py)
 ## EJEMPLOS: [`EXPLICACIÓN DETALLADA`](https://github.com/dabeaz/ply)
+
+## Instalación de [Graphviz](https://graphviz.org/)
+
+
+Seguir las siguientes indicaciones para `windows`:
+- Sitio web oficial: https://graphviz.org/
+- Descarga el instalador de Windows.
+- Ejecuta el archivo descargado y sigue las instrucciones del asistente de instalación.
+- Asegúrate de que la opción "Add Graphviz to the system PATH" esté seleccionada durante la instalación, para que puedas usar Graphviz desde la línea de comandos.
+- Una vez instalado, abre la terminal (CMD) y ejecuta dot -version para verificar que Graphviz esté instalado correctamente.
+
+
+Seguir las siguientes indicaciones para `Linux`:
+```bash
+   sudo apt-get install graphviz
+   dot -version
+```
+
+## Descripción del sintactic 
+El sintactic de **NetCode** utiliza diferentes componentes léxicos como:
+- Lista de tokens (sacada de lexic)
+- Función analizador sintáctico
+- Función generador tabla ll1.csv
+- Estructura de datos: Node, Simbolo
+- Gramática.txt
+  
+## Código Fuente Functions sintactic: [`AQUI`](./netcode/functions_sintactic.py)
+## Código Fuente Sintactic: [`AQUI`](./netcode/sintactic.py)
