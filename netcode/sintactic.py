@@ -3,6 +3,7 @@ from lexic import listtokens
 import os
 from functions_sintactic import generate_table_ll1
 from functions_sintactic import arbolSintactico
+from functions_sintactic import arbolSintacticoContorno
 from functions_sintactic import parser_sintactico_ll1
 
 directory2 = os.path.dirname(__file__)
@@ -31,7 +32,8 @@ success, parse_tree_root = parser_sintactico_ll1(listtokens, table_ll1, simboloi
 if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
-    graph = arbolSintactico(parse_tree_root)
+    graph = arbolSintacticoContorno(parse_tree_root)
+    #graph = arbolSintactico(parse_tree_root)
     output_pdf_path = os.path.join(output_folder, 'tree_sintactic_hola_mundo') 
     graph.render(output_pdf_path, format='png', view=True)
 else:

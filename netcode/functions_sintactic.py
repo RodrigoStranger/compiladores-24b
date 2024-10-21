@@ -152,6 +152,28 @@ def arbolSintactico(raiz):
     generar_nodos(raiz)
     return graph
 
+def arbolSintacticoContorno(raiz):
+    graph = Digraph()
+    def generar_nodos(node):
+        label = f"{node.simbolo_lexer}"
+        if node.line is not None:
+            label += f"\nline: {node.line}"
+        if node.column is not None:
+            label += f"\ncol: {node.column}"
+        if node.valor is not None:
+            label += f"\nvalor: {node.valor}"
+        # Si es una hoja (no tiene hijos), le aplicamos doble contorno
+        if not node.children:
+            graph.node(str(node.id), label, style="filled", fillcolor='white', peripheries='2')
+        else:
+            graph.node(str(node.id), label, style="filled", fillcolor='white')
+        if node.padre:
+            graph.edge(str(node.padre.id), str(node.id))
+        for child in node.children:
+            generar_nodos(child)
+    generar_nodos(raiz)
+    return graph
+
 def parser_sintactico_ll1(listtokens, table_ll1, inicial):
     global count
     error = False

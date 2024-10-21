@@ -2,17 +2,17 @@ digraph {
 	0 [label=NETCODE fillcolor=white style=filled]
 	2 [label=MAIN fillcolor=white style=filled]
 	0 -> 2
-	10 [label=PROGRAMA fillcolor=white style=filled]
+	10 [label=PROGRAMA fillcolor=white peripheries=2 style=filled]
 	2 -> 10
-	9 [label=PRINCIPAL fillcolor=white style=filled]
+	9 [label=PRINCIPAL fillcolor=white peripheries=2 style=filled]
 	2 -> 9
-	8 [label=TIPOENTERO fillcolor=white style=filled]
+	8 [label=TIPOENTERO fillcolor=white peripheries=2 style=filled]
 	2 -> 8
-	7 [label=CORCHETEABI fillcolor=white style=filled]
+	7 [label=CORCHETEABI fillcolor=white peripheries=2 style=filled]
 	2 -> 7
-	6 [label=CORCHETECERR fillcolor=white style=filled]
+	6 [label=CORCHETECERR fillcolor=white peripheries=2 style=filled]
 	2 -> 6
-	5 [label=LLAVEABI fillcolor=white style=filled]
+	5 [label=LLAVEABI fillcolor=white peripheries=2 style=filled]
 	2 -> 5
 	4 [label=INS fillcolor=white style=filled]
 	2 -> 4
@@ -20,9 +20,9 @@ digraph {
 	4 -> 12
 	13 [label=IMP fillcolor=white style=filled]
 	12 -> 13
-	17 [label=IMPRIMIR fillcolor=white style=filled]
+	17 [label=IMPRIMIR fillcolor=white peripheries=2 style=filled]
 	13 -> 17
-	16 [label=CORCHETEABI fillcolor=white style=filled]
+	16 [label=CORCHETEABI fillcolor=white peripheries=2 style=filled]
 	13 -> 16
 	15 [label=CMDS fillcolor=white style=filled]
 	13 -> 15
@@ -30,22 +30,22 @@ digraph {
 	15 -> 19
 	21 [label=DATO fillcolor=white style=filled]
 	19 -> 21
-	22 [label=NCADENA fillcolor=white style=filled]
+	22 [label=NCADENA fillcolor=white peripheries=2 style=filled]
 	21 -> 22
 	20 [label=MASEXPRESION fillcolor=white style=filled]
 	19 -> 20
-	23 [label=e fillcolor=white style=filled]
+	23 [label=e fillcolor=white peripheries=2 style=filled]
 	20 -> 23
 	18 [label=MASCOMANDOS fillcolor=white style=filled]
 	15 -> 18
-	24 [label=e fillcolor=white style=filled]
+	24 [label=e fillcolor=white peripheries=2 style=filled]
 	18 -> 24
-	14 [label=CORCHETECERR fillcolor=white style=filled]
+	14 [label=CORCHETECERR fillcolor=white peripheries=2 style=filled]
 	13 -> 14
 	11 [label=MASINSTRUCCION fillcolor=white style=filled]
 	4 -> 11
-	25 [label=e fillcolor=white style=filled]
+	25 [label=e fillcolor=white peripheries=2 style=filled]
 	11 -> 25
-	3 [label=LLAVECERR fillcolor=white style=filled]
+	3 [label=LLAVECERR fillcolor=white peripheries=2 style=filled]
 	2 -> 3
 }
