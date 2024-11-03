@@ -53,10 +53,22 @@ def buscar(node, id):
             return found_node
     return None
 
-def arbolSintactico(raiz, contorno_hojas=False):
+def arbolSintactico(raiz, contorno_hojas=False, opcion="tipo"):
     graph = Digraph()
     def generar_nodos(node):
-        label = f"{node.tipo}"
+        # Seleccionar el valor de la etiqueta en función de la opción proporcionada
+        if opcion == "tipo":
+            label = f"{node.tipo}"
+        elif opcion == "linea":
+            label = f"{node.linea}"
+        elif opcion == "columna":
+            label = f"{node.columna}"
+        elif opcion == "valor":
+            label = f"{node.valor}"
+        elif opcion == "id":
+            label = f"{node.id}"
+        else:
+            label = f"{node.tipo}"
         '''
         if node.linea is not None:
             label += f"\nline: {node.linea}"

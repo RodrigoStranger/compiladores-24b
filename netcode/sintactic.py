@@ -13,7 +13,7 @@ success, tree = parser_sintactico_ll1(listtokens, table_ll1, simboloinicial)
 if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
-    graph = arbolSintactico(tree, True)
+    graph = arbolSintactico(tree, True, "tipo") # arbol, si se quiere con contorno en las hojas o no, que atributo del nodo se desea imprimir
     output_pdf_path = os.path.join(output_folder, 'tree_hola_mundo') 
     graph.render(output_pdf_path, format='png', view=True)
 else:
