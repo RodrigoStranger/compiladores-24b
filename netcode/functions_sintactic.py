@@ -8,27 +8,6 @@ def generate_table_ll1(pathfile):
     df = df.fillna('')
     return df
 
-#funcion que genera un png de una tabla ll1
-def generate_syntax_table_png(csv_path, output_png_path):
-    table_print = generate_table_ll1(csv_path)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.axis('tight')
-    ax.axis('off')
-    table = ax.table(cellText=table_print.values, 
-                     colLabels=table_print.columns, 
-                     rowLabels=table_print.index, 
-                     loc='center', 
-                     cellLoc='center')
-    table.auto_set_font_size(False)
-    table.set_fontsize(12)
-    table.scale(1.2, 1.2)
-    for j in range(len(table_print.columns) + 1):
-        for (i, j2) in table.get_celld().keys():
-            if j2 == j: table[(i, j2)].set_width(0.3)
-    plt.savefig(output_png_path, bbox_inches='tight', dpi=300)
-    plt.close(fig)
-    print(f"Imagen png generada exitosamente en: {output_png_path}")
-
 class Node:
     def __init__(self, id, tipo, valor, linea, columna, terminal):
         self.id = id                  # Identificador único del nodo
