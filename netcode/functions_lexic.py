@@ -22,8 +22,8 @@ def generate_data(name_pathfile):
 def print_tokens(list_tokens):
     print("Tokens NetCode: ")
     for token in list_tokens:
-    #print(token.type, token.value)
-        print(token.type)
+        print(token.type, token.value)
+        #print(token.type)
 
 #funcion que escribe tokens en un txt
 def write_tokens_in_txt(lista_tokens, nombre_archivo):
