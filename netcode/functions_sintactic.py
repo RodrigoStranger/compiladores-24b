@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from graphviz import Digraph
 
-#funcion que genera una tabla ll1 
 def generate_table_ll1(pathfile):
     df = pd.read_csv(pathfile, index_col = 0)
     df = df.fillna('')
