@@ -31,6 +31,11 @@ def buscar(node, id):
             return found_node
     return None
 
+def recorrer_arbol_por_id(nodo):
+    print(f"{nodo.id}, {nodo.tipo}, {nodo.valor}, {nodo.terminal}")
+    for hijo in nodo.hijos:
+        recorrer_arbol_por_id(hijo)
+
 def arbolSintactico(raiz, contorno_hojas=False, opcion="tipo"):
     graph = Digraph()
     def generar_nodos(node):
