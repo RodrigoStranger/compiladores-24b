@@ -1,20 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from graphviz import Digraph
-import math
-from functions_lexic import Token
 
 #funcion que genera una tabla ll1 
 def generate_table_ll1(pathfile):
     df = pd.read_csv(pathfile, index_col = 0)
     df = df.fillna('')
     return df
-
-#funcion que genera tokens
-#atributes: type , value, line, column
-def generate_token_example(type, listtokens):
-    token_obj = Token(type, type, 0, 0)
-    listtokens.append(token_obj)
 
 #funcion que genera un png de una tabla ll1
 def generate_syntax_table_png(csv_path, output_png_path):
@@ -61,11 +53,10 @@ def buscar(node, id):
             return found_node
     return None
 
-def arbolSintactico(raiz):
+def arbolSintactico(raiz, contorno_hojas=False):
     graph = Digraph()
     def generar_nodos(node):
         label = f"{node.tipo}"
-        #label = f"{node.terminal}"
         '''
         if node.linea is not None:
             label += f"\nline: {node.linea}"
@@ -74,25 +65,15 @@ def arbolSintactico(raiz):
         if node.valor is not None:
             label += f"\nvalor: {node.valor}"
         '''
-        graph.node(str(node.id), label, style="filled", fillcolor='white')
-        if node.padre:
-            graph.edge(str(node.padre.id), str(node.id))
-        for hijo in node.hijos:
-            generar_nodos(hijo)
-    generar_nodos(raiz)
-    return graph
-
-def arbolSintacticoContorno(raiz):
-    graph = Digraph()
-    def generar_nodos(node):
-        label = f"{node.terminal}"
-        #label = f"{node.terminal}"
-        if not node.hijos:
+        # Aplicar doble contorno si es hoja y `contorno_hojas` es True
+        if not node.hijos and contorno_hojas:
             graph.node(str(node.id), label, style="filled", fillcolor='white', peripheries='2')
         else:
             graph.node(str(node.id), label, style="filled", fillcolor='white')
+        # Conectar con el nodo padre
         if node.padre:
             graph.edge(str(node.padre.id), str(node.id))
+        # Llamada recursiva para cada hijo
         for hijo in node.hijos:
             generar_nodos(hijo)
     generar_nodos(raiz)
@@ -104,11 +85,11 @@ def parser_sintactico_ll1(listtokens, table_ll1, inicial):
     count = 0
     # Nodo inicial y nodo de fin de entrada
     node_PROGRAMA = Node(count, inicial, inicial, None, None, False)
-    node_dolar = Node(count + 1, "$", "$", None, None, True)
+    node_dolar = Node(None, "$", "$", None, None, True)
     stack = [node_dolar, node_PROGRAMA]  # Pila con el símbolo inicial y el fin de entrada
     nodoPadre = node_PROGRAMA
     listtokens_copy = list(listtokens)  # Copia de tokens para preservar la lista original
-    count += 2
+    count += 1
     while stack and listtokens:  # Mientras haya elementos en la pila y tokens
         print(f"Stack: {[s.tipo for s in stack]}")
         top_stack = stack.pop()  # Extraemos el símbolo del tope de la pila
@@ -124,7 +105,7 @@ def parser_sintactico_ll1(listtokens, table_ll1, inicial):
             top_stack.columna = current_token.column
         # Error de coincidencia entre el terminal y el token actual
         elif top_stack.terminal and top_stack.tipo != listtokens[0].type:
-            print(f"Error: Se esperaba '{stack[0].tipo}', pero se encontró '{listtokens[0].type}'.")
+            print("Error")
             error = True
             break
         # Expansión del no terminal
@@ -134,7 +115,7 @@ def parser_sintactico_ll1(listtokens, table_ll1, inicial):
                 production = table_ll1.loc[top_stack.tipo][listtokens[0].type]
             except KeyError:
                 error = True
-                print(f"Error: No hay producción válida para el no terminal '{stack[0].tipo}' con el token '{listtokens[0].type}'.")
+                print("Error")
                 break
             # Si la producción es "e" (vacía)
             if production == "e":
@@ -151,7 +132,7 @@ def parser_sintactico_ll1(listtokens, table_ll1, inicial):
                 for Symlexer in symbols:
                     if Symlexer:  # Evitar símbolos vacíos
                         is_terminal = Symlexer in table_ll1.columns
-                        value = Symlexer if not is_terminal else None  # Asignar `tipo` como `valor` si es no terminal
+                        value = Symlexer if not is_terminal else None  # Asignar tipo como valor si es no terminal
                         line, column = (None, None)
                         # Extraer datos del token si es terminal
                         if is_terminal:
