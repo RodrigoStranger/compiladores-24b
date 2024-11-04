@@ -9,6 +9,7 @@ function F2 [var a interger, var b interger] interger {
 }
 
 program main interger [] {
-	var m interger = F1[1, 2] + F2 [3, 4]
+	var m interger
+    m  = F1[1, 2] + F2 [3, 4]
     echo 0
 }

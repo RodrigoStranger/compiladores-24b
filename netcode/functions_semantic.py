@@ -1,79 +1,127 @@
 class Simbolo:
-    def __init__(self, lexema, tipo_lexema, tipo, ambito):
+    def __init__(self, lexema, tipo_lexema, categoria, ambito):
         self.lexema = lexema
         self.tipo_lexema = tipo_lexema
-        self.tipo = tipo
+        self.tipo = categoria
         self.ambito = ambito
 
-    def __repr__(self):
-        return f"Lexema: {self.lexema}, Tipo: {self.tipo_lexema}, Categoría: {self.tipo}, Ámbito: {self.ambito}"
+    def __repr__(self): return f"{self.lexema}, {self.tipo_lexema}, {self.tipo}, {self.ambito}"
 
-# Verificar si un símbolo ya existe en el ámbito
-def simbolo_existe(pila_simbolos, lexema, ambito):
-    return any(simbolo.lexema == lexema and simbolo.ambito == ambito for simbolo in pila_simbolos)
-
-# Recorrido preorden (RAIZ, IZQUIERDA, DERECHA) para construir la tabla de símbolos
-def recorrer_preorden(node, pila_simbolos, ambito="global"):
-    # Procesar el nodo actual según su tipo
-    if node.tipo == "FUNC":
-        procesar_funcion(node, pila_simbolos, ambito)
-    elif node.tipo == "MAIN":
-        procesar_main(node, pila_simbolos)
-    elif node.tipo == "ASIG":
-        procesar_asignacion(node, pila_simbolos, ambito)
-    elif node.tipo == "ID" and node.hijos and node.hijos[0].tipo == "CORCHETEABI":
-        validar_llamada_funcion(node, pila_simbolos)
-
-    # Recorrer hijos de izquierda a derecha
+def preorder(node):
+    if not node.hijos:
+        if node.valor != "e":
+            print(node.valor)
+        return
     for hijo in node.hijos:
-        recorrer_preorden(hijo, pila_simbolos, ambito)
+        preorder(hijo)
 
-# Función para procesar nodos FUNC y agregarlo a la tabla de símbolos
-def procesar_funcion(node, pila_simbolos, ambito):
-    funcion_id = next((hijo for hijo in node.hijos if hijo.tipo == "ID"), None)
-    tipo_funcion = next((hijo.hijos[0].valor for hijo in node.hijos if hijo.tipo == "OPDATO" and hijo.hijos), None)
-    if funcion_id and tipo_funcion:
-        if not simbolo_existe(pila_simbolos, funcion_id.valor, ambito):
-            pila_simbolos.append(Simbolo(funcion_id.valor, tipo_funcion, "function", ambito))
-        
-        # Nuevo ámbito dentro de la función
-        nuevo_ambito = funcion_id.valor
+def preorder_tipo(node):
+    print(node.tipo)
+    for hijo in node.hijos:
+        preorder_tipo(hijo)
 
-        # Procesar parámetros
-        parametros = next((hijo for hijo in node.hijos if hijo.tipo == "PARAMETROS"), None)
-        if parametros:
-            for param in parametros.hijos:
-                if param.tipo == "VARIABLE":
-                    var_id = next((h for h in param.hijos if h.tipo == "ID"), None)
-                    var_tipo = next((h.hijos[0].valor for h in param.hijos if h.tipo == "TIPODATO" and h.hijos), None)
-                    if var_id and var_tipo and not simbolo_existe(pila_simbolos, var_id.valor, nuevo_ambito):
-                        pila_simbolos.append(Simbolo(var_id.valor, var_tipo, "var", nuevo_ambito))
+def verificar(lexema, tabla_de_simbolos):
+    for simbolo in tabla_de_simbolos:
+        if simbolo.lexema == lexema:
+            return False
+    return True
 
-        # Procesar instrucciones dentro de la función
-        ins_nodo = next((hijo for hijo in node.hijos if hijo.tipo == "INS"), None)
-        if ins_nodo:
-            recorrer_preorden(ins_nodo, pila_simbolos, nuevo_ambito)
+def obtener_valor_hoja(node):
+    # Recorrer hasta la hoja y devolver el valor
+    if not node.hijos:
+        return node.valor
+    for hijo in node.hijos:
+        valor = obtener_valor_hoja(hijo)
+        if valor is not None:
+            return valor
+    return None
 
-# Función para procesar el nodo MAIN y agregarlo a la tabla de símbolos
-def procesar_main(node, pila_simbolos):
-    main_tipo = next((hijo.hijos[0].valor for hijo in node.hijos if hijo.tipo == "TIPOENTERO" and hijo.hijos), None)
-    if not simbolo_existe(pila_simbolos, "main", "global"):
-        pila_simbolos.append(Simbolo("main", main_tipo, "function", "global"))
+def contiene_retorno(node):
+    # Verificar si el nodo actual es RETORNAR
+    if node.tipo == "RETORNAR":
+        return True
+    # Recorrer los hijos en busca de RETORNAR
+    for hijo in node.hijos:
+        if contiene_retorno(hijo):
+            return True
+    return False
 
-    # Procesar instrucciones dentro del MAIN
-    ins_nodo = next((hijo for hijo in node.hijos if hijo.tipo == "INS"), None)
-    if ins_nodo:
-        recorrer_preorden(ins_nodo, pila_simbolos, ambito="main")
+def crear_simbolo_func(node, tabla_de_simbolos):
+    if node.tipo == "FUNC":
+        tipo = None
+        # Obtener el tipo de la función desde el nodo OPDATO
+        for hijo in node.hijos:
+            if hijo.tipo == "OPDATO":
+                tipo = obtener_valor_hoja(hijo)
+                break
 
-# Función para procesar nodos de asignación y agregar variables al ámbito correspondiente
-def procesar_asignacion(node, pila_simbolos, ambito):
-    var_id = next((hijo for hijo in node.hijos if hijo.tipo == "ID"), None)
-    var_tipo = next((hijo.hijos[0].valor for hijo in node.hijos if hijo.tipo == "TIPODATO" and hijo.hijos), None)
-    if var_id and var_tipo and not simbolo_existe(pila_simbolos, var_id.valor, ambito):
-        pila_simbolos.append(Simbolo(var_id.valor, var_tipo, "var", ambito))
+        # Obtener el lexema de la función (nombre de la función)
+        lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
 
-# Función para validar llamadas a funciones y asegurarse de que están declaradas
-def validar_llamada_funcion(node, pila_simbolos):
-    funcion_id = node.valor
-    if not simbolo_existe(pila_simbolos, funcion_id, "global"):
-        print(f"Error semántico: La función {funcion_id} no está declarada.")
+        # Si el tipo de la función es void, verificar que no haya un nodo RETORNAR en INS
+        if tipo == "void":
+            for hijo in node.hijos:
+                if hijo.tipo == "INS":
+                    if contiene_retorno(hijo):
+                        print(f"Error: La función '{lexema}' es de tipo 'void' y no debe contener un 'RETORNAR'.")
+                        return False  # Terminar si hay un error, sin agregar el símbolo
+
+        # Verificar si la función ya existe en la tabla de símbolos
+        if lexema and verificar(lexema, tabla_de_simbolos):
+            # Crear y agregar el símbolo de la función
+            simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo, categoria="function", ambito="global")
+            tabla_de_simbolos.append(simbolo)
+            print(f"Símbolo creado: {simbolo}")
+        else:
+            print(f"Ya existe la función '{lexema}' en la tabla de símbolos.")
+        return False
+
+    # Recorrer recursivamente los hijos en busca de nodos FUNC adicionales
+    for hijo in node.hijos:
+        crear_simbolo_func(hijo, tabla_de_simbolos)
+
+def procesar_main(node, tabla_de_simbolos):
+    # Buscar el nodo MAIN y crear su símbolo
+    if node.tipo == "MAIN":
+        # Crear símbolo para MAIN
+        lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
+        tipo_lexema = node.hijos[2].valor if len(node.hijos) > 2 else None
+        simbolo_main = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria="function", ambito="global")
+        tabla_de_simbolos.append(simbolo_main)
+        print(f"Símbolo creado para MAIN: {simbolo_main}")
+        # Procesar todos los nodos de INS en busca de ASIG
+        for hijo in node.hijos:
+            if hijo.tipo == "INS":
+                procesar_asignaciones(hijo, tabla_de_simbolos)
+        return  # Terminar la búsqueda después de procesar MAIN
+    # Recorrer recursivamente los hijos para encontrar MAIN
+    for hijo in node.hijos:
+        procesar_main(hijo, tabla_de_simbolos)
+
+def procesar_asignaciones(node, tabla_de_simbolos):
+    # Recorrer exhaustivamente el subárbol INS en busca de nodos ASIG
+    if node.tipo == "ASIG":
+        # Comprobar si ASIG tiene un hijo VARIABLE, indicando asignación
+        tiene_variable = any(sub_hijo.tipo == "VARIABLE" for sub_hijo in node.hijos)
+        if tiene_variable:
+            # Obtener el lexema del segundo hijo de ASIG
+            lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
+            # Obtener el tipo de lexema desde la hoja del tercer hijo
+            tipo_lexema = obtener_valor_hoja(node.hijos[2]) if len(node.hijos) > 2 else None
+            # Verificar si el símbolo ya existe en la tabla de símbolos
+            if lexema and verificar(lexema, tabla_de_simbolos):
+                # Crear símbolo para la variable y agregarlo a la tabla de símbolos
+                simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria="var", ambito="main")
+                tabla_de_simbolos.append(simbolo)
+                print(f"Símbolo creado para asignación: {simbolo}")
+            else:
+                print(f"La variable '{lexema}' ya existe en la tabla de símbolos.")
+        else:
+            # No existe VARIABLE, verificar si el primer hijo (ID) tiene un valor que coincide en la tabla
+            id_valor = node.hijos[0].valor if len(node.hijos) > 0 else None
+            if id_valor and any(simbolo.lexema == id_valor for simbolo in tabla_de_simbolos):
+                print(f"Llamada verificada: {id_valor} ya existe en la tabla de símbolos.")
+            else: print(f"{id_valor} no existe en la tabla de símbolos.")
+    # Recursivamente recorrer todos los hijos para encontrar ASIG dentro de INS
+    for hijo in node.hijos:
+        procesar_asignaciones(hijo, tabla_de_simbolos)

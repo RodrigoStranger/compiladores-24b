@@ -2,11 +2,12 @@ from sintactic import success, tree
 from functions_semantic import *
 
 if success:
-    pila_simbolos = []
-    recorrer_preorden(tree, pila_simbolos)
-    # Imprimir la tabla de símbolos generada
-    print("Tabla de Símbolos:")
-    for simbolo in pila_simbolos:
+    tabla_de_simbolos = []
+    print("Creacion de Símbolos:")
+    crear_simbolo_func(tree, tabla_de_simbolos)
+    procesar_main(tree, tabla_de_simbolos)
+    print("\nTabla de Símbolos")
+    for simbolo in tabla_de_simbolos:
         print(simbolo)
 else:
     print(" ")
