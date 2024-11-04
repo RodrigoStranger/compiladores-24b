@@ -1,0 +1,379 @@
+digraph {
+	0 [label=NETCODE fillcolor=white style=filled]
+	1 [label=FUNC fillcolor=white style=filled]
+	0 -> 1
+	4 [label=function fillcolor=white peripheries=2 style=filled]
+	1 -> 4
+	5 [label=F1 fillcolor=white peripheries=2 style=filled]
+	1 -> 5
+	6 [label="[" fillcolor=white peripheries=2 style=filled]
+	1 -> 6
+	7 [label=PARAMETROS fillcolor=white style=filled]
+	1 -> 7
+	13 [label=var fillcolor=white peripheries=2 style=filled]
+	7 -> 13
+	14 [label=a fillcolor=white peripheries=2 style=filled]
+	7 -> 14
+	15 [label=TIPODATO fillcolor=white style=filled]
+	7 -> 15
+	17 [label=interger fillcolor=white peripheries=2 style=filled]
+	15 -> 17
+	16 [label=MASPARAMETROS fillcolor=white style=filled]
+	7 -> 16
+	18 [label="," fillcolor=white peripheries=2 style=filled]
+	16 -> 18
+	19 [label=PARAMETROS fillcolor=white style=filled]
+	16 -> 19
+	20 [label=var fillcolor=white peripheries=2 style=filled]
+	19 -> 20
+	21 [label=b fillcolor=white peripheries=2 style=filled]
+	19 -> 21
+	22 [label=TIPODATO fillcolor=white style=filled]
+	19 -> 22
+	24 [label=interger fillcolor=white peripheries=2 style=filled]
+	22 -> 24
+	23 [label=MASPARAMETROS fillcolor=white style=filled]
+	19 -> 23
+	25 [label=e fillcolor=white peripheries=2 style=filled]
+	23 -> 25
+	8 [label="]" fillcolor=white peripheries=2 style=filled]
+	1 -> 8
+	9 [label=OPDATO fillcolor=white style=filled]
+	1 -> 9
+	26 [label=void fillcolor=white peripheries=2 style=filled]
+	9 -> 26
+	10 [label="{" fillcolor=white peripheries=2 style=filled]
+	1 -> 10
+	11 [label=INS fillcolor=white style=filled]
+	1 -> 11
+	27 [label=INSTRUCCION fillcolor=white style=filled]
+	11 -> 27
+	29 [label=ASIG fillcolor=white style=filled]
+	27 -> 29
+	30 [label=var fillcolor=white peripheries=2 style=filled]
+	29 -> 30
+	31 [label=x fillcolor=white peripheries=2 style=filled]
+	29 -> 31
+	32 [label=TIPODATO fillcolor=white style=filled]
+	29 -> 32
+	34 [label=interger fillcolor=white peripheries=2 style=filled]
+	32 -> 34
+	33 [label=OPC fillcolor=white style=filled]
+	29 -> 33
+	35 [label="=" fillcolor=white peripheries=2 style=filled]
+	33 -> 35
+	36 [label=EXPRESION fillcolor=white style=filled]
+	33 -> 36
+	37 [label=a fillcolor=white peripheries=2 style=filled]
+	36 -> 37
+	38 [label=OPCION fillcolor=white style=filled]
+	36 -> 38
+	40 [label=e fillcolor=white peripheries=2 style=filled]
+	38 -> 40
+	39 [label=MASEXPRESION fillcolor=white style=filled]
+	36 -> 39
+	41 [label=OPERACION fillcolor=white style=filled]
+	39 -> 41
+	43 [label="+" fillcolor=white peripheries=2 style=filled]
+	41 -> 43
+	42 [label=EXPRESION fillcolor=white style=filled]
+	39 -> 42
+	44 [label=b fillcolor=white peripheries=2 style=filled]
+	42 -> 44
+	45 [label=OPCION fillcolor=white style=filled]
+	42 -> 45
+	47 [label=e fillcolor=white peripheries=2 style=filled]
+	45 -> 47
+	46 [label=MASEXPRESION fillcolor=white style=filled]
+	42 -> 46
+	48 [label=e fillcolor=white peripheries=2 style=filled]
+	46 -> 48
+	28 [label=MASINSTRUCCION fillcolor=white style=filled]
+	11 -> 28
+	49 [label=e fillcolor=white peripheries=2 style=filled]
+	28 -> 49
+	12 [label="}" fillcolor=white peripheries=2 style=filled]
+	1 -> 12
+	2 [label=MASFUNCIONES fillcolor=white style=filled]
+	0 -> 2
+	50 [label=FUNC fillcolor=white style=filled]
+	2 -> 50
+	52 [label=function fillcolor=white peripheries=2 style=filled]
+	50 -> 52
+	53 [label=F2 fillcolor=white peripheries=2 style=filled]
+	50 -> 53
+	54 [label="[" fillcolor=white peripheries=2 style=filled]
+	50 -> 54
+	55 [label=PARAMETROS fillcolor=white style=filled]
+	50 -> 55
+	61 [label=var fillcolor=white peripheries=2 style=filled]
+	55 -> 61
+	62 [label=a fillcolor=white peripheries=2 style=filled]
+	55 -> 62
+	63 [label=TIPODATO fillcolor=white style=filled]
+	55 -> 63
+	65 [label=interger fillcolor=white peripheries=2 style=filled]
+	63 -> 65
+	64 [label=MASPARAMETROS fillcolor=white style=filled]
+	55 -> 64
+	66 [label="," fillcolor=white peripheries=2 style=filled]
+	64 -> 66
+	67 [label=PARAMETROS fillcolor=white style=filled]
+	64 -> 67
+	68 [label=var fillcolor=white peripheries=2 style=filled]
+	67 -> 68
+	69 [label=b fillcolor=white peripheries=2 style=filled]
+	67 -> 69
+	70 [label=TIPODATO fillcolor=white style=filled]
+	67 -> 70
+	72 [label=interger fillcolor=white peripheries=2 style=filled]
+	70 -> 72
+	71 [label=MASPARAMETROS fillcolor=white style=filled]
+	67 -> 71
+	73 [label=e fillcolor=white peripheries=2 style=filled]
+	71 -> 73
+	56 [label="]" fillcolor=white peripheries=2 style=filled]
+	50 -> 56
+	57 [label=OPDATO fillcolor=white style=filled]
+	50 -> 57
+	74 [label=TIPODATO fillcolor=white style=filled]
+	57 -> 74
+	75 [label=interger fillcolor=white peripheries=2 style=filled]
+	74 -> 75
+	58 [label="{" fillcolor=white peripheries=2 style=filled]
+	50 -> 58
+	59 [label=INS fillcolor=white style=filled]
+	50 -> 59
+	76 [label=INSTRUCCION fillcolor=white style=filled]
+	59 -> 76
+	78 [label=ASIG fillcolor=white style=filled]
+	76 -> 78
+	79 [label=var fillcolor=white peripheries=2 style=filled]
+	78 -> 79
+	80 [label=x fillcolor=white peripheries=2 style=filled]
+	78 -> 80
+	81 [label=TIPODATO fillcolor=white style=filled]
+	78 -> 81
+	83 [label=interger fillcolor=white peripheries=2 style=filled]
+	81 -> 83
+	82 [label=OPC fillcolor=white style=filled]
+	78 -> 82
+	84 [label="=" fillcolor=white peripheries=2 style=filled]
+	82 -> 84
+	85 [label=EXPRESION fillcolor=white style=filled]
+	82 -> 85
+	86 [label=a fillcolor=white peripheries=2 style=filled]
+	85 -> 86
+	87 [label=OPCION fillcolor=white style=filled]
+	85 -> 87
+	89 [label=e fillcolor=white peripheries=2 style=filled]
+	87 -> 89
+	88 [label=MASEXPRESION fillcolor=white style=filled]
+	85 -> 88
+	90 [label=OPERACION fillcolor=white style=filled]
+	88 -> 90
+	92 [label="*" fillcolor=white peripheries=2 style=filled]
+	90 -> 92
+	91 [label=EXPRESION fillcolor=white style=filled]
+	88 -> 91
+	93 [label=b fillcolor=white peripheries=2 style=filled]
+	91 -> 93
+	94 [label=OPCION fillcolor=white style=filled]
+	91 -> 94
+	96 [label=e fillcolor=white peripheries=2 style=filled]
+	94 -> 96
+	95 [label=MASEXPRESION fillcolor=white style=filled]
+	91 -> 95
+	97 [label=e fillcolor=white peripheries=2 style=filled]
+	95 -> 97
+	77 [label=MASINSTRUCCION fillcolor=white style=filled]
+	59 -> 77
+	98 [label=INSTRUCCION fillcolor=white style=filled]
+	77 -> 98
+	100 [label=echo fillcolor=white peripheries=2 style=filled]
+	98 -> 100
+	101 [label=EXPRESION fillcolor=white style=filled]
+	98 -> 101
+	102 [label=x fillcolor=white peripheries=2 style=filled]
+	101 -> 102
+	103 [label=OPCION fillcolor=white style=filled]
+	101 -> 103
+	105 [label=e fillcolor=white peripheries=2 style=filled]
+	103 -> 105
+	104 [label=MASEXPRESION fillcolor=white style=filled]
+	101 -> 104
+	106 [label=e fillcolor=white peripheries=2 style=filled]
+	104 -> 106
+	99 [label=MASINSTRUCCION fillcolor=white style=filled]
+	77 -> 99
+	107 [label=e fillcolor=white peripheries=2 style=filled]
+	99 -> 107
+	60 [label="}" fillcolor=white peripheries=2 style=filled]
+	50 -> 60
+	51 [label=MASFUNCIONES fillcolor=white style=filled]
+	2 -> 51
+	108 [label=e fillcolor=white peripheries=2 style=filled]
+	51 -> 108
+	3 [label=MAIN fillcolor=white style=filled]
+	0 -> 3
+	109 [label=program fillcolor=white peripheries=2 style=filled]
+	3 -> 109
+	110 [label=main fillcolor=white peripheries=2 style=filled]
+	3 -> 110
+	111 [label=interger fillcolor=white peripheries=2 style=filled]
+	3 -> 111
+	112 [label="[" fillcolor=white peripheries=2 style=filled]
+	3 -> 112
+	113 [label="]" fillcolor=white peripheries=2 style=filled]
+	3 -> 113
+	114 [label="{" fillcolor=white peripheries=2 style=filled]
+	3 -> 114
+	115 [label=INS fillcolor=white style=filled]
+	3 -> 115
+	117 [label=INSTRUCCION fillcolor=white style=filled]
+	115 -> 117
+	119 [label=ASIG fillcolor=white style=filled]
+	117 -> 119
+	120 [label=var fillcolor=white peripheries=2 style=filled]
+	119 -> 120
+	121 [label=m fillcolor=white peripheries=2 style=filled]
+	119 -> 121
+	122 [label=TIPODATO fillcolor=white style=filled]
+	119 -> 122
+	124 [label=interger fillcolor=white peripheries=2 style=filled]
+	122 -> 124
+	123 [label=OPC fillcolor=white style=filled]
+	119 -> 123
+	125 [label="=" fillcolor=white peripheries=2 style=filled]
+	123 -> 125
+	126 [label=EXPRESION fillcolor=white style=filled]
+	123 -> 126
+	127 [label=F1 fillcolor=white peripheries=2 style=filled]
+	126 -> 127
+	128 [label=OPCION fillcolor=white style=filled]
+	126 -> 128
+	130 [label="[" fillcolor=white peripheries=2 style=filled]
+	128 -> 130
+	131 [label=PAR fillcolor=white style=filled]
+	128 -> 131
+	133 [label=TF fillcolor=white style=filled]
+	131 -> 133
+	135 [label=DATO fillcolor=white style=filled]
+	133 -> 135
+	137 [label=1 fillcolor=white peripheries=2 style=filled]
+	135 -> 137
+	136 [label=MASEXPRESION fillcolor=white style=filled]
+	133 -> 136
+	138 [label=e fillcolor=white peripheries=2 style=filled]
+	136 -> 138
+	134 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	131 -> 134
+	139 [label="," fillcolor=white peripheries=2 style=filled]
+	134 -> 139
+	140 [label=TF fillcolor=white style=filled]
+	134 -> 140
+	142 [label=DATO fillcolor=white style=filled]
+	140 -> 142
+	144 [label=2 fillcolor=white peripheries=2 style=filled]
+	142 -> 144
+	143 [label=MASEXPRESION fillcolor=white style=filled]
+	140 -> 143
+	145 [label=e fillcolor=white peripheries=2 style=filled]
+	143 -> 145
+	141 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	134 -> 141
+	146 [label=e fillcolor=white peripheries=2 style=filled]
+	141 -> 146
+	132 [label="]" fillcolor=white peripheries=2 style=filled]
+	128 -> 132
+	129 [label=MASEXPRESION fillcolor=white style=filled]
+	126 -> 129
+	147 [label=OPERACION fillcolor=white style=filled]
+	129 -> 147
+	149 [label="+" fillcolor=white peripheries=2 style=filled]
+	147 -> 149
+	148 [label=EXPRESION fillcolor=white style=filled]
+	129 -> 148
+	150 [label=F2 fillcolor=white peripheries=2 style=filled]
+	148 -> 150
+	151 [label=OPCION fillcolor=white style=filled]
+	148 -> 151
+	153 [label="[" fillcolor=white peripheries=2 style=filled]
+	151 -> 153
+	154 [label=PAR fillcolor=white style=filled]
+	151 -> 154
+	156 [label=TF fillcolor=white style=filled]
+	154 -> 156
+	158 [label=DATO fillcolor=white style=filled]
+	156 -> 158
+	160 [label=3 fillcolor=white peripheries=2 style=filled]
+	158 -> 160
+	159 [label=MASEXPRESION fillcolor=white style=filled]
+	156 -> 159
+	161 [label=e fillcolor=white peripheries=2 style=filled]
+	159 -> 161
+	157 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	154 -> 157
+	162 [label="," fillcolor=white peripheries=2 style=filled]
+	157 -> 162
+	163 [label=TF fillcolor=white style=filled]
+	157 -> 163
+	165 [label=DATO fillcolor=white style=filled]
+	163 -> 165
+	167 [label=4 fillcolor=white peripheries=2 style=filled]
+	165 -> 167
+	166 [label=MASEXPRESION fillcolor=white style=filled]
+	163 -> 166
+	168 [label=e fillcolor=white peripheries=2 style=filled]
+	166 -> 168
+	164 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	157 -> 164
+	169 [label=e fillcolor=white peripheries=2 style=filled]
+	164 -> 169
+	155 [label="]" fillcolor=white peripheries=2 style=filled]
+	151 -> 155
+	152 [label=MASEXPRESION fillcolor=white style=filled]
+	148 -> 152
+	170 [label=e fillcolor=white peripheries=2 style=filled]
+	152 -> 170
+	118 [label=MASINSTRUCCION fillcolor=white style=filled]
+	115 -> 118
+	171 [label=INSTRUCCION fillcolor=white style=filled]
+	118 -> 171
+	173 [label=ASIG fillcolor=white style=filled]
+	171 -> 173
+	174 [label=var fillcolor=white peripheries=2 style=filled]
+	173 -> 174
+	175 [label=m fillcolor=white peripheries=2 style=filled]
+	173 -> 175
+	176 [label=TIPODATO fillcolor=white style=filled]
+	173 -> 176
+	178 [label=decimal fillcolor=white peripheries=2 style=filled]
+	176 -> 178
+	177 [label=OPC fillcolor=white style=filled]
+	173 -> 177
+	179 [label=e fillcolor=white peripheries=2 style=filled]
+	177 -> 179
+	172 [label=MASINSTRUCCION fillcolor=white style=filled]
+	118 -> 172
+	180 [label=INSTRUCCION fillcolor=white style=filled]
+	172 -> 180
+	182 [label=echo fillcolor=white peripheries=2 style=filled]
+	180 -> 182
+	183 [label=EXPRESION fillcolor=white style=filled]
+	180 -> 183
+	184 [label=DATO fillcolor=white style=filled]
+	183 -> 184
+	186 [label=0 fillcolor=white peripheries=2 style=filled]
+	184 -> 186
+	185 [label=MASEXPRESION fillcolor=white style=filled]
+	183 -> 185
+	187 [label=e fillcolor=white peripheries=2 style=filled]
+	185 -> 187
+	181 [label=MASINSTRUCCION fillcolor=white style=filled]
+	172 -> 181
+	188 [label=e fillcolor=white peripheries=2 style=filled]
+	181 -> 188
+	116 [label="}" fillcolor=white peripheries=2 style=filled]
+	3 -> 116
+}

@@ -50,6 +50,8 @@ def arbolSintactico(raiz, contorno_hojas=False, opcion="tipo"):
             label = f"{node.valor}"
         elif opcion == "id":
             label = f"{node.id}"
+        elif opcion == "terminal":
+            label = f"{node.terminal}"
         else:
             label = f"{node.tipo}"
         '''
