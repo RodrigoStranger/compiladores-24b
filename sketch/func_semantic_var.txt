@@ -3,8 +3,9 @@ function F1 [] interger {
     echo x
 }
 
-function F2 [var a interger, var b interger] interger {
+function F2 [var a interger, var b interger, var c interger, var d interger] interger {
     var x interger = a * b
+    echo x
 }
 
 function F3 [] void {
