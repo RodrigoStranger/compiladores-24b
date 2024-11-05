@@ -1,15 +1,18 @@
-function F1 [var a interger, var b interger] interger {
+function F1 [] interger {
     var x interger = a + b
     echo x
 }
 
 function F2 [var a interger, var b interger] interger {
     var x interger = a * b
-    echo x
+}
+
+function F3 [] void {
+    log["hola"]
 }
 
 program main interger [] {
-	var m interger
-    m  = F1[1, 2] + F2 [3, 4]
+	//var m interger = F1[1, 2] + F2 [3, 4]
+    F3[]
     echo 0
 }

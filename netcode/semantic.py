@@ -1,6 +1,16 @@
 from sintactic import success, tree
 from functions_semantic import *
 
+
+funcionactual = "F2"
+
+# Llamada a la función para contar los parámetros de la función especificada
+num_parametros = buscar_y_verificar_parametros(funcionactual, tree)
+
+# Imprimir el resultado
+print(f"Número de parámetros en la función '{funcionactual}': {num_parametros}")
+
+'''
 if success:
     tabla_de_simbolos = []
     print("Creacion de Símbolos:")
@@ -12,3 +22,4 @@ if success:
 else:
     print(" ")
     print("El análisis sintáctico ha fallado.")
+    '''
