@@ -1,3 +1,0 @@
-program main interger [] {
-	f[x,g[c,7],h[g,k,l[]]]
-}

@@ -67,7 +67,7 @@ def recorrer_funciones(node, tabla_de_simbolos, errores):
             elif hijo.tipo == "ID":
                 lexema = hijo.valor
         if lexema and not verificar(lexema, tabla_de_simbolos):
-            errores.append(Error(descripcion=f"Ya existe una función {lexema} definida."))
+            errores.append(Error(descripcion = f"Ya existe una función {lexema} definida."))
             return
         num_retorno = 0
         for hijo in node.hijos:
@@ -75,29 +75,62 @@ def recorrer_funciones(node, tabla_de_simbolos, errores):
                 num_retorno += contar_retorno(hijo)
         if tipo == "void":
             if num_retorno > 0:
-                errores.append(Error(descripcion=f"{lexema} es una función de tipo void y no debe contener echo."))
+                errores.append(Error(descripcion = f"{lexema} es una función de tipo void y no debe contener echo."))
         else:
             if num_retorno == 0:
-                errores.append(Error(descripcion=f"La función {lexema} debe retornar algo."))
+                errores.append(Error(descripcion = f"La función {lexema} debe retornar algo."))
             elif num_retorno > 1:
-                errores.append(Error(descripcion=f"La función {lexema} contiene múltiples echo, pero solo se permite uno."))
-        simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo, categoria="function", ambito="global")
+                errores.append(Error(descripcion = f"La función {lexema} contiene múltiples echo, pero solo se permite uno."))
+        simbolo = Simbolo(lexema = lexema, tipo_lexema = tipo, categoria = "function", ambito = "global")
         tabla_de_simbolos.append(simbolo)
         return
-    for hijo in node.hijos:
-        recorrer_funciones(hijo, tabla_de_simbolos, errores)
+    for hijo in node.hijos: recorrer_funciones(hijo, tabla_de_simbolos, errores)
 
-def procesar_main(node, tabla_de_simbolos):
-    # Buscar el nodo MAIN y crear su símbolo
+def recorrer_main(node, tabla_de_simbolos, errores):
     if node.tipo == "MAIN":
-        # Crear símbolo para MAIN
         lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
         tipo_lexema = node.hijos[2].valor if len(node.hijos) > 2 else None
-        simbolo_main = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria="function", ambito="global")
+        simbolo_main = Simbolo(lexema = lexema, tipo_lexema = tipo_lexema, categoria = "function", ambito = "global")
         tabla_de_simbolos.append(simbolo_main)
-    # Recorrer recursivamente los hijos para encontrar MAIN
-    for hijo in node.hijos:
-        procesar_main(hijo, tabla_de_simbolos)
+        num_retorno = 0
+        for hijo in node.hijos:
+            if hijo.tipo == "INS":
+                num_retorno += contar_retorno(hijo)
+        if num_retorno == 0:
+            errores.append(Error(descripcion = "La función main debe contener un echo."))
+        elif num_retorno > 1:
+            errores.append(Error(descripcion = "La función main contiene múltiples echo, solo se permite uno."))
+    for hijo in node.hijos: recorrer_main(hijo, tabla_de_simbolos, errores)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def procesar_asignaciones(node, tabla_de_simbolos):
     # Recorrer exhaustivamente el subárbol INS en busca de nodos ASIG
