@@ -92,7 +92,7 @@ def parser_sintactico_ll1(listtokens, table_ll1, inicial):
         top_stack = stack.pop()  # Extraemos el símbolo del tope de la pila
         # Si alcanzamos el fin de entrada tanto en la pila como en los tokens
         if top_stack.tipo == "$" and listtokens[0].type == "$":
-            print("Análisis sintáctico exitoso: Se alcanzó el símbolo de fin de entrada de la pila.\n")
+            print("Análisis sintáctico exitoso, se alcanzó el símbolo de fin de entrada de la pila.\n")
             break
         # Coincidencia directa entre el terminal en la pila y el primer token
         elif top_stack.terminal and top_stack.tipo == listtokens[0].type:

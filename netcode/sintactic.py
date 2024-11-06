@@ -10,8 +10,6 @@ table_ll1 = generate_table_ll1(pathfile2)
 simboloinicial = "NETCODE"
 success, tree = parser_sintactico_ll1(listtokens, table_ll1, simboloinicial)
 
-#recorrer_arbol_por_id(tree)
-
 '''
 if success:
     output_folder = 'tree'

@@ -2,23 +2,29 @@ class Simbolo:
     def __init__(self, lexema, tipo_lexema, categoria, ambito):
         self.lexema = lexema
         self.tipo_lexema = tipo_lexema
-        self.tipo = categoria
+        self.categoria = categoria
         self.ambito = ambito
 
-    def __repr__(self): return f"{self.lexema}, {self.tipo_lexema}, {self.tipo}, {self.ambito}"
+    def __repr__(self): return f"{self.lexema}, {self.tipo_lexema}, {self.categoria}, {self.ambito}"
 
-def preorder(node):
-    if not node.hijos:
-        if node.valor != "e":
-            print(node.valor)
+class Error:
+    def __init__(self, descripcion):
+        self.descripcion = descripcion
+    
+    def __repr__(self): return f"{self.descripcion}"
+
+def imprimir_resultado_errores(errores_semanticos):
+    if not errores_semanticos:
+        print("\nAnálisis semántico exitoso")
         return
-    for hijo in node.hijos:
-        preorder(hijo)
+    for error in errores_semanticos:
+        print("\nErrores encontrados:")
+        print(error) 
 
-def preorder_tipo(node):
-    print(node.tipo)
-    for hijo in node.hijos:
-        preorder_tipo(hijo)
+def imprimir_tabla_de_simbolos(tabla_de_simbolos):
+    print("Tabla de Símbolos:")
+    for simbolo in tabla_de_simbolos:
+        print(simbolo)
 
 def verificar(lexema, tabla_de_simbolos):
     for simbolo in tabla_de_simbolos:
@@ -27,7 +33,6 @@ def verificar(lexema, tabla_de_simbolos):
     return True
 
 def obtener_valor_hoja(node):
-    # Recorrer hasta la hoja y devolver el valor
     if not node.hijos:
         return node.valor
     for hijo in node.hijos:
@@ -37,48 +42,50 @@ def obtener_valor_hoja(node):
     return None
 
 def contiene_retorno(node):
-    # Verificar si el nodo actual es RETORNAR
     if node.tipo == "RETORNAR":
         return True
-    # Recorrer los hijos en busca de RETORNAR
     for hijo in node.hijos:
         if contiene_retorno(hijo):
             return True
     return False
 
-def crear_simbolo_func(node, tabla_de_simbolos):
+def contar_retorno(node):
+    count = 0
+    if node.tipo == "RETORNAR":
+        count += 1
+    for hijo in node.hijos:
+        count += contar_retorno(hijo)
+    return count
+
+def recorrer_funciones(node, tabla_de_simbolos, errores):
     if node.tipo == "FUNC":
         tipo = None
-        # Obtener el tipo de la función desde el nodo OPDATO
+        lexema = None
         for hijo in node.hijos:
             if hijo.tipo == "OPDATO":
                 tipo = obtener_valor_hoja(hijo)
-                break
-
-        # Obtener el lexema de la función (nombre de la función)
-        lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
-
-        # Si el tipo de la función es void, verificar que no haya un nodo RETORNAR en INS
+            elif hijo.tipo == "ID":
+                lexema = hijo.valor
+        if lexema and not verificar(lexema, tabla_de_simbolos):
+            errores.append(Error(descripcion=f"Ya existe una función {lexema} definida."))
+            return
+        num_retorno = 0
+        for hijo in node.hijos:
+            if hijo.tipo == "INS":
+                num_retorno += contar_retorno(hijo)
         if tipo == "void":
-            for hijo in node.hijos:
-                if hijo.tipo == "INS":
-                    if contiene_retorno(hijo):
-                        print(f"Error: La función '{lexema}' es de tipo 'void' y no debe contener un 'RETORNAR'.")
-                        return False  # Terminar si hay un error, sin agregar el símbolo
-
-        # Verificar si la función ya existe en la tabla de símbolos
-        if lexema and verificar(lexema, tabla_de_simbolos):
-            # Crear y agregar el símbolo de la función
-            simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo, categoria="function", ambito="global")
-            tabla_de_simbolos.append(simbolo)
-            print(f"Símbolo creado: {simbolo}")
+            if num_retorno > 0:
+                errores.append(Error(descripcion=f"{lexema} es una función de tipo void y no debe contener echo."))
         else:
-            print(f"Ya existe la función '{lexema}' en la tabla de símbolos.")
-        return False
-
-    # Recorrer recursivamente los hijos en busca de nodos FUNC adicionales
+            if num_retorno == 0:
+                errores.append(Error(descripcion=f"La función {lexema} debe retornar algo."))
+            elif num_retorno > 1:
+                errores.append(Error(descripcion=f"La función {lexema} contiene múltiples echo, pero solo se permite uno."))
+        simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo, categoria="function", ambito="global")
+        tabla_de_simbolos.append(simbolo)
+        return
     for hijo in node.hijos:
-        crear_simbolo_func(hijo, tabla_de_simbolos)
+        recorrer_funciones(hijo, tabla_de_simbolos, errores)
 
 def procesar_main(node, tabla_de_simbolos):
     # Buscar el nodo MAIN y crear su símbolo
@@ -88,12 +95,6 @@ def procesar_main(node, tabla_de_simbolos):
         tipo_lexema = node.hijos[2].valor if len(node.hijos) > 2 else None
         simbolo_main = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria="function", ambito="global")
         tabla_de_simbolos.append(simbolo_main)
-        print(f"Símbolo creado para main: {simbolo_main}")
-        # Procesar todos los nodos de INS en busca de ASIG
-        for hijo in node.hijos:
-            if hijo.tipo == "INS":
-                procesar_asignaciones(hijo, tabla_de_simbolos)
-        return  # Terminar la búsqueda después de procesar MAIN
     # Recorrer recursivamente los hijos para encontrar MAIN
     for hijo in node.hijos:
         procesar_main(hijo, tabla_de_simbolos)

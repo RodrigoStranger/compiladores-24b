@@ -1,10 +1,7 @@
 import os
 import ply.lex as lex
 
-from functions_lexic import generate_data
-from functions_lexic import print_tokens
-from functions_lexic import write_tokens_in_txt
-from functions_lexic import Token
+from functions_lexic import *
 
 directory = os.path.dirname(__file__)
 sketchfile = 'func_semantic_var.txt'
@@ -100,19 +97,20 @@ lexer = lex.lex()
 lexer.input(generate_data(pathfile))
 listtokens = []
 
+print("Nombre del código puesto a revisión: ", sketchfile)
+print(" ")
+
 def generate_tokens(list_tokens):
     while True:
         tok = lexer.token()
         if not tok: break
         token_obj = Token(tok.type, tok.value, tok.lineno, tok.lexpos)
         list_tokens.append(token_obj)
-    print("Tokens generados correctamente.\n")
+    #print("Tokens generados correctamente.\n")
+    print("Análisis léxico exitoso, tokens generados correctamente.\n")
 
 generate_tokens(listtokens)
 listtokens.append(Token("$", "$", None, None))
-
-print("Nombre del codigo: ", sketchfile)
-print(" ")
 
 #print_tokens(listtokens)
 #cambiar nombre cuando se quiere sacar tokens de cada codigo
