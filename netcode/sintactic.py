@@ -10,12 +10,14 @@ table_ll1 = generate_table_ll1(pathfile2)
 simboloinicial = "NETCODE"
 success, tree = parser_sintactico_ll1(listtokens, table_ll1, simboloinicial)
 
+'''
 if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
-    graph = arbolSintactico(tree, True, "id") 
+    graph = arbolSintactico(tree, True, "tipo") 
     output_pdf_path = os.path.join(output_folder, 'tree_hola_mundo9') 
     graph.render(output_pdf_path, format='png')
 else:
     print(" ")
     print("El análisis sintáctico ha fallado.")
+'''

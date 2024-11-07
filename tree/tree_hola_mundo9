@@ -41,103 +41,65 @@ digraph {
 	2 -> 10
 	10 [label=10 fillcolor=white style=filled]
 	10 -> 27
-	27 [label=27 fillcolor=white style=filled]
-	27 -> 28
-	28 [label=28 fillcolor=lightgrey peripheries=2 style=filled]
+	27 [label=27 fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 11
 	11 [label=11 fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 12
 	12 [label=12 fillcolor=white style=filled]
-	12 -> 29
-	29 [label=29 fillcolor=white style=filled]
-	29 -> 31
-	31 [label=31 fillcolor=lightgrey peripheries=2 style=filled]
-	29 -> 32
-	32 [label=32 fillcolor=white style=filled]
-	32 -> 33
-	33 [label=33 fillcolor=lightgrey peripheries=2 style=filled]
-	32 -> 34
-	34 [label=34 fillcolor=white style=filled]
-	34 -> 36
-	36 [label=36 fillcolor=lightgrey peripheries=2 style=filled]
-	32 -> 35
-	35 [label=35 fillcolor=white style=filled]
-	35 -> 37
-	37 [label=37 fillcolor=white style=filled]
-	37 -> 39
-	39 [label=39 fillcolor=lightgrey peripheries=2 style=filled]
-	35 -> 38
-	38 [label=38 fillcolor=white style=filled]
-	38 -> 40
-	40 [label=40 fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 41
-	41 [label=41 fillcolor=white style=filled]
-	41 -> 43
-	43 [label=43 fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 42
-	42 [label=42 fillcolor=white style=filled]
-	42 -> 44
-	44 [label=44 fillcolor=lightgrey peripheries=2 style=filled]
-	12 -> 30
-	30 [label=30 fillcolor=white style=filled]
-	30 -> 45
-	45 [label=45 fillcolor=lightgrey peripheries=2 style=filled]
+	12 -> 28
+	28 [label=28 fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 13
 	13 [label=13 fillcolor=lightgrey peripheries=2 style=filled]
 	1 -> 3
 	3 [label=3 fillcolor=white style=filled]
-	3 -> 46
-	46 [label=46 fillcolor=lightgrey peripheries=2 style=filled]
+	3 -> 29
+	29 [label=29 fillcolor=lightgrey peripheries=2 style=filled]
 	1 -> 4
 	4 [label=4 fillcolor=white style=filled]
-	4 -> 47
-	47 [label=47 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 48
-	48 [label=48 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 49
+	4 -> 30
+	30 [label=30 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 31
+	31 [label=31 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 32
+	32 [label=32 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 33
+	33 [label=33 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 34
+	34 [label=34 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 35
+	35 [label=35 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 36
+	36 [label=36 fillcolor=white style=filled]
+	36 -> 38
+	38 [label=38 fillcolor=white style=filled]
+	38 -> 40
+	40 [label=40 fillcolor=white style=filled]
+	40 -> 41
+	41 [label=41 fillcolor=lightgrey peripheries=2 style=filled]
+	40 -> 42
+	42 [label=42 fillcolor=lightgrey peripheries=2 style=filled]
+	40 -> 43
+	43 [label=43 fillcolor=white style=filled]
+	43 -> 45
+	45 [label=45 fillcolor=white style=filled]
+	45 -> 47
+	47 [label=47 fillcolor=white style=filled]
+	47 -> 49
 	49 [label=49 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 50
+	45 -> 48
+	48 [label=48 fillcolor=white style=filled]
+	48 -> 50
 	50 [label=50 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 51
+	43 -> 46
+	46 [label=46 fillcolor=white style=filled]
+	46 -> 51
 	51 [label=51 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 52
+	40 -> 44
+	44 [label=44 fillcolor=lightgrey peripheries=2 style=filled]
+	36 -> 39
+	39 [label=39 fillcolor=white style=filled]
+	39 -> 52
 	52 [label=52 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 53
-	53 [label=53 fillcolor=white style=filled]
-	53 -> 55
-	55 [label=55 fillcolor=white style=filled]
-	55 -> 57
-	57 [label=57 fillcolor=white style=filled]
-	57 -> 58
-	58 [label=58 fillcolor=lightgrey peripheries=2 style=filled]
-	57 -> 59
-	59 [label=59 fillcolor=white style=filled]
-	59 -> 60
-	60 [label=60 fillcolor=lightgrey peripheries=2 style=filled]
-	59 -> 61
-	61 [label=61 fillcolor=white style=filled]
-	61 -> 63
-	63 [label=63 fillcolor=white style=filled]
-	63 -> 65
-	65 [label=65 fillcolor=lightgrey peripheries=2 style=filled]
-	63 -> 66
-	66 [label=66 fillcolor=white style=filled]
-	66 -> 68
-	68 [label=68 fillcolor=lightgrey peripheries=2 style=filled]
-	63 -> 67
-	67 [label=67 fillcolor=white style=filled]
-	67 -> 69
-	69 [label=69 fillcolor=lightgrey peripheries=2 style=filled]
-	61 -> 64
-	64 [label=64 fillcolor=white style=filled]
-	64 -> 70
-	70 [label=70 fillcolor=lightgrey peripheries=2 style=filled]
-	59 -> 62
-	62 [label=62 fillcolor=lightgrey peripheries=2 style=filled]
-	53 -> 56
-	56 [label=56 fillcolor=white style=filled]
-	56 -> 71
-	71 [label=71 fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 54
-	54 [label=54 fillcolor=lightgrey peripheries=2 style=filled]
+	4 -> 37
+	37 [label=37 fillcolor=lightgrey peripheries=2 style=filled]
 }

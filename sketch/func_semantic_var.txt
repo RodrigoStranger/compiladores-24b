@@ -1,6 +1,5 @@
-function sumar[var x interger, var y interger] interger {
-    echo x + y
+function F1[var x interger, var y interger] void {
 }
 program main interger [] {
-	F1[a]
+	log["hola"]
 }
