@@ -10,7 +10,7 @@ table_ll1 = generate_table_ll1(pathfile2)
 simboloinicial = "NETCODE"
 success, tree = parser_sintactico_ll1(listtokens, table_ll1, simboloinicial)
 
-'''
+
 if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
@@ -20,4 +20,3 @@ if success:
 else:
     print(" ")
     print("El análisis sintáctico ha fallado.")
-'''

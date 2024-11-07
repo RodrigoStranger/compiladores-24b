@@ -15,9 +15,16 @@ class Node:
         self.columna = columna
         self.terminal = terminal
         self.hijos = []
+        self.padre = None 
     def añadir_hijo(self, hijo):
-        self.hijos.append(hijo)
-
+        hijo.padre = self  
+        self.hijos.append(hijo)  
+    def retornar_al_padre_netcode(self):
+        nodo_actual = self
+        while nodo_actual is not None and nodo_actual.tipo != "NETCODE":
+            nodo_actual = nodo_actual.padre
+        return nodo_actual
+    
 def buscar(node, id):
     if node.id == id:
         return node
@@ -113,5 +120,5 @@ def parser_sintactico_ll1(listatokens, parsing_table, inicial):
             return False, None
     success = index == len(listatokens)
     if success:
-        print("\nAnálisis sintáctico exitoso.")
+        print("Análisis sintáctico exitoso: Se alcanzó el final de la pila.\n")
     return success, arbol if success else None

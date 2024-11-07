@@ -1,5 +1,11 @@
-function F1[var x interger, var y interger] void {
+function F[var x interger, var y interger] void {
+    var k interger
+}
+
+function F2[var x interger, var d interger] void {
+    
 }
 program main interger [] {
-	log["hola"]
+	var v interger
+	F2[v, v]
 }
