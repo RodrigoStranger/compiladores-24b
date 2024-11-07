@@ -1,14 +1,6 @@
-function F1 [] interger {
-    var x interger = a + b
-    echo x
+function sumar[var x interger, var y interger] interger {
+    echo x + y
 }
-
-function F2 [var a interger, var b interger] interger {
-    var x interger = a * b
-    echo x
-}
-
 program main interger [] {
-	var m interger = F1[1, 2] + F2 [3, 4]
-    echo 0
+	F1[a]
 }

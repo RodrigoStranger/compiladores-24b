@@ -1,7 +1,0 @@
-E -> if B then { E } E'
-E -> B
-E -> ''
-E' -> else { E }
-E' -> ''
-B -> true
-B -> false

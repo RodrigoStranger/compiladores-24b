@@ -4,21 +4,19 @@ class Simbolo:
         self.tipo_lexema = tipo_lexema
         self.categoria = categoria
         self.ambito = ambito
-
     def __repr__(self): return f"{self.lexema}, {self.tipo_lexema}, {self.categoria}, {self.ambito}"
 
 class Error:
     def __init__(self, descripcion):
         self.descripcion = descripcion
-    
     def __repr__(self): return f"{self.descripcion}"
 
 def imprimir_resultado_errores(errores_semanticos):
     if not errores_semanticos:
         print("\nAnálisis semántico exitoso")
         return
+    print("\nErrores encontrados:")
     for error in errores_semanticos:
-        print("\nErrores encontrados:")
         print(error) 
 
 def imprimir_tabla_de_simbolos(tabla_de_simbolos):
@@ -49,12 +47,12 @@ def contiene_retorno(node):
             return True
     return False
 
-def contar_retorno(node):
+def contar(node, valor):
     count = 0
-    if node.tipo == "RETORNAR":
+    if node.tipo == valor:
         count += 1
     for hijo in node.hijos:
-        count += contar_retorno(hijo)
+        count += contar(hijo, valor)
     return count
 
 def recorrer_funciones(node, tabla_de_simbolos, errores):
@@ -72,15 +70,13 @@ def recorrer_funciones(node, tabla_de_simbolos, errores):
         num_retorno = 0
         for hijo in node.hijos:
             if hijo.tipo == "INS":
-                num_retorno += contar_retorno(hijo)
+                num_retorno += contar(hijo, "RETORNAR")
         if tipo == "void":
             if num_retorno > 0:
                 errores.append(Error(descripcion = f"{lexema} es una función de tipo void y no debe contener echo."))
         else:
             if num_retorno == 0:
                 errores.append(Error(descripcion = f"La función {lexema} debe retornar algo."))
-            elif num_retorno > 1:
-                errores.append(Error(descripcion = f"La función {lexema} contiene múltiples echo, pero solo se permite uno."))
         simbolo = Simbolo(lexema = lexema, tipo_lexema = tipo, categoria = "function", ambito = "global")
         tabla_de_simbolos.append(simbolo)
         return
@@ -92,73 +88,88 @@ def recorrer_main(node, tabla_de_simbolos, errores):
         tipo_lexema = node.hijos[2].valor if len(node.hijos) > 2 else None
         simbolo_main = Simbolo(lexema = lexema, tipo_lexema = tipo_lexema, categoria = "function", ambito = "global")
         tabla_de_simbolos.append(simbolo_main)
-        num_retorno = 0
-        for hijo in node.hijos:
-            if hijo.tipo == "INS":
-                num_retorno += contar_retorno(hijo)
-        if num_retorno == 0:
-            errores.append(Error(descripcion = "La función main debe contener un echo."))
-        elif num_retorno > 1:
-            errores.append(Error(descripcion = "La función main contiene múltiples echo, solo se permite uno."))
+        evaluar_asignaciones(node, tabla_de_simbolos, errores)
     for hijo in node.hijos: recorrer_main(hijo, tabla_de_simbolos, errores)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def procesar_asignaciones(node, tabla_de_simbolos):
-    # Recorrer exhaustivamente el subárbol INS en busca de nodos ASIG
+def evaluar_asignaciones(node, tabla_de_simbolos, errores):
     if node.tipo == "ASIG":
-        # Comprobar si ASIG tiene un hijo VARIABLE, indicando asignación
-        tiene_variable = any(sub_hijo.tipo == "VARIABLE" for sub_hijo in node.hijos)
-        if tiene_variable:
-            # Obtener el lexema del segundo hijo de ASIG
-            lexema = node.hijos[1].valor if len(node.hijos) > 1 else None
-            # Obtener el tipo de lexema desde la hoja del tercer hijo
-            tipo_lexema = obtener_valor_hoja(node.hijos[2]) if len(node.hijos) > 2 else None
-            # Verificar si el símbolo ya existe en la tabla de símbolos
-            if lexema and verificar(lexema, tabla_de_simbolos):
-                # Crear símbolo para la variable y agregarlo a la tabla de símbolos
-                simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria="var", ambito="main")
-                tabla_de_simbolos.append(simbolo)
-                print(f"Símbolo creado para asignación: {simbolo}")
-            else:
-                print(f"La variable '{lexema}' ya existe en la tabla de símbolos.")
-        else:
-            # No existe VARIABLE, verificar si el primer hijo (ID) tiene un valor que coincide en la tabla
-            id_valor = node.hijos[0].valor if len(node.hijos) > 0 else None
-            if id_valor and any(simbolo.lexema == id_valor for simbolo in tabla_de_simbolos):
-                print(f"Llamada verificada: {id_valor} ya existe en la tabla de símbolos.")
-            else: print(f"{id_valor} no existe en la tabla de símbolos.")
-    # Recursivamente recorrer todos los hijos para encontrar ASIG dentro de INS
-    for hijo in node.hijos:
-        procesar_asignaciones(hijo, tabla_de_simbolos)
+        # Verificar la estructura VARIABLE ID TIPODATO OPC
+        if len(node.hijos) == 4:
+            variable = node.hijos[0]
+            id_node = node.hijos[1]
+            tipo_dato = node.hijos[2]
+            opc_node = node.hijos[3]
+            if (variable.tipo == "VARIABLE" and id_node.tipo == "ID" and tipo_dato.tipo == "TIPODATO" and opc_node.tipo == "OPC"):
+                if len(opc_node.hijos) == 1 and opc_node.hijos[0].valor == "e":
+                    lexema = id_node.valor
+                    tipo_lexema = obtener_valor_hoja(tipo_dato)
+                    categoria = variable.valor
+                    if lexema and not verificar(lexema, tabla_de_simbolos):
+                        errores.append(Error(descripcion=f"Ya existe una variable {lexema} definida."))
+                        return
+                    simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria=categoria, ambito="main")
+                    tabla_de_simbolos.append(simbolo)
+        # Verificar la estructura ID CORCHETEABI PAR CORCHETECERR
+        if len(node.hijos) == 2:
+            id_node = node.hijos[0]
+            og_node = node.hijos[1]
+            funcion_actual = id_node.valor
+            if id_node.tipo == "ID" and og_node.tipo == "OG":
+                if (len(og_node.hijos) == 3 and og_node.hijos[0].tipo == "CORCHETEABI" and og_node.hijos[1].tipo == "PAR" and og_node.hijos[2].tipo == "CORCHETECERR"):
+                    if funcion_actual and not verificar(funcion_actual, tabla_de_simbolos):
+                        print("Función vacía encontrada") 
+                        #verificar dentro de PAR (ID) esten declarados previamente osea que esten en la tabla de simbolos,
+                        par_node = og_node.hijos[1]
+                        verificar_ids_en_par(par_node, tabla_de_simbolos, errores)
+                        #obtener la cantidad de parametros 
+                        cantidad_parametros = contar_hojas_par(par_node)
+                        print(f"Número de parámetros encontrados: {cantidad_parametros}")
+
+                        
+    for hijo in node.hijos: evaluar_asignaciones(hijo, tabla_de_simbolos, errores)
+
+def verificar_ids_en_par(par_node, tabla_de_simbolos, errores):
+    for hijo in par_node.hijos:
+        if hijo.tipo == "ID":
+            id_lexema = hijo.valor
+            if verificar(id_lexema, tabla_de_simbolos):
+                errores.append(Error(descripcion=f"{id_lexema} no está previamente declarado"))
+        else: verificar_ids_en_par(hijo, tabla_de_simbolos, errores)
+
+
+def contar_hojas_par(node):
+    cantidad = 0
+    if not node.hijos:  # Si el nodo es una hoja
+        if node.tipo in ["ID", "DATO"]:
+            cantidad += 1
+    elif node.tipo == "DATO" and len(node.hijos) == 1:
+        # Si el nodo es DATO y tiene una hoja, contar esa hoja
+        cantidad += 1
+    else:
+        # Recursivamente contar las hojas en los hijos
+        for hijo in node.hijos:
+            cantidad += contar_hojas_par(hijo)
+    return cantidad
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Función para buscar la definición de una función en el árbol, contar sus parámetros y procesar su cuerpo en INS
 def buscar_y_verificar_parametros(funcionactual, node, tabla_de_simbolos):

@@ -114,5 +114,5 @@ listtokens.append(Token("$", "$", None, None))
 
 #print_tokens(listtokens)
 #cambiar nombre cuando se quiere sacar tokens de cada codigo
-#namelisttokens = 'hola_mundo_tokens.txt'
+#namelisttokens = 'prueba.txt'
 #write_tokens_in_txt(listtokens, namelisttokens)
