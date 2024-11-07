@@ -80,7 +80,6 @@ def parser_sintactico_ll1(listatokens, parsing_table, inicial):
             top.columna = current_token.column
             index += 1
         elif top.terminal:
-            print(f"\nError: Se esperaba '{top.tipo}' pero se encontró '{listatokens[index].type if index < len(listatokens) else 'fin de entrada'}'")
             return False, None
         elif top.tipo in parsing_table.index:
             if index < len(listatokens):
