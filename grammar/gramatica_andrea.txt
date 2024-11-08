@@ -1,0 +1,57 @@
+INSTRUCCIONES ::= INSTRUCCION INSTRUCCIONES
+INSTRUCCIONES ::= ''
+INSTRUCCION ::= ASIGNACION 
+INSTRUCCION ::= WHILE 
+INSTRUCCION ::= FOR 
+INSTRUCCION ::= DEF 
+INSTRUCCION ::= IF 
+INSTRUCCION ::= PRINT 
+INSTRUCCION ::= RETURN 
+RETURN ::= retorna EXP
+
+EXP ::= parin EXP parfin OPE_EXP
+EXP ::= DATO OPE_EXP
+OPE_EXP ::= OPE EXP
+OPE_EXP ::= ''
+DATO ::= variable P
+DATO ::= numentero
+DATO ::= numdecimal
+DATO ::= booleano
+DATO ::= cadena
+
+P ::= parin EXP parfin
+P ::= ''
+OPE ::= op_mas
+OPE ::= op_menos
+OPE ::= op_multi
+OPE ::= op_div
+OPE ::= op_igual
+OPE ::= o  
+OPE ::= y  
+OPE ::= en
+OPE ::= sigmenor
+OPE ::= sigmayor
+OPE ::= sigmenorigual
+OPE ::= sigmayorigual
+OPE ::= sigdobleigual
+
+WHILE ::= mientras parin EXP parfin llain INSTRUCCIONES llafin
+
+FOR ::= para variable en DATO llain INSTRUCCIONES llafin 
+
+DEF ::= funcion variable parin PARAMETRO parfin llain INSTRUCCIONES llafin
+
+PARAMETRO ::= variable RESTANTE_PARA
+PARAMETRO ::= ''
+RESTANTE_PARA ::= coma variable RESTANTE_PARA
+RESTANTE_PARA ::= ''
+
+ASIGNACION ::= variable op_igual EXP
+PRINT ::= imprimir parin EXP parfin
+
+IF ::= si parin EXP parfin llain INSTRUCCIONES llafin IF_RESTANTE 
+IF_RESTANTE ::= ELIF
+IF_RESTANTE ::= ELSE
+IF_RESTANTE ::= ''
+ELIF ::= si_no parin EXP parfin llain INSTRUCCIONES llafin
+ELSE ::= sino llain INSTRUCCIONES llafin
