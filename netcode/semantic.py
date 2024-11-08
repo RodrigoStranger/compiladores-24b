@@ -3,6 +3,7 @@ from functions_semantic import *
 
 tabla_de_simbolos = []
 errores_semanticos = []
+
 if success:
     recorrer_funciones(tree, tabla_de_simbolos, errores_semanticos)
     recorrer_main(tree, tabla_de_simbolos, errores_semanticos)
