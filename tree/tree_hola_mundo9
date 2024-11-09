@@ -1,213 +1,89 @@
 digraph {
 	1 [label=NETCODE fillcolor=white style=filled]
 	1 -> 2
-	2 [label=FUNC fillcolor=white style=filled]
+	2 [label=MAIN fillcolor=white style=filled]
+	2 -> 3
+	3 [label=PROGRAMA fillcolor=lightgrey peripheries=2 style=filled]
+	2 -> 4
+	4 [label=PRINCIPAL fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 5
-	5 [label=FUNCION fillcolor=lightgrey peripheries=2 style=filled]
+	5 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 6
-	6 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	6 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 7
-	7 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
+	7 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 8
-	8 [label=PARAMETROS fillcolor=white style=filled]
-	8 -> 14
+	8 [label=LLAVEABI fillcolor=lightgrey peripheries=2 style=filled]
+	2 -> 9
+	9 [label=INS fillcolor=white style=filled]
+	9 -> 11
+	11 [label=INSTRUCCION fillcolor=white style=filled]
+	11 -> 13
+	13 [label=ASIG fillcolor=white style=filled]
+	13 -> 14
 	14 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
-	8 -> 15
+	13 -> 15
 	15 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	8 -> 16
+	13 -> 16
 	16 [label=TIPODATO fillcolor=white style=filled]
 	16 -> 18
 	18 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	8 -> 17
-	17 [label=MASPARAMETROS fillcolor=white style=filled]
+	13 -> 17
+	17 [label=OPC fillcolor=white style=filled]
 	17 -> 19
-	19 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
-	17 -> 20
-	20 [label=PARAMETROS fillcolor=white style=filled]
-	20 -> 21
-	21 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
+	19 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	9 -> 12
+	12 [label=MASINSTRUCCION fillcolor=white style=filled]
+	12 -> 20
+	20 [label=INSTRUCCION fillcolor=white style=filled]
 	20 -> 22
-	22 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	20 -> 23
-	23 [label=TIPODATO fillcolor=white style=filled]
-	23 -> 25
-	25 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	20 -> 24
-	24 [label=MASPARAMETROS fillcolor=white style=filled]
+	22 [label=ASIG fillcolor=white style=filled]
+	22 -> 23
+	23 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	22 -> 24
+	24 [label=OG fillcolor=white style=filled]
+	24 -> 25
+	25 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
 	24 -> 26
-	26 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	2 -> 9
-	9 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
-	2 -> 10
-	10 [label=OPDATO fillcolor=white style=filled]
-	10 -> 27
-	27 [label=TIPOVACIO fillcolor=lightgrey peripheries=2 style=filled]
-	2 -> 11
-	11 [label=LLAVEABI fillcolor=lightgrey peripheries=2 style=filled]
-	2 -> 12
-	12 [label=INS fillcolor=white style=filled]
-	12 -> 28
-	28 [label=INSTRUCCION fillcolor=white style=filled]
+	26 [label=PAR fillcolor=white style=filled]
+	26 -> 28
+	28 [label=TF fillcolor=white style=filled]
 	28 -> 30
-	30 [label=ASIG fillcolor=white style=filled]
-	30 -> 31
-	31 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
-	30 -> 32
-	32 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	30 -> 33
-	33 [label=TIPODATO fillcolor=white style=filled]
-	33 -> 35
-	35 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	30 -> 34
-	34 [label=OPC fillcolor=white style=filled]
-	34 -> 36
-	36 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	12 -> 29
-	29 [label=MASINSTRUCCION fillcolor=white style=filled]
+	30 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	28 -> 31
+	31 [label=OPCION fillcolor=white style=filled]
+	31 -> 33
+	33 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	28 -> 32
+	32 [label=MASEXPRESION fillcolor=white style=filled]
+	32 -> 34
+	34 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	26 -> 29
+	29 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	29 -> 35
+	35 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
+	29 -> 36
+	36 [label=TF fillcolor=white style=filled]
+	36 -> 38
+	38 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	36 -> 39
+	39 [label=OPCION fillcolor=white style=filled]
+	39 -> 41
+	41 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	36 -> 40
+	40 [label=MASEXPRESION fillcolor=white style=filled]
+	40 -> 42
+	42 [label=e fillcolor=lightgrey peripheries=2 style=filled]
 	29 -> 37
-	37 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	2 -> 13
-	13 [label=LLAVECERR fillcolor=lightgrey peripheries=2 style=filled]
-	1 -> 3
-	3 [label=MASFUNCIONES fillcolor=white style=filled]
-	3 -> 38
-	38 [label=FUNC fillcolor=white style=filled]
-	38 -> 40
-	40 [label=FUNCION fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 41
-	41 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 42
-	42 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 43
-	43 [label=PARAMETROS fillcolor=white style=filled]
-	43 -> 49
-	49 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
-	43 -> 50
-	50 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	43 -> 51
-	51 [label=TIPODATO fillcolor=white style=filled]
-	51 -> 53
-	53 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	43 -> 52
-	52 [label=MASPARAMETROS fillcolor=white style=filled]
-	52 -> 54
-	54 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
-	52 -> 55
-	55 [label=PARAMETROS fillcolor=white style=filled]
-	55 -> 56
-	56 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
-	55 -> 57
-	57 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	55 -> 58
-	58 [label=TIPODATO fillcolor=white style=filled]
-	58 -> 60
-	60 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	55 -> 59
-	59 [label=MASPARAMETROS fillcolor=white style=filled]
-	59 -> 61
-	61 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 44
-	44 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 45
-	45 [label=OPDATO fillcolor=white style=filled]
-	45 -> 62
-	62 [label=TIPOVACIO fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 46
-	46 [label=LLAVEABI fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 47
-	47 [label=INS fillcolor=white style=filled]
-	47 -> 63
-	63 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	38 -> 48
-	48 [label=LLAVECERR fillcolor=lightgrey peripheries=2 style=filled]
-	3 -> 39
-	39 [label=MASFUNCIONES fillcolor=white style=filled]
-	39 -> 64
-	64 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	1 -> 4
-	4 [label=MAIN fillcolor=white style=filled]
-	4 -> 65
-	65 [label=PROGRAMA fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 66
-	66 [label=PRINCIPAL fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 67
-	67 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 68
-	68 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 69
-	69 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 70
-	70 [label=LLAVEABI fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 71
-	71 [label=INS fillcolor=white style=filled]
-	71 -> 73
-	73 [label=INSTRUCCION fillcolor=white style=filled]
-	73 -> 75
-	75 [label=ASIG fillcolor=white style=filled]
-	75 -> 76
-	76 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
-	75 -> 77
-	77 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	75 -> 78
-	78 [label=TIPODATO fillcolor=white style=filled]
-	78 -> 80
-	80 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	75 -> 79
-	79 [label=OPC fillcolor=white style=filled]
-	79 -> 81
-	81 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	71 -> 74
-	74 [label=MASINSTRUCCION fillcolor=white style=filled]
-	74 -> 82
-	82 [label=INSTRUCCION fillcolor=white style=filled]
-	82 -> 84
-	84 [label=ASIG fillcolor=white style=filled]
-	84 -> 85
-	85 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	84 -> 86
-	86 [label=OG fillcolor=white style=filled]
-	86 -> 87
-	87 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
-	86 -> 88
-	88 [label=PAR fillcolor=white style=filled]
-	88 -> 90
-	90 [label=TF fillcolor=white style=filled]
-	90 -> 92
-	92 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	90 -> 93
-	93 [label=OPCION fillcolor=white style=filled]
-	93 -> 95
-	95 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	90 -> 94
-	94 [label=MASEXPRESION fillcolor=white style=filled]
-	94 -> 96
-	96 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	88 -> 91
-	91 [label=RESTO_PARAMETROS fillcolor=white style=filled]
-	91 -> 97
-	97 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
-	91 -> 98
-	98 [label=TF fillcolor=white style=filled]
-	98 -> 100
-	100 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	98 -> 101
-	101 [label=OPCION fillcolor=white style=filled]
-	101 -> 103
-	103 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	98 -> 102
-	102 [label=MASEXPRESION fillcolor=white style=filled]
-	102 -> 104
-	104 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	91 -> 99
-	99 [label=RESTO_PARAMETROS fillcolor=white style=filled]
-	99 -> 105
-	105 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	86 -> 89
-	89 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
-	74 -> 83
-	83 [label=MASINSTRUCCION fillcolor=white style=filled]
-	83 -> 106
-	106 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	4 -> 72
-	72 [label=LLAVECERR fillcolor=lightgrey peripheries=2 style=filled]
+	37 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	37 -> 43
+	43 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	24 -> 27
+	27 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
+	12 -> 21
+	21 [label=MASINSTRUCCION fillcolor=white style=filled]
+	21 -> 44
+	44 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	2 -> 10
+	10 [label=LLAVECERR fillcolor=lightgrey peripheries=2 style=filled]
 }
