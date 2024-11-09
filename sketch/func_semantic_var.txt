@@ -1,4 +1,14 @@
+function F3 [var j interger, var k interger] interger {
+	echo j
+}
+
+function F2 [var n interger, var c interger] interger {
+	F3[n,c]
+	echo c
+}
 
 program main interger [] {
-	g = 2 + F2[1,2]
+	var n interger
+	n = cosas + cosas
+	
 }
