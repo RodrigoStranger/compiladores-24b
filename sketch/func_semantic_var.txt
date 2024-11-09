@@ -1,5 +1,4 @@
 
 program main interger [] {
-	var v interger
-	F2[v, v]
+	g = 2 + F2[1,2]
 }

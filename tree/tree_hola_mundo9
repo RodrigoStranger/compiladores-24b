@@ -21,69 +21,71 @@ digraph {
 	11 -> 13
 	13 [label=ASIG fillcolor=white style=filled]
 	13 -> 14
-	14 [label=VARIABLE fillcolor=lightgrey peripheries=2 style=filled]
+	14 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
 	13 -> 15
-	15 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	13 -> 16
-	16 [label=TIPODATO fillcolor=white style=filled]
-	16 -> 18
-	18 [label=TIPOENTERO fillcolor=lightgrey peripheries=2 style=filled]
-	13 -> 17
-	17 [label=OPC fillcolor=white style=filled]
+	15 [label=OG fillcolor=white style=filled]
+	15 -> 16
+	16 [label=IGUAL fillcolor=lightgrey peripheries=2 style=filled]
+	15 -> 17
+	17 [label=EXPRESION fillcolor=white style=filled]
+	17 -> 18
+	18 [label=DATO fillcolor=white style=filled]
+	18 -> 20
+	20 [label=NENTERO fillcolor=lightgrey peripheries=2 style=filled]
 	17 -> 19
-	19 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	9 -> 12
-	12 [label=MASINSTRUCCION fillcolor=white style=filled]
-	12 -> 20
-	20 [label=INSTRUCCION fillcolor=white style=filled]
-	20 -> 22
-	22 [label=ASIG fillcolor=white style=filled]
-	22 -> 23
-	23 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	19 [label=MASEXPRESION fillcolor=white style=filled]
+	19 -> 21
+	21 [label=OPERACION fillcolor=white style=filled]
+	21 -> 23
+	23 [label=SUMA fillcolor=lightgrey peripheries=2 style=filled]
+	19 -> 22
+	22 [label=EXPRESION fillcolor=white style=filled]
 	22 -> 24
-	24 [label=OG fillcolor=white style=filled]
-	24 -> 25
-	25 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
-	24 -> 26
-	26 [label=PAR fillcolor=white style=filled]
-	26 -> 28
-	28 [label=TF fillcolor=white style=filled]
+	24 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
+	22 -> 25
+	25 [label=OPCION fillcolor=white style=filled]
+	25 -> 27
+	27 [label=CORCHETEABI fillcolor=lightgrey peripheries=2 style=filled]
+	25 -> 28
+	28 [label=PAR fillcolor=white style=filled]
 	28 -> 30
-	30 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	28 -> 31
-	31 [label=OPCION fillcolor=white style=filled]
-	31 -> 33
-	33 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	28 -> 32
-	32 [label=MASEXPRESION fillcolor=white style=filled]
+	30 [label=TF fillcolor=white style=filled]
+	30 -> 32
+	32 [label=DATO fillcolor=white style=filled]
 	32 -> 34
-	34 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	26 -> 29
-	29 [label=RESTO_PARAMETROS fillcolor=white style=filled]
-	29 -> 35
-	35 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
-	29 -> 36
-	36 [label=TF fillcolor=white style=filled]
-	36 -> 38
-	38 [label=ID fillcolor=lightgrey peripheries=2 style=filled]
-	36 -> 39
-	39 [label=OPCION fillcolor=white style=filled]
+	34 [label=NENTERO fillcolor=lightgrey peripheries=2 style=filled]
+	30 -> 33
+	33 [label=MASEXPRESION fillcolor=white style=filled]
+	33 -> 35
+	35 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	28 -> 31
+	31 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	31 -> 36
+	36 [label=COMA fillcolor=lightgrey peripheries=2 style=filled]
+	31 -> 37
+	37 [label=TF fillcolor=white style=filled]
+	37 -> 39
+	39 [label=DATO fillcolor=white style=filled]
 	39 -> 41
-	41 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	36 -> 40
+	41 [label=NENTERO fillcolor=lightgrey peripheries=2 style=filled]
+	37 -> 40
 	40 [label=MASEXPRESION fillcolor=white style=filled]
 	40 -> 42
 	42 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	29 -> 37
-	37 [label=RESTO_PARAMETROS fillcolor=white style=filled]
-	37 -> 43
+	31 -> 38
+	38 [label=RESTO_PARAMETROS fillcolor=white style=filled]
+	38 -> 43
 	43 [label=e fillcolor=lightgrey peripheries=2 style=filled]
-	24 -> 27
-	27 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
-	12 -> 21
-	21 [label=MASINSTRUCCION fillcolor=white style=filled]
-	21 -> 44
+	25 -> 29
+	29 [label=CORCHETECERR fillcolor=lightgrey peripheries=2 style=filled]
+	22 -> 26
+	26 [label=MASEXPRESION fillcolor=white style=filled]
+	26 -> 44
 	44 [label=e fillcolor=lightgrey peripheries=2 style=filled]
+	9 -> 12
+	12 [label=MASINSTRUCCION fillcolor=white style=filled]
+	12 -> 45
+	45 [label=e fillcolor=lightgrey peripheries=2 style=filled]
 	2 -> 10
 	10 [label=LLAVECERR fillcolor=lightgrey peripheries=2 style=filled]
 }

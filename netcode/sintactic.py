@@ -18,5 +18,4 @@ if success:
     output_pdf_path = os.path.join(output_folder, 'tree_hola_mundo9') 
     graph.render(output_pdf_path, format='png')
 else:
-    print(" ")
     print("El análisis sintáctico ha fallado.")
