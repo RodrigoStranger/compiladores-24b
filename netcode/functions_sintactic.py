@@ -15,7 +15,8 @@ class Node:
         self.columna = columna
         self.terminal = terminal
         self.hijos = []
-        self.padre = None 
+        self.padre = None
+        self.tipo_de_dato_asociado = None # para el analisis de tipos en el semantico
     def añadir_hijo(self, hijo):
         hijo.padre = self  
         self.hijos.append(hijo)  
@@ -54,6 +55,8 @@ def arbolSintactico(raiz, contorno_hojas=False, opcion="tipo"):
             label = f"{node.id}"
         elif opcion == "terminal":
             label = f"{node.terminal}"
+        elif opcion == "tipo_de_dato_asociado":
+            label = f"{node.tipo_de_dato_asociado}"
         else:
             label = f"{node.tipo}"
         if not node.hijos and contorno_hojas:

@@ -14,7 +14,8 @@ success, tree = parser_sintactico_ll1(listtokens, table_ll1, simboloinicial)
 if success:
     output_folder = 'tree'
     if not os.path.exists(output_folder): os.makedirs(output_folder)
-    graph = arbolSintactico(tree, True, "tipo") 
+    #graph = arbolSintactico(tree, True, "tipo_de_dato_asociado")
+    graph = arbolSintactico(tree, True, "valor")
     output_pdf_path = os.path.join(output_folder, 'tree_hola_mundo9') 
     graph.render(output_pdf_path, format='png')
 else:
