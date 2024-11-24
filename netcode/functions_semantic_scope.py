@@ -148,56 +148,126 @@ def recorrer_main(node, tabla_de_simbolos, errores):
         evaluar_asignaciones(node, tabla_de_simbolos, errores, "main")
     for hijo in node.hijos: recorrer_main(hijo, tabla_de_simbolos, errores)
 
-def evaluar_asignaciones(node, tabla_de_simbolos, errores, ambitoactual):
-    parametros_list = obtener_lista_parametros_por_nombre(ambitoactual, node)
-    if node.tipo == "ASIG":
-        # Verificar la estructura VARIABLE ID TIPODATO OPC
-        if len(node.hijos) == 4:
-            variable = node.hijos[0]
-            id_node = node.hijos[1]
-            tipo_dato = node.hijos[2]
-            opc_node = node.hijos[3]
-            if (variable.tipo == "VARIABLE" and id_node.tipo == "ID" and tipo_dato.tipo == "TIPODATO" and opc_node.tipo == "OPC"):
-                if len(opc_node.hijos) == 1 and opc_node.hijos[0].valor == "e":
-                    lexema = id_node.valor
-                    tipo_lexema = obtener_valor_hoja(tipo_dato)
-                    categoria = variable.valor
-                    if lexema and not verificar(lexema, tabla_de_simbolos):
-                        errores.append(Error(descripcion=f"Ya existe una variable {lexema} definida."))
-                        return
-                    if ambitoactual != "global":
-                        for parametro in parametros_list:
-                            if parametro == lexema: 
-                                errores.append(Error(descripcion=f"La variable {lexema} ya está declarada en los parametros de la función {ambitoactual}"))
+def procesar_asignacion_variable(node, tabla_de_simbolos, errores, parametros_list, ambitoactual):
+    """
+    Procesa asignaciones con estructura VARIABLE ID TIPODATO OPC o expresiones complejas dentro de OPC.
+    """
+    if len(node.hijos) == 4:
+        variable = node.hijos[0]
+        id_node = node.hijos[1]
+        tipo_dato = node.hijos[2]
+        opc_node = node.hijos[3]
+
+        if (variable.tipo == "VARIABLE" and id_node.tipo == "ID" and tipo_dato.tipo == "TIPODATO" and opc_node.tipo == "OPC"):
+            if len(opc_node.hijos) == 1 and opc_node.hijos[0].valor == "e":
+                # Caso 1: Asignación directa con valor "e"
+                lexema = id_node.valor
+                tipo_lexema = obtener_valor_hoja(tipo_dato)
+                categoria = variable.valor
+                if lexema and not verificar(lexema, tabla_de_simbolos):
+                    errores.append(Error(descripcion=f"Ya existe una variable {lexema} definida."))
+                    return
+                if ambitoactual != "global":
+                    for parametro in parametros_list:
+                        if parametro == lexema:
+                            errores.append(Error(descripcion=f"La variable {lexema} ya está declarada en los parámetros de la función {ambitoactual}"))
                             return
-                    simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria=categoria, ambito = ambitoactual)
-                    simbolo.asignado_valor = False
-                    tabla_de_simbolos.append(simbolo)
-                else:
-                    # recorrer EXPRESION tiene muchos hijos, incluso hay un MASEXPRESION que contiene EXPRESION
-                    # en ello puede existir: ID / DATO / ID OPCION
-                    # ID OPCION es como = ID CORCHETEABI PAR CORCHETECERR , osea una funcion
-                    # en ID, se debe de verificar si existe ese ID en la tabla
-                    # el DATO se omite
-                    # cada EXPRESION esta separada por una OPERACION, asi que eso nos facilita la evaluacion.
-                    print()
-        # Verificar la estructura ID CORCHETEABI PAR CORCHETECERR
-        if len(node.hijos) == 2:
-            id_node = node.hijos[0]
-            og_node = node.hijos[1]
-            funcion_actual = id_node.valor
-            if id_node.tipo == "ID" and og_node.tipo == "OG":
-                if (len(og_node.hijos) == 3 and og_node.hijos[0].tipo == "CORCHETEABI" and og_node.hijos[1].tipo == "PAR" and og_node.hijos[2].tipo == "CORCHETECERR"):
+                simbolo = Simbolo(lexema=lexema, tipo_lexema=tipo_lexema, categoria=categoria, ambito=ambitoactual)
+                simbolo.asignado_valor = False
+                tabla_de_simbolos.append(simbolo)
+            else:
+                # Caso 2: Procesar nodos EXPRESION dentro de OPC
+                for expresion in opc_node.hijos:
+                    procesar_expresion(expresion, tabla_de_simbolos, errores, parametros_list, ambitoactual)
+
+def procesar_expresion(node, tabla_de_simbolos, errores, parametros_list, ambitoactual):
+    """
+    Procesa nodos EXPRESION y verifica las diferentes estructuras posibles.
+    """
+    if node.tipo == "EXPRESION":
+        for hijo in node.hijos:
+            # Caso 1: ID OPCION
+            if hijo.tipo == "ID":
+                id_lexema = hijo.valor
+                if len(hijo.hijos) > 0 and hijo.hijos[0].tipo == "OPCION":
+                    opcion_node = hijo.hijos[0]
+                    if len(opcion_node.hijos) == 1 and opcion_node.hijos[0].valor == "e":
+                        # Verificar si ID está declarado
+                        if verificar(id_lexema, tabla_de_simbolos):
+                            errores.append(Error(descripcion=f"La variable {id_lexema} no está previamente declarada."))
+                        elif verificar_asignado_valor(id_lexema, tabla_de_simbolos):
+                            errores.append(Error(descripcion=f"La variable {id_lexema} no tiene asignado ningún valor."))
+                    else:
+                        # Procesar estructuras más complejas dentro de OPCION
+                        procesar_expresion(opcion_node, tabla_de_simbolos, errores, parametros_list, ambitoactual)
+            
+            # Caso 2: DATO (literal o constante)
+            elif hijo.tipo == "DATO":
+                # No hay validación necesaria para literales
+                pass
+            
+            # Caso 3: ID con llamada a función (OPCION tiene CORCHETEABI, PAR, CORCHETECERR)
+            elif hijo.tipo == "ID" and len(hijo.hijos) > 0:
+                opcion_node = hijo.hijos[0]
+                if (len(opcion_node.hijos) == 3 and 
+                    opcion_node.hijos[0].tipo == "CORCHETEABI" and 
+                    opcion_node.hijos[1].tipo == "PAR" and 
+                    opcion_node.hijos[2].tipo == "CORCHETECERR"):
+                    funcion_actual = hijo.valor
                     if funcion_actual and not verificar(funcion_actual, tabla_de_simbolos):
-                        par_node = og_node.hijos[1]
+                        par_node = opcion_node.hijos[1]
                         verificar_ids_en_par(par_node, tabla_de_simbolos, errores, parametros_list)
                         cantidad_parametros = contar_hojas_par(par_node)
                         nodo_netcode = node.retornar_al_padre_netcode()
                         buscar_y_verificar_parametros_y_cuerpo(funcion_actual, cantidad_parametros, nodo_netcode, tabla_de_simbolos, errores)
-                    else : errores.append(Error(descripcion=f"La función {funcion_actual} no esta declarada.")) 
-        # Verificar la estructura ID = COSAS...............
-        #           
-    for hijo in node.hijos: evaluar_asignaciones(hijo, tabla_de_simbolos, errores, ambitoactual)
+                    else:
+                        errores.append(Error(descripcion=f"La función {funcion_actual} no está declarada."))
+            
+            # Recursivamente procesar hijos de EXPRESION
+            procesar_expresion(hijo, tabla_de_simbolos, errores, parametros_list, ambitoactual)
+
+
+
+def procesar_llamada_funcion(node, tabla_de_simbolos, errores, parametros_list):
+    if len(node.hijos) == 2:
+        id_node = node.hijos[0]
+        og_node = node.hijos[1]
+        funcion_actual = id_node.valor
+        if id_node.tipo == "ID" and og_node.tipo == "OG":
+            if (len(og_node.hijos) == 3 and og_node.hijos[0].tipo == "CORCHETEABI" and og_node.hijos[1].tipo == "PAR" and og_node.hijos[2].tipo == "CORCHETECERR"):
+                if funcion_actual and not verificar(funcion_actual, tabla_de_simbolos):
+                    par_node = og_node.hijos[1]
+                    verificar_ids_en_par(par_node, tabla_de_simbolos, errores, parametros_list)
+                    cantidad_parametros = contar_hojas_par(par_node)
+                    nodo_netcode = node.retornar_al_padre_netcode()
+                    buscar_y_verificar_parametros_y_cuerpo(funcion_actual, cantidad_parametros, nodo_netcode, tabla_de_simbolos, errores)
+                else:
+                    errores.append(Error(descripcion=f"La función {funcion_actual} no está declarada."))
+
+
+def procesar_otros_tipos_asignacion(node, tabla_de_simbolos, errores):
+    # Lógica para otros casos de asignaciones no cubiertos en las funciones anteriores
+    pass
+
+def evaluar_asignaciones(node, tabla_de_simbolos, errores, ambitoactual):
+    parametros_list = obtener_lista_parametros_por_nombre(ambitoactual, node)
+
+    if node.tipo == "ASIG":
+        # Procesar asignación de tipo VARIABLE ID TIPODATO OPC
+        if len(node.hijos) == 4:
+            procesar_asignacion_variable(node, tabla_de_simbolos, errores, parametros_list, ambitoactual)
+        
+        # Procesar llamada de función ID CORCHETEABI PAR CORCHETECERR
+        elif len(node.hijos) == 2:
+            procesar_llamada_funcion(node, tabla_de_simbolos, errores, parametros_list)
+        
+        # Otros tipos de asignaciones
+        else:
+            procesar_otros_tipos_asignacion(node, tabla_de_simbolos, errores)
+
+    for hijo in node.hijos:
+        evaluar_asignaciones(hijo, tabla_de_simbolos, errores, ambitoactual)
+
 
 def buscar_y_verificar_parametros_y_cuerpo(funcionactual, cantidadparametros, node, tabla_de_simbolos, errores):
     if node.tipo == "FUNC" and len(node.hijos) > 3:

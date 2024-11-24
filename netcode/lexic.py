@@ -4,7 +4,7 @@ import ply.lex as lex
 from functions_lexic import *
 
 directory = os.path.dirname(__file__)
-sketchfile = 'func_semantic_var.txt'
+sketchfile = 'types.txt'
 pathfile = os.path.join(directory, '..', 'sketch', sketchfile)
 
 tokens = ['FUNCION', 'ID', 'CORCHETEABI', 'CORCHETECERR', 'LLAVEABI', 'LLAVECERR', 'PROGRAMA', 'PRINCIPAL', 'TIPOENTERO', 'TIPOVACIO', 

@@ -1,0 +1,3 @@
+program main interger [] {
+    var n interger = x
+}
